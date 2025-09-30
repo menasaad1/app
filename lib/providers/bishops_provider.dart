@@ -17,10 +17,6 @@ class BishopsProvider with ChangeNotifier {
   String get sortBy => _sortBy;
   bool get ascending => _ascending;
 
-  BishopsProvider() {
-    fetchBishops();
-  }
-
   Future<void> fetchBishops() async {
     try {
       _isLoading = true;
@@ -33,10 +29,13 @@ class BishopsProvider with ChangeNotifier {
           .get();
 
       _bishops = snapshot.docs
-          .map((doc) => Bishop.fromMap({
-                'id': doc.id,
-                ...doc.data(),
-              }))
+          .map((doc) {
+            final data = doc.data() as Map<String, dynamic>;
+            return Bishop.fromMap({
+              'id': doc.id,
+              ...data,
+            });
+          })
           .toList();
 
     } catch (e) {

@@ -24,10 +24,13 @@ class FirebaseService {
           .get();
       
       return snapshot.docs
-          .map((doc) => Bishop.fromMap({
-                'id': doc.id,
-                ...doc.data(),
-              }))
+          .map((doc) {
+            final data = doc.data() as Map<String, dynamic>;
+            return Bishop.fromMap({
+              'id': doc.id,
+              ...data,
+            });
+          })
           .toList();
     } catch (e) {
       throw Exception('حدث خطأ في تحميل البيانات: $e');
@@ -77,10 +80,13 @@ class FirebaseService {
         .orderBy(sortBy, descending: !ascending)
         .snapshots()
         .map((snapshot) => snapshot.docs
-            .map((doc) => Bishop.fromMap({
-                  'id': doc.id,
-                  ...doc.data(),
-                }))
+            .map((doc) {
+              final data = doc.data() as Map<String, dynamic>;
+              return Bishop.fromMap({
+                'id': doc.id,
+                ...data,
+              });
+            })
             .toList());
   }
   

@@ -12,35 +12,35 @@ class ThemeUtils {
   static BoxDecoration get cardDecoration => BoxDecoration(
     color: cardColor,
     borderRadius: BorderRadius.circular(12),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
-        color: Colors.black.withValues(alpha: 0.1),
+        color: Color(0x1A000000),
         blurRadius: 8,
-        offset: const Offset(0, 2),
+        offset: Offset(0, 2),
       ),
     ],
   );
   
   static BoxDecoration get primaryCardDecoration => BoxDecoration(
-    gradient: LinearGradient(
+    gradient: const LinearGradient(
       colors: [primaryColor, secondaryColor],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
     borderRadius: BorderRadius.circular(12),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
-        color: primaryColor.withValues(alpha: 0.3),
+        color: Color(0x4D9C27B0),
         blurRadius: 10,
-        offset: const Offset(0, 5),
+        offset: Offset(0, 5),
       ),
     ],
   );
   
   static BoxDecoration get infoCardDecoration => BoxDecoration(
-    color: primaryColor.withValues(alpha: 0.05),
+    color: const Color(0x0D9C27B0),
     borderRadius: BorderRadius.circular(12),
-    border: Border.all(color: primaryColor.withValues(alpha: 0.2)),
+    border: Border.all(color: const Color(0x339C27B0)),
   );
   
   static InputDecoration get inputDecoration => InputDecoration(
