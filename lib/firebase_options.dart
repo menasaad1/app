@@ -44,12 +44,12 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQ',
-    appId: '1:123456789012:web:abcdef1234567890abcdef',
-    messagingSenderId: '123456789012',
-    projectId: 'bishops-management-app',
-    authDomain: 'bishops-management-app.firebaseapp.com',
-    storageBucket: 'bishops-management-app.appspot.com',
+  apiKey: "AIzaSyAWEZ2x-JOmM9QhfLLv9Y2xls8nwRdrmLc",
+  authDomain: "bishopsapp-13ccb.firebaseapp.com",
+  projectId: "bishopsapp-13ccb",
+  storageBucket: "bishopsapp-13ccb.firebasestorage.app",
+  messagingSenderId: "205001123773",
+  appId: "1:205001123773:web:9a9fe34c61c929e74014d4"
   );
 
   static const FirebaseOptions android = FirebaseOptions(
