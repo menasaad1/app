@@ -47,24 +47,62 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           ),
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              if (value == 'logout') {
-                _showLogoutDialog();
+          Consumer<AuthProvider>(
+            builder: (context, authProvider, child) {
+              if (authProvider.isAuthenticated && authProvider.isAdmin) {
+                return PopupMenuButton<String>(
+                  onSelected: (value) {
+                    if (value == 'admin') {
+                      Navigator.pushNamed(context, '/admin');
+                    } else if (value == 'logout') {
+                      _showLogoutDialog();
+                    }
+                  },
+                  itemBuilder: (context) => [
+                    const PopupMenuItem(
+                      value: 'admin',
+                      child: Row(
+                        children: [
+                          Icon(Icons.admin_panel_settings, color: Colors.deepPurple),
+                          SizedBox(width: 8),
+                          Text('لوحة الإدارة', style: TextStyle(fontFamily: 'Cairo')),
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: 'logout',
+                      child: Row(
+                        children: [
+                          Icon(Icons.logout, color: Colors.red),
+                          SizedBox(width: 8),
+                          Text('تسجيل الخروج', style: TextStyle(fontFamily: 'Cairo')),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return PopupMenuButton<String>(
+                  onSelected: (value) {
+                    if (value == 'login') {
+                      Navigator.pushNamed(context, '/login');
+                    }
+                  },
+                  itemBuilder: (context) => [
+                    const PopupMenuItem(
+                      value: 'login',
+                      child: Row(
+                        children: [
+                          Icon(Icons.login, color: Colors.deepPurple),
+                          SizedBox(width: 8),
+                          Text('تسجيل الدخول', style: TextStyle(fontFamily: 'Cairo')),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
               }
             },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'logout',
-                child: Row(
-                  children: [
-                    Icon(Icons.logout, color: Colors.red),
-                    SizedBox(width: 8),
-                    Text('تسجيل الخروج', style: TextStyle(fontFamily: 'Cairo')),
-                  ],
-                ),
-              ),
-            ],
           ),
         ],
       ),
@@ -235,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.pop(context);
               Provider.of<AuthProvider>(context, listen: false).signOut();
-              Navigator.pushReplacementNamed(context, '/login');
+              Navigator.pushReplacementNamed(context, '/home');
             },
             child: const Text(
               'تسجيل الخروج',

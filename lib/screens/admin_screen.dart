@@ -380,7 +380,7 @@ class _AdminScreenState extends State<AdminScreen> {
             onPressed: () {
               Navigator.pop(context);
               Provider.of<AuthProvider>(context, listen: false).signOut();
-              Navigator.pushReplacementNamed(context, '/login');
+              Navigator.pushReplacementNamed(context, '/home');
             },
             child: const Text(
               'تسجيل الخروج',

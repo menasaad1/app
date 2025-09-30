@@ -37,14 +37,10 @@ class _SplashScreenState extends State<SplashScreen>
   void _checkAuthStatus() {
     Future.delayed(const Duration(seconds: 3), () {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      if (authProvider.isAuthenticated) {
-        if (authProvider.isAdmin) {
-          Navigator.pushReplacementNamed(context, '/admin');
-        } else {
-          Navigator.pushReplacementNamed(context, '/home');
-        }
+      if (authProvider.isAuthenticated && authProvider.isAdmin) {
+        Navigator.pushReplacementNamed(context, '/admin');
       } else {
-        Navigator.pushReplacementNamed(context, '/login');
+        Navigator.pushReplacementNamed(context, '/home');
       }
     });
   }

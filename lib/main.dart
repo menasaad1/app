@@ -8,6 +8,7 @@ import 'providers/bishops_provider.dart';
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/welcome_screen.dart';
 import 'screens/admin_screen.dart';
 
 void main() async {
@@ -45,7 +46,7 @@ class BishopsApp extends StatelessWidget {
         home: const SplashScreen(),
         routes: {
           '/login': (context) => const LoginScreen(),
-          '/home': (context) => const HomeScreen(),
+          '/home': (context) => const WelcomeScreen(),
           '/admin': (context) => const AdminScreen(),
         },
       ),
