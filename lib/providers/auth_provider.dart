@@ -4,18 +4,18 @@ import '../utils/constants.dart';
 
 class AuthProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? _user;
+  dynamic _user;
   bool _isLoading = false;
   String? _errorMessage;
 
-  User? get user => _user;
+  dynamic get user => _user;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   bool get isAuthenticated => _user != null;
   bool get isAdmin => _user?.email == AppConstants.adminEmail;
 
   AuthProvider() {
-    _auth.authStateChanges().listen((User? user) {
+    _auth.authStateChanges().listen((user) {
       _user = user;
       notifyListeners();
     });

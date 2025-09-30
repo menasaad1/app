@@ -8,7 +8,7 @@ class FirebaseService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   
   // Authentication Methods
-  static User? get currentUser => _auth.currentUser;
+  static dynamic get currentUser => _auth.currentUser;
   static bool get isAuthenticated => _auth.currentUser != null;
   static bool get isAdmin => _auth.currentUser?.email == AppConstants.adminEmail;
   
@@ -85,5 +85,5 @@ class FirebaseService {
   }
   
   // Authentication Stream
-  static Stream<User?> get authStateChanges => _auth.authStateChanges();
+  static Stream<dynamic> get authStateChanges => _auth.authStateChanges();
 }

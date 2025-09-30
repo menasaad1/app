@@ -1,0 +1,151 @@
+import 'package:flutter/material.dart';
+
+class DialogUtils {
+  static void showConfirmDialog({
+    required BuildContext context,
+    required String title,
+    required String message,
+    required VoidCallback onConfirm,
+    String confirmText = 'تأكيد',
+    String cancelText = 'إلغاء',
+    Color confirmColor = Colors.red,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          title,
+          style: const TextStyle(fontFamily: 'Cairo'),
+        ),
+        content: Text(
+          message,
+          style: const TextStyle(fontFamily: 'Cairo'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              cancelText,
+              style: const TextStyle(fontFamily: 'Cairo'),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              onConfirm();
+            },
+            child: Text(
+              confirmText,
+              style: TextStyle(
+                fontFamily: 'Cairo',
+                color: confirmColor,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  static void showInfoDialog({
+    required BuildContext context,
+    required String title,
+    required String message,
+    String buttonText = 'موافق',
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          title,
+          style: const TextStyle(fontFamily: 'Cairo'),
+        ),
+        content: Text(
+          message,
+          style: const TextStyle(fontFamily: 'Cairo'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              buttonText,
+              style: const TextStyle(fontFamily: 'Cairo'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  static void showSuccessDialog({
+    required BuildContext context,
+    required String title,
+    required String message,
+    String buttonText = 'موافق',
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            const Icon(Icons.check_circle, color: Colors.green),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: const TextStyle(fontFamily: 'Cairo'),
+            ),
+          ],
+        ),
+        content: Text(
+          message,
+          style: const TextStyle(fontFamily: 'Cairo'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              buttonText,
+              style: const TextStyle(fontFamily: 'Cairo'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  static void showErrorDialog({
+    required BuildContext context,
+    required String title,
+    required String message,
+    String buttonText = 'موافق',
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            const Icon(Icons.error, color: Colors.red),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: const TextStyle(fontFamily: 'Cairo'),
+            ),
+          ],
+        ),
+        content: Text(
+          message,
+          style: const TextStyle(fontFamily: 'Cairo'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              buttonText,
+              style: const TextStyle(fontFamily: 'Cairo'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
