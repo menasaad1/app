@@ -1,63 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:go_router/go_router.dart';
-
-import 'core/config/firebase_config.dart';
-import 'core/router/app_router.dart';
-import 'core/theme/app_theme.dart';
-import 'core/locale/app_localizations.dart';
-import 'core/providers/theme_provider.dart';
-import 'core/providers/locale_provider.dart';
+import 'firebase_config.dart';
+import 'theme/app_theme.dart';
+import 'providers/auth_provider.dart';
+import 'providers/bishops_provider.dart';
+import 'screens/splash_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/home_screen.dart';
+import 'screens/admin_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Initialize Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  
-  runApp(
-    const ProviderScope(
-      child: BishopsManagementApp(),
-    ),
-  );
+  await FirebaseConfig.initialize();
+  runApp(const BishopsApp());
 }
 
-class BishopsManagementApp extends ConsumerWidget {
-  const BishopsManagementApp({super.key});
+class BishopsApp extends StatelessWidget {
+  const BishopsApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeProvider);
-    final locale = ref.watch(localeProvider);
-    
-    return MaterialApp.router(
-      title: 'تطبيق إدارة الأساقفة',
-      debugShowCheckedModeBanner: false,
-      
-      // Theme Configuration
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: themeMode,
-      
-      // Localization Configuration
-      locale: locale,
-      supportedLocales: const [
-        Locale('ar', 'SA'), // Arabic
-        Locale('en', 'US'), // English
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => BishopsProvider()),
       ],
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      
-      // Router Configuration
-      routerConfig: AppRouter.router,
+      child: MaterialApp(
+        title: 'إدارة الأساقفة',
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('ar', 'SA'),
+          Locale('en', 'US'),
+        ],
+        locale: const Locale('ar', 'SA'),
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        home: const SplashScreen(),
+        routes: {
+          '/login': (context) => const LoginScreen(),
+          '/home': (context) => const HomeScreen(),
+          '/admin': (context) => const AdminScreen(),
+        },
+      ),
     );
   }
 }
+
