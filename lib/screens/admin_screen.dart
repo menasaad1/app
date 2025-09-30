@@ -195,11 +195,11 @@ class _AdminScreenState extends State<AdminScreen> {
                   ),
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
-                    BoxShadow(
-                      color: Colors.deepPurple.withOpacity(0.3),
-                      blurRadius: 10,
-                      offset: const Offset(0, 5),
-                    ),
+                  BoxShadow(
+                    color: Colors.deepPurple.withValues(alpha: 0.3),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
                   ],
                 ),
                 child: Row(
@@ -223,14 +223,14 @@ class _AdminScreenState extends State<AdminScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            'يمكنك إضافة وتعديل وحذف بيانات الأساقفة',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
-                              fontFamily: 'Cairo',
-                              fontSize: 12,
-                            ),
+                        Text(
+                          'يمكنك إضافة وتعديل وحذف بيانات الأساقفة',
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.9),
+                            fontFamily: 'Cairo',
+                            fontSize: 12,
                           ),
+                        ),
                         ],
                       ),
                     ),

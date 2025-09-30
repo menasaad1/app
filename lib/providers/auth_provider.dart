@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../utils/constants.dart';
 
 class AuthProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -11,7 +12,7 @@ class AuthProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   bool get isAuthenticated => _user != null;
-  bool get isAdmin => _user?.email == 'admin@bishops.com';
+  bool get isAdmin => _user?.email == AppConstants.adminEmail;
 
   AuthProvider() {
     _auth.authStateChanges().listen((User? user) {

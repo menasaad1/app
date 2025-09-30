@@ -44,35 +44,35 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'your-web-api-key',
-    appId: 'your-web-app-id',
-    messagingSenderId: 'your-sender-id',
+    apiKey: 'AIzaSyBxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQ',
+    appId: '1:123456789012:web:abcdef1234567890abcdef',
+    messagingSenderId: '123456789012',
     projectId: 'bishops-management-app',
     authDomain: 'bishops-management-app.firebaseapp.com',
     storageBucket: 'bishops-management-app.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'your-android-api-key',
-    appId: 'your-android-app-id',
-    messagingSenderId: 'your-sender-id',
+    apiKey: 'AIzaSyBxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQ',
+    appId: '1:123456789012:android:abcdef1234567890abcdef',
+    messagingSenderId: '123456789012',
     projectId: 'bishops-management-app',
     storageBucket: 'bishops-management-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'your-ios-api-key',
-    appId: 'your-ios-app-id',
-    messagingSenderId: 'your-sender-id',
+    apiKey: 'AIzaSyBxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQ',
+    appId: '1:123456789012:ios:abcdef1234567890abcdef',
+    messagingSenderId: '123456789012',
     projectId: 'bishops-management-app',
     storageBucket: 'bishops-management-app.appspot.com',
     iosBundleId: 'com.example.bishopsManagementApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'your-macos-api-key',
-    appId: 'your-macos-app-id',
-    messagingSenderId: 'your-sender-id',
+    apiKey: 'AIzaSyBxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQ',
+    appId: '1:123456789012:ios:abcdef1234567890abcdef',
+    messagingSenderId: '123456789012',
     projectId: 'bishops-management-app',
     storageBucket: 'bishops-management-app.appspot.com',
     iosBundleId: 'com.example.bishopsManagementApp',

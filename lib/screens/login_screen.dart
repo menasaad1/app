@@ -45,11 +45,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.deepPurple,
                       borderRadius: BorderRadius.circular(50),
                       boxShadow: [
-                        BoxShadow(
-                          color: Colors.deepPurple.withOpacity(0.3),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                        ),
+                    BoxShadow(
+                      color: Colors.deepPurple.withValues(alpha: 0.3),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
+                    ),
                       ],
                     ),
                     child: const Icon(

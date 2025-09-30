@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/bishop.dart';
+import '../utils/constants.dart';
 
 class BishopsProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -27,14 +28,14 @@ class BishopsProvider with ChangeNotifier {
       notifyListeners();
 
       final QuerySnapshot snapshot = await _firestore
-          .collection('bishops')
+          .collection(AppConstants.bishopsCollection)
           .orderBy(_sortBy, descending: !_ascending)
           .get();
 
       _bishops = snapshot.docs
           .map((doc) => Bishop.fromMap({
                 'id': doc.id,
-                ...doc.data() as Map<String, dynamic>,
+                ...doc.data(),
               }))
           .toList();
 
@@ -52,7 +53,7 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      await _firestore.collection('bishops').add(bishop.toMap());
+      await _firestore.collection(AppConstants.bishopsCollection).add(bishop.toMap());
       await fetchBishops();
       return true;
     } catch (e) {
@@ -71,7 +72,7 @@ class BishopsProvider with ChangeNotifier {
       notifyListeners();
 
       await _firestore
-          .collection('bishops')
+          .collection(AppConstants.bishopsCollection)
           .doc(bishop.id)
           .update(bishop.toMap());
       await fetchBishops();
@@ -91,7 +92,7 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      await _firestore.collection('bishops').doc(bishopId).delete();
+      await _firestore.collection(AppConstants.bishopsCollection).doc(bishopId).delete();
       await fetchBishops();
       return true;
     } catch (e) {

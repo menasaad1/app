@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/bishop.dart';
-import '../constants/app_constants.dart';
+import '../utils/constants.dart';
 
 class FirebaseService {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -26,7 +26,7 @@ class FirebaseService {
       return snapshot.docs
           .map((doc) => Bishop.fromMap({
                 'id': doc.id,
-                ...doc.data() as Map<String, dynamic>,
+                ...doc.data(),
               }))
           .toList();
     } catch (e) {
@@ -79,7 +79,7 @@ class FirebaseService {
         .map((snapshot) => snapshot.docs
             .map((doc) => Bishop.fromMap({
                   'id': doc.id,
-                  ...doc.data() as Map<String, dynamic>,
+                  ...doc.data(),
                 }))
             .toList());
   }
