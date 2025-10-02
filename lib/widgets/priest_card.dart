@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/priest.dart';
+import 'safe_widget.dart';
 
 class PriestCard extends StatelessWidget {
   final Priest priest;
@@ -18,14 +19,15 @@ class PriestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return SafeWidget(
       margin: const EdgeInsets.only(bottom: 12),
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: SafeContainer(
+          decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
@@ -64,7 +66,7 @@ class PriestCard extends StatelessWidget {
                         Row(
                           children: [
                             if (priest.rank != null) ...[
-                              Text(
+                              SafeText(
                                 priest.rank!,
                                 style: TextStyle(
                                   fontSize: 14,
@@ -76,7 +78,7 @@ class PriestCard extends StatelessWidget {
                               const SizedBox(width: 4),
                             ],
                             Expanded(
-                              child: Text(
+                              child: SafeText(
                                 priest.name,
                                 style: const TextStyle(
                                   fontSize: 18,
@@ -90,7 +92,7 @@ class PriestCard extends StatelessWidget {
                         ),
                         if (priest.church != null) ...[
                           const SizedBox(height: 4),
-                          Text(
+                          SafeText(
                             priest.church!,
                             style: TextStyle(
                               fontSize: 14,
@@ -153,7 +155,7 @@ class PriestCard extends StatelessWidget {
                       size: 20,
                     ),
                     const SizedBox(width: 8),
-                    Text(
+                    SafeText(
                       'تاريخ الرسامة: ${DateFormat('yyyy/MM/dd', 'ar').format(priest.ordinationDate)}',
                       style: TextStyle(
                         fontSize: 14,
@@ -178,7 +180,7 @@ class PriestCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      SafeText(
                         'ملاحظات:',
                         style: TextStyle(
                           fontSize: 12,
@@ -188,7 +190,7 @@ class PriestCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Text(
+                      SafeText(
                         priest.notes!,
                         style: TextStyle(
                           fontSize: 14,

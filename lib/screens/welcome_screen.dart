@@ -10,6 +10,7 @@ import '../widgets/bishop_card.dart';
 import '../widgets/priest_card.dart';
 import '../widgets/sort_dialog.dart';
 import '../widgets/mode_selector_widget.dart';
+import '../widgets/safe_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -265,7 +266,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       color: Colors.white,
                     ),
                     const SizedBox(height: 12),
-                    Text(
+                    SafeText(
                       appModeProvider.modeTitle,
                       style: const TextStyle(
                         fontSize: 20,
@@ -276,7 +277,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 6),
-                    Text(
+                    SafeText(
                       appModeProvider.modeDescription,
                       style: const TextStyle(
                         fontSize: 14,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'firebase_config.dart';
@@ -18,6 +19,21 @@ import 'screens/admin_management_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Add error handling for Flutter Web
+  FlutterError.onError = (FlutterErrorDetails details) {
+    // Log error but don't crash the app
+    debugPrint('Flutter Error: ${details.exception}');
+    debugPrint('Stack trace: ${details.stack}');
+  };
+  
+  // Handle platform errors
+  PlatformDispatcher.instance.onError = (error, stack) {
+    debugPrint('Platform Error: $error');
+    debugPrint('Stack trace: $stack');
+    return true; // Handled
+  };
+  
   await FirebaseConfig.initialize();
   runApp(const BishopsApp());
 }

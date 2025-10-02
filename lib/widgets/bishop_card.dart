@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/bishop.dart';
+import 'safe_widget.dart';
 
 class BishopCard extends StatelessWidget {
   final Bishop bishop;
@@ -18,14 +19,15 @@ class BishopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return SafeWidget(
       margin: const EdgeInsets.only(bottom: 12),
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: SafeContainer(
+          decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
@@ -61,7 +63,7 @@ class BishopCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        SafeText(
                           bishop.name,
                           style: const TextStyle(
                             fontSize: 18,
@@ -72,7 +74,7 @@ class BishopCard extends StatelessWidget {
                         ),
                         if (bishop.diocese != null) ...[
                           const SizedBox(height: 4),
-                          Text(
+                          SafeText(
                             bishop.diocese!,
                             style: TextStyle(
                               fontSize: 14,
@@ -135,7 +137,7 @@ class BishopCard extends StatelessWidget {
                       size: 20,
                     ),
                     const SizedBox(width: 8),
-                    Text(
+                    SafeText(
                       'تاريخ الرسامة: ${DateFormat('yyyy/MM/dd', 'ar').format(bishop.ordinationDate)}',
                       style: TextStyle(
                         fontSize: 14,
@@ -160,7 +162,7 @@ class BishopCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      SafeText(
                         'ملاحظات:',
                         style: TextStyle(
                           fontSize: 12,
@@ -170,7 +172,7 @@ class BishopCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Text(
+                      SafeText(
                         bishop.notes!,
                         style: TextStyle(
                           fontSize: 14,
