@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/bishops_provider.dart';
+import '../providers/priests_provider.dart';
+import '../providers/app_mode_provider.dart';
 import '../models/bishop.dart';
+import '../models/priest.dart';
 import '../widgets/bishop_card.dart';
+import '../widgets/priest_card.dart';
 import '../widgets/sort_dialog.dart';
+import '../widgets/mode_selector_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -18,7 +23,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<BishopsProvider>(context, listen: false).fetchBishops();
+      final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
+      appModeProvider.loadMode().then((_) {
+        if (appModeProvider.isBishopsMode) {
+          Provider.of<BishopsProvider>(context, listen: false).fetchBishops();
+        } else {
+          Provider.of<PriestsProvider>(context, listen: false).fetchPriests();
+        }
+      });
     });
   }
 
@@ -29,13 +41,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       appBar: AppBar(
         title: Row(
           children: [
-            const Expanded(
-              child: Text(
-                'ترتيب الآباء الأساقفة',
-                style: TextStyle(
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.bold,
-                ),
+            Expanded(
+              child: Consumer<AppModeProvider>(
+                builder: (context, appModeProvider, child) {
+                  return Text(
+                    appModeProvider.modeTitle,
+                    style: const TextStyle(
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
               ),
             ),
             Consumer<AuthProvider>(
@@ -44,8 +60,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.2),
+                      color: Colors.white.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
                     ),
                     child: const Text(
                       'مدير',
@@ -67,24 +84,66 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
         actions: [
-          // Sort button
-          Consumer<BishopsProvider>(
-            builder: (context, bishopsProvider, child) {
+          // Mode toggle button
+          Consumer<AppModeProvider>(
+            builder: (context, appModeProvider, child) {
               return IconButton(
-                icon: const Icon(Icons.sort),
-                onPressed: bishopsProvider.bishops.isEmpty ? null : () => _showSortDialog(context, bishopsProvider),
-                tooltip: 'ترتيب',
+                icon: Icon(appModeProvider.isBishopsMode ? Icons.person : Icons.church),
+                onPressed: () => _showModeSelector(),
+                tooltip: 'تغيير الوضع',
               );
             },
           ),
+          // Sort button
+          Consumer<AppModeProvider>(
+            builder: (context, appModeProvider, child) {
+              if (appModeProvider.isBishopsMode) {
+                return Consumer<BishopsProvider>(
+                  builder: (context, bishopsProvider, child) {
+                    return IconButton(
+                      icon: const Icon(Icons.sort),
+                      onPressed: bishopsProvider.bishops.isEmpty ? null : () => _showSortDialog(),
+                      tooltip: 'ترتيب',
+                    );
+                  },
+                );
+              } else {
+                return Consumer<PriestsProvider>(
+                  builder: (context, priestsProvider, child) {
+                    return IconButton(
+                      icon: const Icon(Icons.sort),
+                      onPressed: priestsProvider.priests.isEmpty ? null : () => _showSortDialog(),
+                      tooltip: 'ترتيب',
+                    );
+                  },
+                );
+              }
+            },
+          ),
           // Attendance selection button
-          Consumer<BishopsProvider>(
-            builder: (context, bishopsProvider, child) {
-              return IconButton(
-                icon: const Icon(Icons.group),
-                onPressed: bishopsProvider.bishops.isEmpty ? null : () => _showAttendanceDialog(),
-                tooltip: 'اختيار الحاضرين',
-              );
+          Consumer<AppModeProvider>(
+            builder: (context, appModeProvider, child) {
+              if (appModeProvider.isBishopsMode) {
+                return Consumer<BishopsProvider>(
+                  builder: (context, bishopsProvider, child) {
+                    return IconButton(
+                      icon: const Icon(Icons.group),
+                      onPressed: bishopsProvider.bishops.isEmpty ? null : () => _showAttendanceDialog(),
+                      tooltip: 'اختيار الحاضرين',
+                    );
+                  },
+                );
+              } else {
+                return Consumer<PriestsProvider>(
+                  builder: (context, priestsProvider, child) {
+                    return IconButton(
+                      icon: const Icon(Icons.group),
+                      onPressed: priestsProvider.priests.isEmpty ? null : () => _showPriestsAttendanceDialog(),
+                      tooltip: 'اختيار الحاضرين',
+                    );
+                  },
+                );
+              }
             },
           ),
           // Simple login button
@@ -191,182 +250,52 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ],
             ),
-            child: Column(
-              children: [
-                const Icon(
-                  Icons.church,
-                  size: 48,
-                  color: Colors.white,
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'ترتيب الآباء الأساقفة',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontFamily: 'Cairo',
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 8),
-                  const Text(
-                  'اختر الأساقفة الحاضرين وقم بترتيبهم حسب تاريخ الرسامة',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontFamily: 'Cairo',
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          // Bishops List
-          Expanded(
-            child: Consumer<BishopsProvider>(
-              builder: (context, bishopsProvider, child) {
-                if (bishopsProvider.isLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
-                    ),
-                  );
-                }
-
-                if (bishopsProvider.errorMessage != null) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.error_outline,
-                          size: 64,
-                          color: Colors.red[300],
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          bishopsProvider.errorMessage!,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.red[700],
-                            fontFamily: 'Cairo',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {
-                            bishopsProvider.clearError();
-                            bishopsProvider.fetchBishops();
-                          },
-                          child: const Text(
-                            'إعادة المحاولة',
-                            style: TextStyle(fontFamily: 'Cairo'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-
-                if (bishopsProvider.bishops.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.church,
-                          size: 64,
-                          color: Colors.grey[400],
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'لا توجد بيانات للآباء الأساقفة',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.grey[800],
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'سيتم إضافة البيانات من قبل المدير',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[700],
-                            fontFamily: 'Cairo',
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-
+            child: Consumer<AppModeProvider>(
+              builder: (context, appModeProvider, child) {
                 return Column(
                   children: [
-                    // Sort Info
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(16),
-                      margin: const EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple[50],
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.deepPurple[200]!),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.info_outline,
-                            color: Colors.deepPurple[700],
-                            size: 20,
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'الترتيب: ${bishopsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${bishopsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
-                                  style: TextStyle(
-                                    color: Colors.deepPurple[700],
-                                    fontFamily: 'Cairo',
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                if (bishopsProvider.isFiltered) ...[
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    bishopsProvider.getFilterInfo(),
-                                    style: TextStyle(
-                                      color: Colors.orange[800],
-                                      fontFamily: 'Cairo',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                    Icon(
+                      appModeProvider.modeIcon,
+                      size: 48,
+                      color: Colors.white,
                     ),
-                    // Bishops List
-                    Expanded(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        itemCount: bishopsProvider.bishops.length,
-                        itemBuilder: (context, index) {
-                          final bishop = bishopsProvider.bishops[index];
-                          return BishopCard(bishop: bishop);
-                        },
+                    const SizedBox(height: 16),
+                    Text(
+                      appModeProvider.modeTitle,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontFamily: 'Cairo',
                       ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      appModeProvider.modeDescription,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontFamily: 'Cairo',
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 );
+              },
+            ),
+          ),
+          // Mode Selector
+          const ModeSelectorWidget(),
+          // Data List
+          Expanded(
+            child: Consumer<AppModeProvider>(
+              builder: (context, appModeProvider, child) {
+                if (appModeProvider.isBishopsMode) {
+                  return _buildBishopsList();
+                } else {
+                  return _buildPriestsList();
+                }
               },
             ),
           ),
@@ -375,17 +304,355 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
-  void _showSortDialog(BuildContext context, BishopsProvider bishopsProvider) {
+  Widget _buildBishopsList() {
+    return Consumer<BishopsProvider>(
+      builder: (context, bishopsProvider, child) {
+        if (bishopsProvider.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+            ),
+          );
+        }
+
+        if (bishopsProvider.errorMessage != null) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  size: 64,
+                  color: Colors.red[300],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  bishopsProvider.errorMessage!,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.red[700],
+                    fontFamily: 'Cairo',
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    bishopsProvider.clearError();
+                    bishopsProvider.fetchBishops();
+                  },
+                  child: const Text(
+                    'إعادة المحاولة',
+                    style: TextStyle(fontFamily: 'Cairo'),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        if (bishopsProvider.bishops.isEmpty) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.church,
+                  size: 64,
+                  color: Colors.grey[400],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'لا توجد بيانات للآباء الأساقفة',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[800],
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'سيتم إضافة البيانات من قبل المدير',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[700],
+                    fontFamily: 'Cairo',
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        return Column(
+          children: [
+            // Sort Info
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[50],
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.deepPurple[200]!),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.info_outline,
+                    color: Colors.deepPurple[700],
+                    size: 20,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'الترتيب: ${bishopsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${bishopsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
+                          style: TextStyle(
+                            color: Colors.deepPurple[700],
+                            fontFamily: 'Cairo',
+                            fontSize: 14,
+                          ),
+                        ),
+                        if (bishopsProvider.isFiltered) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            bishopsProvider.getFilterInfo(),
+                            style: TextStyle(
+                              color: Colors.orange[800],
+                              fontFamily: 'Cairo',
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Bishops List
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: bishopsProvider.bishops.length,
+                itemBuilder: (context, index) {
+                  final bishop = bishopsProvider.bishops[index];
+                  return BishopCard(bishop: bishop);
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildPriestsList() {
+    return Consumer<PriestsProvider>(
+      builder: (context, priestsProvider, child) {
+        if (priestsProvider.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+            ),
+          );
+        }
+
+        if (priestsProvider.errorMessage != null) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  size: 64,
+                  color: Colors.red[300],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  priestsProvider.errorMessage!,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.red[700],
+                    fontFamily: 'Cairo',
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    priestsProvider.clearError();
+                    priestsProvider.fetchPriests();
+                  },
+                  child: const Text(
+                    'إعادة المحاولة',
+                    style: TextStyle(fontFamily: 'Cairo'),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        if (priestsProvider.priests.isEmpty) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.person,
+                  size: 64,
+                  color: Colors.grey[400],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'لا توجد بيانات للآباء الكهنة',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[800],
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'سيتم إضافة البيانات من قبل المدير',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[700],
+                    fontFamily: 'Cairo',
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        return Column(
+          children: [
+            // Sort Info
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.blue[200]!),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.info_outline,
+                    color: Colors.blue[700],
+                    size: 20,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'الترتيب: ${priestsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${priestsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
+                          style: TextStyle(
+                            color: Colors.blue[700],
+                            fontFamily: 'Cairo',
+                            fontSize: 14,
+                          ),
+                        ),
+                        if (priestsProvider.isFiltered) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            priestsProvider.getFilterInfo(),
+                            style: TextStyle(
+                              color: Colors.orange[800],
+                              fontFamily: 'Cairo',
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Priests List
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: priestsProvider.priests.length,
+                itemBuilder: (context, index) {
+                  final priest = priestsProvider.priests[index];
+                  return PriestCard(priest: priest);
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showModeSelector() {
     showDialog(
       context: context,
-      builder: (context) => SortDialog(
-        currentSortBy: bishopsProvider.sortBy,
-        currentAscending: bishopsProvider.ascending,
-        onSortChanged: (sortBy, ascending) {
-          bishopsProvider.setSortBy(sortBy);
-        },
+      builder: (context) => AlertDialog(
+        title: const Text(
+          'اختيار وضع التطبيق',
+          style: TextStyle(
+            fontFamily: 'Cairo',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: const ModeSelectorWidget(),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'إغلاق',
+              style: TextStyle(fontFamily: 'Cairo'),
+            ),
+          ),
+        ],
       ),
     );
+  }
+
+  void _showSortDialog() {
+    final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
+    
+    if (appModeProvider.isBishopsMode) {
+      final bishopsProvider = Provider.of<BishopsProvider>(context, listen: false);
+      showDialog(
+        context: context,
+        builder: (context) => SortDialog(
+          currentSortBy: bishopsProvider.sortBy,
+          currentAscending: bishopsProvider.ascending,
+          onSortChanged: (sortBy, ascending) {
+            bishopsProvider.setSortBy(sortBy);
+          },
+        ),
+      );
+    } else {
+      final priestsProvider = Provider.of<PriestsProvider>(context, listen: false);
+      showDialog(
+        context: context,
+        builder: (context) => SortDialog(
+          currentSortBy: priestsProvider.sortBy,
+          currentAscending: priestsProvider.ascending,
+          onSortChanged: (sortBy, ascending) {
+            priestsProvider.setSortBy(sortBy);
+          },
+        ),
+      );
+    }
   }
 
   void _showAttendanceDialog() {
@@ -537,6 +804,168 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text(
+                'تطبيق',
+                style: TextStyle(fontFamily: 'Cairo'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showPriestsAttendanceDialog() {
+    final priestsProvider = Provider.of<PriestsProvider>(context, listen: false);
+    final allPriests = priestsProvider.allPriests;
+    final selectedPriests = <String, bool>{};
+    final searchController = TextEditingController();
+    List<Priest> filteredPriests = List.from(allPriests);
+    
+    // Initialize all priests as not selected
+    for (var priest in allPriests) {
+      selectedPriests[priest.id] = false;
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text(
+            'اختيار الآباء الكهنة الحاضرين',
+            style: TextStyle(
+              fontFamily: 'Cairo',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: SizedBox(
+            width: double.maxFinite,
+            height: 400,
+            child: Column(
+              children: [
+                // Search field
+                TextField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    hintText: 'ابحث بالاسم...',
+                    hintStyle: const TextStyle(fontFamily: 'Cairo'),
+                    prefixIcon: const Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                    ),
+                  ),
+                  style: const TextStyle(fontFamily: 'Cairo'),
+                  onChanged: (value) {
+                    setState(() {
+                      if (value.isEmpty) {
+                        filteredPriests = List.from(allPriests);
+                      } else {
+                        filteredPriests = allPriests
+                            .where((priest) => priest.name.toLowerCase().contains(value.toLowerCase()))
+                            .toList();
+                      }
+                    });
+                  },
+                ),
+                const SizedBox(height: 16),
+                // Priests list
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: filteredPriests.length,
+                    itemBuilder: (context, index) {
+                      final priest = filteredPriests[index];
+                      return CheckboxListTile(
+                        title: Text(
+                          priest.name,
+                          style: const TextStyle(
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          'رُسم في: ${priest.ordinationDate.day}/${priest.ordinationDate.month}/${priest.ordinationDate.year}',
+                          style: TextStyle(
+                            fontFamily: 'Cairo',
+                            fontSize: 12,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                        value: selectedPriests[priest.id] ?? false,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            selectedPriests[priest.id] = value ?? false;
+                          });
+                        },
+                        activeColor: Colors.blue,
+                        controlAffinity: ListTileControlAffinity.leading,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                searchController.dispose();
+                Navigator.pop(context);
+              },
+              child: const Text(
+                'إلغاء',
+                style: TextStyle(fontFamily: 'Cairo'),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final selectedIds = selectedPriests.entries
+                    .where((entry) => entry.value)
+                    .map((entry) => entry.key)
+                    .toList();
+                
+                if (selectedIds.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'يرجى اختيار كاهن واحد على الأقل',
+                        style: TextStyle(fontFamily: 'Cairo'),
+                      ),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                  return;
+                }
+                
+                // Filter priests to show only selected ones
+                priestsProvider.filterPriestsByIds(selectedIds);
+                searchController.dispose();
+                Navigator.pop(context);
+                
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'تم اختيار ${selectedIds.length} من الآباء الكهنة الحاضرين',
+                      style: const TextStyle(fontFamily: 'Cairo'),
+                    ),
+                    backgroundColor: Colors.green,
+                    action: SnackBarAction(
+                      label: 'إظهار الكل',
+                      textColor: Colors.white,
+                      onPressed: () {
+                        priestsProvider.clearFilter();
+                      },
+                    ),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
               ),
               child: const Text(

@@ -5,7 +5,9 @@ import 'firebase_config.dart';
 import 'theme/app_theme.dart';
 import 'providers/auth_provider.dart';
 import 'providers/bishops_provider.dart';
+import 'providers/priests_provider.dart';
 import 'providers/admin_provider.dart';
+import 'providers/app_mode_provider.dart';
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
@@ -28,7 +30,9 @@ class BishopsApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => BishopsProvider()),
+        ChangeNotifierProvider(create: (_) => PriestsProvider()),
         ChangeNotifierProvider(create: (_) => AdminProvider()),
+        ChangeNotifierProvider(create: (_) => AppModeProvider()),
       ],
       child: MaterialApp(
         title: 'ترتيب الآباء الأساقفة',

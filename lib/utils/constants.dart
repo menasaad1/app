@@ -1,6 +1,7 @@
 class AppConstants {
   // Firebase Collections
   static const String bishopsCollection = 'bishops';
+  static const String priestsCollection = 'priests';
   static const String usersCollection = 'users';
   
   // Admin Configuration
