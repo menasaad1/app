@@ -1,6 +1,6 @@
 class TypeUtils {
   // Safe type conversion utilities
-  static String toString(dynamic value) {
+  static String toStringValue(dynamic value) {
     if (value == null) return '';
     return value.toString();
   }
