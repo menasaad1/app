@@ -33,7 +33,7 @@ class CollectionUtils {
   }
   
   // Safe map access
-  static T? safeGet<T>(Map<String, dynamic> map, String key) {
+  static T? safeMapGet<T>(Map<String, dynamic> map, String key) {
     if (map.isEmpty || !map.containsKey(key)) return null;
     final value = map[key];
     if (value is T) return value;
@@ -41,48 +41,42 @@ class CollectionUtils {
   }
   
   // Safe list addition
-  static List<T> safeAdd<T>(List<T> list, T item) {
-    if (list == null) return [item];
+  static List<T> safeListAdd<T>(List<T> list, T item) {
     return [...list, item];
   }
   
   // Safe map addition
-  static Map<String, dynamic> safeAdd(Map<String, dynamic> map, String key, dynamic value) {
-    if (map == null) return {key: value};
+  static Map<String, dynamic> safeMapAdd(Map<String, dynamic> map, String key, dynamic value) {
     return {...map, key: value};
   }
   
   // Safe list removal
-  static List<T> safeRemove<T>(List<T> list, T item) {
-    if (list == null) return [];
+  static List<T> safeListRemove<T>(List<T> list, T item) {
     return list.where((element) => element != item).toList();
   }
   
   // Safe map removal
-  static Map<String, dynamic> safeRemove(Map<String, dynamic> map, String key) {
-    if (map == null) return {};
+  static Map<String, dynamic> safeMapRemove(Map<String, dynamic> map, String key) {
     final newMap = Map<String, dynamic>.from(map);
     newMap.remove(key);
     return newMap;
   }
   
   // Safe list update
-  static List<T> safeUpdate<T>(List<T> list, int index, T item) {
-    if (list == null || index < 0 || index >= list.length) return list ?? [];
+  static List<T> safeListUpdate<T>(List<T> list, int index, T item) {
+    if (index < 0 || index >= list.length) return list;
     final newList = List<T>.from(list);
     newList[index] = item;
     return newList;
   }
   
   // Safe map update
-  static Map<String, dynamic> safeUpdate(Map<String, dynamic> map, String key, dynamic value) {
-    if (map == null) return {key: value};
+  static Map<String, dynamic> safeMapUpdate(Map<String, dynamic> map, String key, dynamic value) {
     return {...map, key: value};
   }
   
   // Safe list filtering
   static List<T> safeFilter<T>(List<T> list, bool Function(T) predicate) {
-    if (list == null) return [];
     try {
       return list.where(predicate).toList();
     } catch (e) {
@@ -91,8 +85,7 @@ class CollectionUtils {
   }
   
   // Safe list mapping
-  static List<R> safeMap<T, R>(List<T> list, R Function(T) mapper) {
-    if (list == null) return [];
+  static List<R> safeMapList<T, R>(List<T> list, R Function(T) mapper) {
     try {
       return list.map(mapper).toList();
     } catch (e) {
