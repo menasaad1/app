@@ -31,7 +31,7 @@ class BishopsApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AdminProvider()),
       ],
       child: MaterialApp(
-        title: 'إدارة الأساقفة',
+        title: 'ترتيب الآباء الأساقفة',
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,

@@ -26,12 +26,41 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'مرحباً بك في تطبيق إدارة الأساقفة',
-          style: TextStyle(
-            fontFamily: 'Cairo',
-            fontWeight: FontWeight.bold,
-          ),
+        title: Row(
+          children: [
+            const Expanded(
+              child: Text(
+                'ترتيب الآباء الأساقفة',
+                style: TextStyle(
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Consumer<AuthProvider>(
+              builder: (context, authProvider, child) {
+                if (authProvider.isAuthenticated && authProvider.isAdmin) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Text(
+                      'مدير',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Cairo',
+                      ),
+                    ),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+          ],
         ),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
@@ -136,7 +165,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  'مرحباً بك في تطبيق إدارة الأساقفة',
+                  'ترتيب الآباء الأساقفة',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -147,7 +176,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'يمكنك تصفح قائمة الأساقفة والبحث عن المعلومات',
+                  'تصفح وترتيب قائمة الآباء الأساقفة حسب تاريخ الرسامة',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white70,
@@ -252,7 +281,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'لا توجد بيانات للأساقفة',
+                          'لا توجد بيانات للآباء الأساقفة',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.grey[600],
@@ -261,7 +290,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'سيتم إضافة البيانات قريباً',
+                          'سيتم إضافة البيانات من قبل المدير',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[500],

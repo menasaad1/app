@@ -30,7 +30,7 @@ class _AdminScreenState extends State<AdminScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text(
-          'إدارة الأساقفة',
+          'إدارة الآباء الأساقفة',
           style: TextStyle(
             fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
@@ -88,7 +88,7 @@ class _AdminScreenState extends State<AdminScreen> {
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add),
         label: const Text(
-          'إضافة أسقف',
+          'إضافة أب أسقف',
           style: TextStyle(
             fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
@@ -152,29 +152,29 @@ class _AdminScreenState extends State<AdminScreen> {
                     color: Colors.grey[400],
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    'لا توجد بيانات للأساقفة',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey[600],
-                      fontFamily: 'Cairo',
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'اضغط على + لإضافة أسقف جديد',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[500],
-                      fontFamily: 'Cairo',
-                    ),
-                  ),
+                        Text(
+                          'لا توجد بيانات للآباء الأساقفة',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey[600],
+                            fontFamily: 'Cairo',
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'اضغط على + لإضافة أب أسقف جديد',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[500],
+                            fontFamily: 'Cairo',
+                          ),
+                        ),
                   const SizedBox(height: 24),
                   ElevatedButton.icon(
                     onPressed: () => _showAddBishopDialog(),
                     icon: const Icon(Icons.add),
                     label: const Text(
-                      'إضافة أسقف جديد',
+                      'إضافة أب أسقف جديد',
                       style: TextStyle(fontFamily: 'Cairo'),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -235,7 +235,7 @@ class _AdminScreenState extends State<AdminScreen> {
                             ),
                           ),
                         Text(
-                          'يمكنك إضافة وتعديل وحذف بيانات الأساقفة',
+                          'يمكنك إضافة وتعديل وحذف بيانات الآباء الأساقفة',
                           style: TextStyle(
                             color: Colors.white.withValues(alpha: 0.9),
                             fontFamily: 'Cairo',

@@ -13,7 +13,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isSignUp = false;
   bool _obscurePassword = true;
 
   @override
@@ -61,9 +60,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 40),
                 // Title
-                Text(
-                  _isSignUp ? 'إنشاء حساب جديد' : 'تسجيل الدخول',
-                  style: const TextStyle(
+                const Text(
+                  'تسجيل الدخول - المدير',
+                  style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.deepPurple,
@@ -73,9 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  _isSignUp 
-                    ? 'أنشئ حسابك للوصول إلى النظام'
-                    : 'أدخل بياناتك للوصول إلى النظام',
+                  'أدخل بياناتك للوصول إلى لوحة الإدارة',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey[600],
@@ -150,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
                 const SizedBox(height: 30),
-                // Login/SignUp Button
+                // Login Button
                 Consumer<AuthProvider>(
                   builder: (context, authProvider, child) {
                     return ElevatedButton(
@@ -173,9 +170,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                               ),
                             )
-                          : Text(
-                              _isSignUp ? 'إنشاء الحساب' : 'تسجيل الدخول',
-                              style: const TextStyle(
+                          : const Text(
+                              'تسجيل الدخول',
+                              style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Cairo',
@@ -183,24 +180,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                     );
                   },
-                ),
-                const SizedBox(height: 20),
-                // Toggle Sign Up/Login
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _isSignUp = !_isSignUp;
-                    });
-                  },
-                  child: Text(
-                    _isSignUp 
-                      ? 'لديك حساب بالفعل؟ تسجيل الدخول'
-                      : 'ليس لديك حساب؟ إنشاء حساب جديد',
-                    style: const TextStyle(
-                      color: Colors.deepPurple,
-                      fontFamily: 'Cairo',
-                    ),
-                  ),
                 ),
                 const SizedBox(height: 20),
                 // Error Message
@@ -238,19 +217,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _handleAuth() async {
     if (_formKey.currentState!.validate()) {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      bool success;
       
-      if (_isSignUp) {
-        success = await authProvider.signUp(
-          _emailController.text.trim(),
-          _passwordController.text,
-        );
-      } else {
-        success = await authProvider.signIn(
-          _emailController.text.trim(),
-          _passwordController.text,
-        );
-      }
+      final success = await authProvider.signIn(
+        _emailController.text.trim(),
+        _passwordController.text,
+      );
 
       if (success && mounted) {
         if (authProvider.isAdmin) {

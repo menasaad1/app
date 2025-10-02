@@ -29,8 +29,8 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text(
-        'إضافة أسقف جديد',
+        title: const Text(
+        'إضافة أب أسقف جديد',
         style: TextStyle(
           fontFamily: 'Cairo',
           fontWeight: FontWeight.bold,
@@ -46,8 +46,8 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: 'اسم الأسقف *',
-                  hintText: 'أدخل اسم الأسقف',
+                  labelText: 'اسم الأب الأسقف *',
+                  hintText: 'أدخل اسم الأب الأسقف',
                   prefixIcon: const Icon(Icons.person),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -59,7 +59,7 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'يرجى إدخال اسم الأسقف';
+                    return 'يرجى إدخال اسم الأب الأسقف';
                   }
                   return null;
                 },
@@ -219,7 +219,7 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text(
-              'تم إضافة الأسقف بنجاح',
+              'تم إضافة الأب الأسقف بنجاح',
               style: TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.green,
@@ -229,7 +229,7 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              bishopsProvider.errorMessage ?? 'حدث خطأ في إضافة الأسقف',
+              bishopsProvider.errorMessage ?? 'حدث خطأ في إضافة الأب الأسقف',
               style: const TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.red,
