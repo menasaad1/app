@@ -386,8 +386,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   void _showAttendanceDialog() {
     final bishopsProvider = Provider.of<BishopsProvider>(context, listen: false);
-    final allBishops = bishopsProvider.bishops;
+    final allBishops = bishopsProvider.allBishops;
     final selectedBishops = <String, bool>{};
+    final searchController = TextEditingController();
+    List<Bishop> filteredBishops = List.from(allBishops);
     
     // Initialize all bishops as not selected
     for (var bishop in allBishops) {
@@ -410,61 +412,41 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             height: 400,
             child: Column(
               children: [
-                // Select All / Deselect All buttons
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          setState(() {
-                            for (var key in selectedBishops.keys) {
-                              selectedBishops[key] = true;
-                            }
-                          });
-                        },
-                        icon: const Icon(Icons.select_all, size: 16),
-                        label: const Text(
-                          'تحديد الكل',
-                          style: TextStyle(fontFamily: 'Cairo', fontSize: 12),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                        ),
-                      ),
+                // Search field
+                TextField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    hintText: 'ابحث بالاسم...',
+                    hintStyle: const TextStyle(fontFamily: 'Cairo'),
+                    prefixIcon: const Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          setState(() {
-                            for (var key in selectedBishops.keys) {
-                              selectedBishops[key] = false;
-                            }
-                          });
-                        },
-                        icon: const Icon(Icons.clear, size: 16),
-                        label: const Text(
-                          'إلغاء الكل',
-                          style: TextStyle(fontFamily: 'Cairo', fontSize: 12),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                        ),
-                      ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
                     ),
-                  ],
+                  ),
+                  style: const TextStyle(fontFamily: 'Cairo'),
+                  onChanged: (value) {
+                    setState(() {
+                      if (value.isEmpty) {
+                        filteredBishops = List.from(allBishops);
+                      } else {
+                        filteredBishops = allBishops
+                            .where((bishop) => bishop.name.toLowerCase().contains(value.toLowerCase()))
+                            .toList();
+                      }
+                    });
+                  },
                 ),
                 const SizedBox(height: 16),
                 // Bishops list
                 Expanded(
                   child: ListView.builder(
-                    itemCount: allBishops.length,
+                    itemCount: filteredBishops.length,
                     itemBuilder: (context, index) {
-                      final bishop = allBishops[index];
+                      final bishop = filteredBishops[index];
                       return CheckboxListTile(
                         title: Text(
                           bishop.name,
@@ -497,7 +479,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                searchController.dispose();
+                Navigator.pop(context);
+              },
               child: const Text(
                 'إلغاء',
                 style: TextStyle(fontFamily: 'Cairo'),
@@ -525,6 +510,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 
                 // Filter bishops to show only selected ones
                 bishopsProvider.filterBishopsByIds(selectedIds);
+                searchController.dispose();
                 Navigator.pop(context);
                 
                 ScaffoldMessenger.of(context).showSnackBar(
