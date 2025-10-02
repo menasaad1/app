@@ -66,24 +66,55 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
         actions: [
+          // Sort button
           Consumer<BishopsProvider>(
             builder: (context, bishopsProvider, child) {
               return IconButton(
                 icon: const Icon(Icons.sort),
-                onPressed: () => _showSortDialog(context, bishopsProvider),
-                tooltip: 'ترتيب القائمة',
+                onPressed: bishopsProvider.bishops.isEmpty ? null : () => _showSortDialog(context, bishopsProvider),
+                tooltip: 'ترتيب',
               );
             },
           ),
+          // Attendance selection button
+          Consumer<BishopsProvider>(
+            builder: (context, bishopsProvider, child) {
+              return IconButton(
+                icon: const Icon(Icons.group),
+                onPressed: bishopsProvider.bishops.isEmpty ? null : () => _showAttendanceDialog(),
+                tooltip: 'اختيار الحاضرين',
+              );
+            },
+          ),
+          // Simple login button
           Consumer<AuthProvider>(
             builder: (context, authProvider, child) {
               if (authProvider.isAuthenticated && authProvider.isAdmin) {
                 return PopupMenuButton<String>(
-                  onSelected: (value) {
+                  icon: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: const Text(
+                      'مدير',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Cairo',
+                      ),
+                    ),
+                  ),
+                  onSelected: (value) async {
                     if (value == 'admin') {
                       Navigator.pushNamed(context, '/admin');
                     } else if (value == 'logout') {
-                      _showLogoutDialog();
+                      await Provider.of<AuthProvider>(context, listen: false).signOut();
+                      if (mounted) {
+                        Navigator.pushReplacementNamed(context, '/home');
+                      }
                     }
                   },
                   itemBuilder: (context) => [
@@ -91,9 +122,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       value: 'admin',
                       child: Row(
                         children: [
-                          Icon(Icons.admin_panel_settings, color: Colors.deepPurple),
+                          Icon(Icons.admin_panel_settings, color: Colors.deepPurple, size: 16),
                           SizedBox(width: 8),
-                          Text('لوحة الإدارة', style: TextStyle(fontFamily: 'Cairo')),
+                          Text('إدارة', style: TextStyle(fontFamily: 'Cairo', fontSize: 12)),
                         ],
                       ),
                     ),
@@ -101,37 +132,38 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       value: 'logout',
                       child: Row(
                         children: [
-                          Icon(Icons.logout, color: Colors.red),
+                          Icon(Icons.logout, color: Colors.red, size: 16),
                           SizedBox(width: 8),
-                          Text('تسجيل الخروج', style: TextStyle(fontFamily: 'Cairo')),
+                          Text('خروج', style: TextStyle(fontFamily: 'Cairo', fontSize: 12)),
                         ],
                       ),
                     ),
                   ],
                 );
               } else {
-                return PopupMenuButton<String>(
-                  onSelected: (value) {
-                    if (value == 'login') {
-                      Navigator.pushNamed(context, '/login');
-                    }
-                  },
-                  itemBuilder: (context) => [
-                    const PopupMenuItem(
-                      value: 'login',
-                      child: Row(
-                        children: [
-                          Icon(Icons.login, color: Colors.deepPurple),
-                          SizedBox(width: 8),
-                          Text('تسجيل الدخول', style: TextStyle(fontFamily: 'Cairo')),
-                        ],
+                return GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, '/login'),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: const Text(
+                      'دخول',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Cairo',
                       ),
                     ),
-                  ],
+                  ),
                 );
               }
             },
           ),
+          const SizedBox(width: 8),
         ],
       ),
       body: Column(
@@ -176,47 +208,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'تصفح وترتيب قائمة الآباء الأساقفة حسب تاريخ الرسامة',
+                  'اختر الأساقفة الحاضرين وقم بترتيبهم حسب تاريخ الرسامة',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white70,
                     fontFamily: 'Cairo',
                   ),
                   textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                Consumer<AuthProvider>(
-                  builder: (context, authProvider, child) {
-                    if (authProvider.isAuthenticated && authProvider.isAdmin) {
-                      return ElevatedButton.icon(
-                        onPressed: () => Navigator.pushNamed(context, '/admin'),
-                        icon: const Icon(Icons.admin_panel_settings),
-                        label: const Text(
-                          'لوحة الإدارة',
-                          style: TextStyle(fontFamily: 'Cairo'),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.deepPurple,
-                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        ),
-                      );
-                    } else {
-                      return ElevatedButton.icon(
-                        onPressed: () => Navigator.pushNamed(context, '/login'),
-                        icon: const Icon(Icons.login),
-                        label: const Text(
-                          'تسجيل الدخول',
-                          style: TextStyle(fontFamily: 'Cairo'),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.deepPurple,
-                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        ),
-                      );
-                    }
-                  },
                 ),
               ],
             ),
@@ -323,13 +321,30 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: Text(
-                              'الترتيب: ${bishopsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${bishopsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
-                              style: TextStyle(
-                                color: Colors.deepPurple[700],
-                                fontFamily: 'Cairo',
-                                fontSize: 14,
-                              ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'الترتيب: ${bishopsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${bishopsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
+                                  style: TextStyle(
+                                    color: Colors.deepPurple[700],
+                                    fontFamily: 'Cairo',
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                if (bishopsProvider.isFiltered) ...[
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    bishopsProvider.getFilterInfo(),
+                                    style: TextStyle(
+                                      color: Colors.orange[700],
+                                      fontFamily: 'Cairo',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ],
                             ),
                           ),
                         ],
@@ -369,41 +384,177 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
-  void _showLogoutDialog() {
+  void _showAttendanceDialog() {
+    final bishopsProvider = Provider.of<BishopsProvider>(context, listen: false);
+    final allBishops = bishopsProvider.bishops;
+    final selectedBishops = <String, bool>{};
+    
+    // Initialize all bishops as not selected
+    for (var bishop in allBishops) {
+      selectedBishops[bishop.id] = false;
+    }
+
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text(
-          'تسجيل الخروج',
-          style: TextStyle(fontFamily: 'Cairo'),
-        ),
-        content: const Text(
-          'هل أنت متأكد من تسجيل الخروج؟',
-          style: TextStyle(fontFamily: 'Cairo'),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'إلغاء',
-              style: TextStyle(fontFamily: 'Cairo'),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text(
+            'اختيار الأساقفة الحاضرين',
+            style: TextStyle(
+              fontFamily: 'Cairo',
+              fontWeight: FontWeight.bold,
             ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Provider.of<AuthProvider>(context, listen: false).signOut();
-              Navigator.pushReplacementNamed(context, '/home');
-            },
-            child: const Text(
-              'تسجيل الخروج',
-              style: TextStyle(
-                fontFamily: 'Cairo',
-                color: Colors.red,
+          content: SizedBox(
+            width: double.maxFinite,
+            height: 400,
+            child: Column(
+              children: [
+                // Select All / Deselect All buttons
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            for (var key in selectedBishops.keys) {
+                              selectedBishops[key] = true;
+                            }
+                          });
+                        },
+                        icon: const Icon(Icons.select_all, size: 16),
+                        label: const Text(
+                          'تحديد الكل',
+                          style: TextStyle(fontFamily: 'Cairo', fontSize: 12),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            for (var key in selectedBishops.keys) {
+                              selectedBishops[key] = false;
+                            }
+                          });
+                        },
+                        icon: const Icon(Icons.clear, size: 16),
+                        label: const Text(
+                          'إلغاء الكل',
+                          style: TextStyle(fontFamily: 'Cairo', fontSize: 12),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                // Bishops list
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: allBishops.length,
+                    itemBuilder: (context, index) {
+                      final bishop = allBishops[index];
+                      return CheckboxListTile(
+                        title: Text(
+                          bishop.name,
+                          style: const TextStyle(
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          'رُسم في: ${bishop.ordinationDate.day}/${bishop.ordinationDate.month}/${bishop.ordinationDate.year}',
+                          style: const TextStyle(
+                            fontFamily: 'Cairo',
+                            fontSize: 12,
+                          ),
+                        ),
+                        value: selectedBishops[bishop.id] ?? false,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            selectedBishops[bishop.id] = value ?? false;
+                          });
+                        },
+                        activeColor: Colors.deepPurple,
+                        controlAffinity: ListTileControlAffinity.leading,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                'إلغاء',
+                style: TextStyle(fontFamily: 'Cairo'),
               ),
             ),
-          ),
-        ],
+            ElevatedButton(
+              onPressed: () {
+                final selectedIds = selectedBishops.entries
+                    .where((entry) => entry.value)
+                    .map((entry) => entry.key)
+                    .toList();
+                
+                if (selectedIds.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'يرجى اختيار أسقف واحد على الأقل',
+                        style: TextStyle(fontFamily: 'Cairo'),
+                      ),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                  return;
+                }
+                
+                // Filter bishops to show only selected ones
+                bishopsProvider.filterBishopsByIds(selectedIds);
+                Navigator.pop(context);
+                
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'تم اختيار ${selectedIds.length} من الأساقفة الحاضرين',
+                      style: const TextStyle(fontFamily: 'Cairo'),
+                    ),
+                    backgroundColor: Colors.green,
+                    action: SnackBarAction(
+                      label: 'إظهار الكل',
+                      textColor: Colors.white,
+                      onPressed: () {
+                        bishopsProvider.clearFilter();
+                      },
+                    ),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text(
+                'تطبيق',
+                style: TextStyle(fontFamily: 'Cairo'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
