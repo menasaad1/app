@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
+import '../providers/app_mode_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -35,10 +36,20 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _checkAuthStatus() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () async {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
+      
+      // Load the app mode first
+      await appModeProvider.loadMode();
+      
       if (authProvider.isAuthenticated && authProvider.isAdmin) {
-        Navigator.pushReplacementNamed(context, '/admin');
+        // Navigate to appropriate admin screen based on mode
+        if (appModeProvider.isBishopsMode) {
+          Navigator.pushReplacementNamed(context, '/admin');
+        } else {
+          Navigator.pushReplacementNamed(context, '/priests-admin');
+        }
       } else {
         Navigator.pushReplacementNamed(context, '/home');
       }

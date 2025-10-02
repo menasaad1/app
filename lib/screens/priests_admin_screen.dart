@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
-import '../providers/bishops_provider.dart';
-import '../models/bishop.dart';
-import '../widgets/bishop_card.dart';
-import '../widgets/add_bishop_dialog.dart';
-import '../widgets/edit_bishop_dialog.dart';
+import '../providers/priests_provider.dart';
+import '../models/priest.dart';
+import '../widgets/priest_card.dart';
+import '../widgets/add_priest_dialog.dart';
+import '../widgets/edit_priest_dialog.dart';
 import '../widgets/sort_dialog.dart';
 
-class AdminScreen extends StatefulWidget {
-  const AdminScreen({super.key});
+class PriestsAdminScreen extends StatefulWidget {
+  const PriestsAdminScreen({super.key});
 
   @override
-  State<AdminScreen> createState() => _AdminScreenState();
+  State<PriestsAdminScreen> createState() => _PriestsAdminScreenState();
 }
 
-class _AdminScreenState extends State<AdminScreen> {
+class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<BishopsProvider>(context, listen: false).fetchBishops();
+      Provider.of<PriestsProvider>(context, listen: false).fetchPriests();
     });
   }
 
@@ -30,21 +30,21 @@ class _AdminScreenState extends State<AdminScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text(
-          'إدارة الآباء الأساقفة',
+          'إدارة الآباء الكهنة',
           style: TextStyle(
             fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         elevation: 0,
         actions: [
-          Consumer<BishopsProvider>(
-            builder: (context, bishopsProvider, child) {
+          Consumer<PriestsProvider>(
+            builder: (context, priestsProvider, child) {
               return IconButton(
                 icon: const Icon(Icons.sort),
-                onPressed: () => _showSortDialog(context, bishopsProvider),
+                onPressed: () => _showSortDialog(context, priestsProvider),
                 tooltip: 'ترتيب القائمة',
               );
             },
@@ -74,7 +74,7 @@ class _AdminScreenState extends State<AdminScreen> {
                 value: 'admin-management',
                 child: Row(
                   children: [
-                    Icon(Icons.people, color: Colors.deepPurple),
+                    Icon(Icons.admin_panel_settings, color: Colors.blue),
                     SizedBox(width: 8),
                     Text('إدارة المدراء', style: TextStyle(fontFamily: 'Cairo')),
                   ],
@@ -95,29 +95,29 @@ class _AdminScreenState extends State<AdminScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddBishopDialog(),
-        backgroundColor: Colors.deepPurple,
+        onPressed: () => _showAddPriestDialog(),
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add),
         label: const Text(
-          'إضافة أب أسقف',
+          'إضافة أب كاهن',
           style: TextStyle(
             fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
-      body: Consumer<BishopsProvider>(
-        builder: (context, bishopsProvider, child) {
-          if (bishopsProvider.isLoading) {
+      body: Consumer<PriestsProvider>(
+        builder: (context, priestsProvider, child) {
+          if (priestsProvider.isLoading) {
             return const Center(
               child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
               ),
             );
           }
 
-          if (bishopsProvider.errorMessage != null) {
+          if (priestsProvider.errorMessage != null) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +129,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    bishopsProvider.errorMessage!,
+                    priestsProvider.errorMessage!,
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.red[700],
@@ -140,8 +140,8 @@ class _AdminScreenState extends State<AdminScreen> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      bishopsProvider.clearError();
-                      bishopsProvider.fetchBishops();
+                      priestsProvider.clearError();
+                      priestsProvider.fetchPriests();
                     },
                     child: const Text(
                       'إعادة المحاولة',
@@ -153,45 +153,45 @@ class _AdminScreenState extends State<AdminScreen> {
             );
           }
 
-          if (bishopsProvider.bishops.isEmpty) {
+          if (priestsProvider.priests.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.church,
+                    Icons.person,
                     size: 64,
                     color: Colors.grey[400],
                   ),
                   const SizedBox(height: 16),
-                        Text(
-                          'لا توجد بيانات للآباء الأساقفة',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.grey[800],
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'اضغط على + لإضافة أب أسقف جديد',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[700],
-                            fontFamily: 'Cairo',
-                          ),
-                        ),
+                  Text(
+                    'لا توجد بيانات للآباء الكهنة',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey[800],
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'اضغط على + لإضافة أب كاهن جديد',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[700],
+                      fontFamily: 'Cairo',
+                    ),
+                  ),
                   const SizedBox(height: 24),
                   ElevatedButton.icon(
-                    onPressed: () => _showAddBishopDialog(),
+                    onPressed: () => _showAddPriestDialog(),
                     icon: const Icon(Icons.add),
                     label: const Text(
-                      'إضافة أب أسقف جديد',
+                      'إضافة أب كاهن جديد',
                       style: TextStyle(fontFamily: 'Cairo'),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple,
+                      backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 24,
@@ -206,40 +206,47 @@ class _AdminScreenState extends State<AdminScreen> {
 
           return Column(
             children: [
-              // Admin Info
+              // Welcome Card for Admin
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(16),
                 margin: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.deepPurple[400]!, Colors.deepPurple[600]!],
+                    colors: [Colors.blue[400]!, Colors.blue[600]!],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(16),
                   boxShadow: [
-                  BoxShadow(
-                    color: Colors.deepPurple.withValues(alpha: 0.3),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  ),
+                    BoxShadow(
+                      color: Colors.blue.withValues(alpha: 0.3),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    ),
                   ],
                 ),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.admin_panel_settings,
-                      color: Colors.white,
-                      size: 24,
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: 32,
+                      ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'وضع الإدارة',
+                            'مرحباً بك في لوحة إدارة الآباء الكهنة',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Cairo',
@@ -247,14 +254,14 @@ class _AdminScreenState extends State<AdminScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        Text(
-                          'يمكنك إضافة وتعديل وحذف بيانات الآباء الأساقفة',
-                          style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.9),
-                            fontFamily: 'Cairo',
-                            fontSize: 12,
+                          Text(
+                            'يمكنك إضافة وتعديل وحذف بيانات الآباء الكهنة',
+                            style: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.9),
+                              fontFamily: 'Cairo',
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
                         ],
                       ),
                     ),
@@ -267,43 +274,60 @@ class _AdminScreenState extends State<AdminScreen> {
                 padding: const EdgeInsets.all(16),
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: Colors.deepPurple[50],
+                  color: Colors.blue[50],
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.deepPurple[200]!),
+                  border: Border.all(color: Colors.blue[200]!),
                 ),
                 child: Row(
                   children: [
                     Icon(
                       Icons.info_outline,
-                      color: Colors.deepPurple[700],
+                      color: Colors.blue[700],
                       size: 20,
                     ),
                     const SizedBox(width: 8),
                     Expanded(
-                      child: Text(
-                        'الترتيب: ${bishopsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${bishopsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
-                        style: TextStyle(
-                          color: Colors.deepPurple[700],
-                          fontFamily: 'Cairo',
-                          fontSize: 14,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'الترتيب: ${priestsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${priestsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
+                            style: TextStyle(
+                              color: Colors.blue[700],
+                              fontFamily: 'Cairo',
+                              fontSize: 14,
+                            ),
+                          ),
+                          if (priestsProvider.isFiltered) ...[
+                            const SizedBox(height: 4),
+                            Text(
+                              priestsProvider.getFilterInfo(),
+                              style: TextStyle(
+                                color: Colors.orange[800],
+                                fontFamily: 'Cairo',
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-              // Bishops List
+              // Priests List
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: bishopsProvider.bishops.length,
+                  itemCount: priestsProvider.priests.length,
                   itemBuilder: (context, index) {
-                    final bishop = bishopsProvider.bishops[index];
-                    return BishopCard(
-                      bishop: bishop,
+                    final priest = priestsProvider.priests[index];
+                    return PriestCard(
+                      priest: priest,
                       isAdmin: true,
-                      onEdit: () => _showEditBishopDialog(bishop),
-                      onDelete: () => _showDeleteBishopDialog(bishop),
+                      onEdit: () => _showEditPriestDialog(priest),
+                      onDelete: () => _showDeletePriestDialog(priest),
                     );
                   },
                 ),
@@ -315,30 +339,30 @@ class _AdminScreenState extends State<AdminScreen> {
     );
   }
 
-  void _showAddBishopDialog() {
+  void _showAddPriestDialog() {
     showDialog(
       context: context,
-      builder: (context) => const AddBishopDialog(),
+      builder: (context) => const AddPriestDialog(),
     );
   }
 
-  void _showEditBishopDialog(Bishop bishop) {
+  void _showEditPriestDialog(Priest priest) {
     showDialog(
       context: context,
-      builder: (context) => EditBishopDialog(bishop: bishop),
+      builder: (context) => EditPriestDialog(priest: priest),
     );
   }
 
-  void _showDeleteBishopDialog(Bishop bishop) {
+  void _showDeletePriestDialog(Priest priest) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text(
-          'حذف الأسقف',
+          'حذف الأب الكاهن',
           style: TextStyle(fontFamily: 'Cairo'),
         ),
         content: Text(
-          'هل أنت متأكد من حذف الأسقف "${bishop.name}"؟',
+          'هل أنت متأكد من حذف الأب الكاهن "${priest.name}"؟',
           style: const TextStyle(fontFamily: 'Cairo'),
         ),
         actions: [
@@ -352,15 +376,15 @@ class _AdminScreenState extends State<AdminScreen> {
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
-              final bishopsProvider = Provider.of<BishopsProvider>(context, listen: false);
-              final success = await bishopsProvider.deleteBishop(bishop.id);
+              final priestsProvider = Provider.of<PriestsProvider>(context, listen: false);
+              final success = await priestsProvider.deletePriest(priest.id);
               
               if (mounted) {
                 if (success) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        'تم حذف الأسقف "${bishop.name}" بنجاح',
+                        'تم حذف الأب الكاهن "${priest.name}" بنجاح',
                         style: const TextStyle(fontFamily: 'Cairo'),
                       ),
                       backgroundColor: Colors.green,
@@ -370,7 +394,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        bishopsProvider.errorMessage ?? 'حدث خطأ في حذف الأسقف',
+                        priestsProvider.errorMessage ?? 'حدث خطأ في حذف الأب الكاهن',
                         style: const TextStyle(fontFamily: 'Cairo'),
                       ),
                       backgroundColor: Colors.red,
@@ -392,14 +416,14 @@ class _AdminScreenState extends State<AdminScreen> {
     );
   }
 
-  void _showSortDialog(BuildContext context, BishopsProvider bishopsProvider) {
+  void _showSortDialog(BuildContext context, PriestsProvider priestsProvider) {
     showDialog(
       context: context,
       builder: (context) => SortDialog(
-        currentSortBy: bishopsProvider.sortBy,
-        currentAscending: bishopsProvider.ascending,
+        currentSortBy: priestsProvider.sortBy,
+        currentAscending: priestsProvider.ascending,
         onSortChanged: (sortBy, ascending) {
-          bishopsProvider.setSortBy(sortBy);
+          priestsProvider.setSortBy(sortBy);
         },
       ),
     );
@@ -444,4 +468,3 @@ class _AdminScreenState extends State<AdminScreen> {
     );
   }
 }
-

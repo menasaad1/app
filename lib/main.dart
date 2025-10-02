@@ -13,6 +13,7 @@ import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/admin_screen.dart';
+import 'screens/priests_admin_screen.dart';
 import 'screens/admin_management_screen.dart';
 
 void main() async {
@@ -55,6 +56,7 @@ class BishopsApp extends StatelessWidget {
           '/login': (context) => const LoginScreen(),
           '/home': (context) => const WelcomeScreen(),
           '/admin': (context) => const AdminScreen(),
+          '/priests-admin': (context) => const PriestsAdminScreen(),
           '/admin-management': (context) => const AdminManagementScreen(),
         },
       ),

@@ -170,7 +170,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   onSelected: (value) async {
                     if (value == 'admin') {
-                      Navigator.pushNamed(context, '/admin');
+                      final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
+                      if (appModeProvider.isBishopsMode) {
+                        Navigator.pushNamed(context, '/admin');
+                      } else {
+                        Navigator.pushNamed(context, '/priests-admin');
+                      }
                     } else if (value == 'logout') {
                       await Provider.of<AuthProvider>(context, listen: false).signOut();
                       if (mounted) {
