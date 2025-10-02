@@ -47,6 +47,7 @@ class BishopsProvider with ChangeNotifier {
         _bishops = _allBishops.where((bishop) => _filteredIds.contains(bishop.id)).toList();
       } else {
         _bishops = List.from(_allBishops);
+        _isFiltered = false; // Reset filter if showing all
       }
       
       _sortBishops();
@@ -65,11 +66,14 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      await _firestore.collection(AppConstants.bishopsCollection).add(bishop.toMap());
+      final bishopMap = bishop.toMap();
+      bishopMap.remove('id'); // Remove id from map before adding
+      
+      await _firestore.collection(AppConstants.bishopsCollection).add(bishopMap);
       await fetchBishops();
       return true;
     } catch (e) {
-      _errorMessage = 'حدث خطأ في إضافة الأسقف';
+      _errorMessage = 'حدث خطأ في إضافة الأسقف: ${e.toString()}';
       return false;
     } finally {
       _isLoading = false;
@@ -83,14 +87,17 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
+      final bishopMap = bishop.toMap();
+      bishopMap.remove('id'); // Remove id from map before updating
+      
       await _firestore
           .collection(AppConstants.bishopsCollection)
           .doc(bishop.id)
-          .update(bishop.toMap());
+          .update(bishopMap);
       await fetchBishops();
       return true;
     } catch (e) {
-      _errorMessage = 'حدث خطأ في تحديث الأسقف';
+      _errorMessage = 'حدث خطأ في تحديث الأسقف: ${e.toString()}';
       return false;
     } finally {
       _isLoading = false;
@@ -105,10 +112,16 @@ class BishopsProvider with ChangeNotifier {
       notifyListeners();
 
       await _firestore.collection(AppConstants.bishopsCollection).doc(bishopId).delete();
+      
+      // Remove from filtered list if it exists
+      if (_isFiltered) {
+        _filteredIds.remove(bishopId);
+      }
+      
       await fetchBishops();
       return true;
     } catch (e) {
-      _errorMessage = 'حدث خطأ في حذف الأسقف';
+      _errorMessage = 'حدث خطأ في حذف الأسقف: ${e.toString()}';
       return false;
     } finally {
       _isLoading = false;

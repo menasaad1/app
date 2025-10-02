@@ -21,11 +21,17 @@ class Bishop {
     return Bishop(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
-      ordinationDate: DateTime.parse(map['ordinationDate']),
+      ordinationDate: map['ordinationDate'] is String 
+          ? DateTime.parse(map['ordinationDate'])
+          : (map['ordinationDate'] as DateTime),
       diocese: map['diocese'],
       notes: map['notes'],
-      createdAt: DateTime.parse(map['createdAt']),
-      updatedAt: DateTime.parse(map['updatedAt']),
+      createdAt: map['createdAt'] is String 
+          ? DateTime.parse(map['createdAt'])
+          : (map['createdAt'] as DateTime),
+      updatedAt: map['updatedAt'] is String 
+          ? DateTime.parse(map['updatedAt'])
+          : (map['updatedAt'] as DateTime),
     );
   }
 

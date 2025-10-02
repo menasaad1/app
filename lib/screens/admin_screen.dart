@@ -337,10 +337,34 @@ class _AdminScreenState extends State<AdminScreen> {
             ),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(context);
-              Provider.of<BishopsProvider>(context, listen: false)
-                  .deleteBishop(bishop.id);
+              final bishopsProvider = Provider.of<BishopsProvider>(context, listen: false);
+              final success = await bishopsProvider.deleteBishop(bishop.id);
+              
+              if (mounted) {
+                if (success) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'تم حذف الأسقف "${bishop.name}" بنجاح',
+                        style: const TextStyle(fontFamily: 'Cairo'),
+                      ),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        bishopsProvider.errorMessage ?? 'حدث خطأ في حذف الأسقف',
+                        style: const TextStyle(fontFamily: 'Cairo'),
+                      ),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              }
             },
             child: const Text(
               'حذف',
