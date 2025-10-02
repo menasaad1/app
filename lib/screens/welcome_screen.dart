@@ -94,8 +94,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   icon: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.2),
+                      color: Colors.white.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
                     ),
                     child: const Text(
                       'مدير',
@@ -146,8 +147,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.2),
+                      color: Colors.white.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
                     ),
                     child: const Text(
                       'دخول',
@@ -207,11 +209,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
-                const Text(
+                  const Text(
                   'اختر الأساقفة الحاضرين وقم بترتيبهم حسب تاريخ الرسامة',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.white70,
+                    color: Colors.white,
                     fontFamily: 'Cairo',
                   ),
                   textAlign: TextAlign.center,
@@ -282,8 +284,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           'لا توجد بيانات للآباء الأساقفة',
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.grey[600],
+                            color: Colors.grey[800],
                             fontFamily: 'Cairo',
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -291,7 +294,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           'سيتم إضافة البيانات من قبل المدير',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.grey[500],
+                            color: Colors.grey[700],
                             fontFamily: 'Cairo',
                           ),
                         ),
@@ -337,7 +340,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   Text(
                                     bishopsProvider.getFilterInfo(),
                                     style: TextStyle(
-                                      color: Colors.orange[700],
+                                      color: Colors.orange[800],
                                       fontFamily: 'Cairo',
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
@@ -457,9 +460,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         subtitle: Text(
                           'رُسم في: ${bishop.ordinationDate.day}/${bishop.ordinationDate.month}/${bishop.ordinationDate.year}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: 'Cairo',
                             fontSize: 12,
+                            color: Colors.grey[800],
                           ),
                         ),
                         value: selectedBishops[bishop.id] ?? false,

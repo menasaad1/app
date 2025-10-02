@@ -156,8 +156,9 @@ class _AdminScreenState extends State<AdminScreen> {
                           'لا توجد بيانات للآباء الأساقفة',
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.grey[600],
+                            color: Colors.grey[800],
                             fontFamily: 'Cairo',
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -165,7 +166,7 @@ class _AdminScreenState extends State<AdminScreen> {
                           'اضغط على + لإضافة أب أسقف جديد',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.grey[500],
+                            color: Colors.grey[700],
                             fontFamily: 'Cairo',
                           ),
                         ),

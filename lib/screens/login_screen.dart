@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'أدخل بياناتك للوصول إلى لوحة الإدارة',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.grey[600],
+                    color: Colors.grey[800],
                     fontFamily: 'Cairo',
                   ),
                   textAlign: TextAlign.center,

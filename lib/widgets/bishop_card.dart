@@ -76,7 +76,7 @@ class BishopCard extends StatelessWidget {
                             bishop.diocese!,
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colors.grey[600],
+                              color: Colors.grey[800],
                               fontFamily: 'Cairo',
                             ),
                           ),
@@ -164,7 +164,7 @@ class BishopCard extends StatelessWidget {
                         'ملاحظات:',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey[600],
+                          color: Colors.grey[800],
                           fontFamily: 'Cairo',
                           fontWeight: FontWeight.w500,
                         ),
@@ -174,7 +174,7 @@ class BishopCard extends StatelessWidget {
                         bishop.notes!,
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.grey[700],
+                          color: Colors.grey[900],
                           fontFamily: 'Cairo',
                         ),
                       ),
