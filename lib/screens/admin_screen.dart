@@ -51,11 +51,23 @@ class _AdminScreenState extends State<AdminScreen> {
           ),
           PopupMenuButton<String>(
             onSelected: (value) {
-              if (value == 'logout') {
+              if (value == 'admin-management') {
+                Navigator.pushNamed(context, '/admin-management');
+              } else if (value == 'logout') {
                 _showLogoutDialog();
               }
             },
             itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'admin-management',
+                child: Row(
+                  children: [
+                    Icon(Icons.people, color: Colors.deepPurple),
+                    SizedBox(width: 8),
+                    Text('إدارة المدراء', style: TextStyle(fontFamily: 'Cairo')),
+                  ],
+                ),
+              ),
               const PopupMenuItem(
                 value: 'logout',
                 child: Row(

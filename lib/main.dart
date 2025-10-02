@@ -5,11 +5,13 @@ import 'firebase_config.dart';
 import 'theme/app_theme.dart';
 import 'providers/auth_provider.dart';
 import 'providers/bishops_provider.dart';
+import 'providers/admin_provider.dart';
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/admin_screen.dart';
+import 'screens/admin_management_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +28,7 @@ class BishopsApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => BishopsProvider()),
+        ChangeNotifierProvider(create: (_) => AdminProvider()),
       ],
       child: MaterialApp(
         title: 'إدارة الأساقفة',
@@ -48,6 +51,7 @@ class BishopsApp extends StatelessWidget {
           '/login': (context) => const LoginScreen(),
           '/home': (context) => const WelcomeScreen(),
           '/admin': (context) => const AdminScreen(),
+          '/admin-management': (context) => const AdminManagementScreen(),
         },
       ),
     );
