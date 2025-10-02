@@ -238,8 +238,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           // Welcome Banner
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(24),
-            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [Colors.deepPurple[400]!, Colors.deepPurple[600]!],
@@ -261,25 +261,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   children: [
                     Icon(
                       appModeProvider.modeIcon,
-                      size: 48,
+                      size: 36,
                       color: Colors.white,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     Text(
                       appModeProvider.modeTitle,
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         fontFamily: 'Cairo',
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6),
                     Text(
                       appModeProvider.modeDescription,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Colors.white,
                         fontFamily: 'Cairo',
                       ),
@@ -322,70 +322,74 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
         if (bishopsProvider.errorMessage != null) {
           return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 64,
-                  color: Colors.red[300],
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  bishopsProvider.errorMessage!,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.red[700],
-                    fontFamily: 'Cairo',
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    size: 64,
+                    color: Colors.red[300],
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    bishopsProvider.clearError();
-                    bishopsProvider.fetchBishops();
-                  },
-                  child: const Text(
-                    'إعادة المحاولة',
-                    style: TextStyle(fontFamily: 'Cairo'),
+                  const SizedBox(height: 16),
+                  Text(
+                    bishopsProvider.errorMessage!,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.red[700],
+                      fontFamily: 'Cairo',
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      bishopsProvider.clearError();
+                      bishopsProvider.fetchBishops();
+                    },
+                    child: const Text(
+                      'إعادة المحاولة',
+                      style: TextStyle(fontFamily: 'Cairo'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         }
 
         if (bishopsProvider.bishops.isEmpty) {
           return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.church,
-                  size: 64,
-                  color: Colors.grey[400],
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'لا توجد بيانات للآباء الأساقفة',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey[800],
-                    fontFamily: 'Cairo',
-                    fontWeight: FontWeight.bold,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.church,
+                    size: 64,
+                    color: Colors.grey[400],
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'سيتم إضافة البيانات من قبل المدير',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[700],
-                    fontFamily: 'Cairo',
+                  const SizedBox(height: 16),
+                  Text(
+                    'لا توجد بيانات للآباء الأساقفة',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey[800],
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 8),
+                  Text(
+                    'سيتم إضافة البيانات من قبل المدير',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[700],
+                      fontFamily: 'Cairo',
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         }
@@ -470,70 +474,74 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
         if (priestsProvider.errorMessage != null) {
           return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 64,
-                  color: Colors.red[300],
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  priestsProvider.errorMessage!,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.red[700],
-                    fontFamily: 'Cairo',
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    size: 64,
+                    color: Colors.red[300],
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    priestsProvider.clearError();
-                    priestsProvider.fetchPriests();
-                  },
-                  child: const Text(
-                    'إعادة المحاولة',
-                    style: TextStyle(fontFamily: 'Cairo'),
+                  const SizedBox(height: 16),
+                  Text(
+                    priestsProvider.errorMessage!,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.red[700],
+                      fontFamily: 'Cairo',
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      priestsProvider.clearError();
+                      priestsProvider.fetchPriests();
+                    },
+                    child: const Text(
+                      'إعادة المحاولة',
+                      style: TextStyle(fontFamily: 'Cairo'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         }
 
         if (priestsProvider.priests.isEmpty) {
           return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.person,
-                  size: 64,
-                  color: Colors.grey[400],
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'لا توجد بيانات للآباء الكهنة',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey[800],
-                    fontFamily: 'Cairo',
-                    fontWeight: FontWeight.bold,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.person,
+                    size: 64,
+                    color: Colors.grey[400],
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'سيتم إضافة البيانات من قبل المدير',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[700],
-                    fontFamily: 'Cairo',
+                  const SizedBox(height: 16),
+                  Text(
+                    'لا توجد بيانات للآباء الكهنة',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey[800],
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 8),
+                  Text(
+                    'سيتم إضافة البيانات من قبل المدير',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[700],
+                      fontFamily: 'Cairo',
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         }

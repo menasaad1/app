@@ -10,8 +10,8 @@ class ModeSelectorWidget extends StatelessWidget {
     return Consumer<AppModeProvider>(
       builder: (context, appModeProvider, child) {
         return Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [Colors.deepPurple[400]!, Colors.blue[400]!],
@@ -32,14 +32,14 @@ class ModeSelectorWidget extends StatelessWidget {
               const Text(
                 'اختر وضع التطبيق',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   fontFamily: 'Cairo',
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               Row(
                 children: [
                   // Bishops Mode
@@ -47,7 +47,7 @@ class ModeSelectorWidget extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => appModeProvider.switchToBishops(),
                       child: Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           color: appModeProvider.isBishopsMode
                               ? Colors.white
@@ -64,7 +64,7 @@ class ModeSelectorWidget extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.church,
-                              size: 40,
+                              size: 32,
                               color: appModeProvider.isBishopsMode
                                   ? Colors.deepPurple
                                   : Colors.white,
@@ -105,7 +105,7 @@ class ModeSelectorWidget extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => appModeProvider.switchToPriests(),
                       child: Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           color: appModeProvider.isPriestsMode
                               ? Colors.white
@@ -122,7 +122,7 @@ class ModeSelectorWidget extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.person,
-                              size: 40,
+                              size: 32,
                               color: appModeProvider.isPriestsMode
                                   ? Colors.blue
                                   : Colors.white,
