@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/bishops_provider.dart';
+import '../models/bishop.dart';
 import '../widgets/bishop_card.dart';
 import '../widgets/sort_dialog.dart';
 
