@@ -67,7 +67,7 @@ class BishopsApp extends StatelessWidget {
         locale: const Locale('ar', 'SA'),
         theme: AppTheme.lightTheme.copyWith(
           textTheme: AppTheme.lightTheme.textTheme.apply(
-            fontFamily: 'Cairo',
+            fontFamily: 'Arial',
             bodyColor: Colors.black87,
             displayColor: Colors.black87,
           ),

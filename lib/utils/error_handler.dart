@@ -26,7 +26,7 @@ class ErrorHandler {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Cairo'),
+          style: const TextStyle(fontFamily: 'Arial'),
         ),
         backgroundColor: Colors.red,
         duration: const Duration(seconds: 4),
@@ -43,7 +43,7 @@ class ErrorHandler {
       SnackBar(
         content: const Text(
           'تحقق من اتصال الإنترنت',
-          style: TextStyle(fontFamily: 'Cairo'),
+          style: TextStyle(fontFamily: 'Arial'),
         ),
         backgroundColor: Colors.orange,
         duration: const Duration(seconds: 3),
@@ -60,7 +60,7 @@ class ErrorHandler {
       SnackBar(
         content: const Text(
           'ليس لديك صلاحية للقيام بهذا الإجراء',
-          style: TextStyle(fontFamily: 'Cairo'),
+          style: TextStyle(fontFamily: 'Arial'),
         ),
         backgroundColor: Colors.red,
         duration: const Duration(seconds: 3),

@@ -29,7 +29,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
         title: const Text(
           'إدارة المدراء',
           style: TextStyle(
-            fontFamily: 'Cairo',
+            fontFamily: 'Arial',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -45,7 +45,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
         label: const Text(
           'إضافة مدير',
           style: TextStyle(
-            fontFamily: 'Cairo',
+            fontFamily: 'Arial',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -76,7 +76,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.red[700],
-                      fontFamily: 'Cairo',
+                      fontFamily: 'Arial',
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -88,7 +88,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                     },
                     child: const Text(
                       'إعادة المحاولة',
-                      style: TextStyle(fontFamily: 'Cairo'),
+                      style: TextStyle(fontFamily: 'Arial'),
                     ),
                   ),
                 ],
@@ -132,7 +132,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontFamily: 'Cairo',
+                        fontFamily: 'Arial',
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -142,7 +142,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.white.withValues(alpha: 0.9),
-                        fontFamily: 'Cairo',
+                        fontFamily: 'Arial',
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -172,7 +172,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                         'عدد المدراء: ${adminProvider.admins.length}',
                         style: TextStyle(
                           color: Colors.deepPurple[700],
-                          fontFamily: 'Cairo',
+                          fontFamily: 'Arial',
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),
@@ -199,7 +199,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.grey[600],
-                                fontFamily: 'Cairo',
+                                fontFamily: 'Arial',
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -208,7 +208,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[500],
-                                fontFamily: 'Cairo',
+                                fontFamily: 'Arial',
                               ),
                             ),
                             const SizedBox(height: 24),
@@ -217,7 +217,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                               icon: const Icon(Icons.person_add),
                               label: const Text(
                                 'إضافة مدير جديد',
-                                style: TextStyle(fontFamily: 'Cairo'),
+                                style: TextStyle(fontFamily: 'Arial'),
                               ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.deepPurple,
@@ -297,7 +297,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.deepPurple,
-                            fontFamily: 'Cairo',
+                            fontFamily: 'Arial',
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -306,7 +306,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[600],
-                            fontFamily: 'Cairo',
+                            fontFamily: 'Arial',
                           ),
                         ),
                       ],
@@ -328,7 +328,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                               fontSize: 12,
                               color: Colors.green[700],
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'Cairo',
+                              fontFamily: 'Arial',
                             ),
                           ),
                         );
@@ -355,7 +355,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                                 const SizedBox(width: 8),
                                 Text(
                                   admin.isActive ? 'إلغاء التفعيل' : 'تفعيل',
-                                  style: const TextStyle(fontFamily: 'Cairo'),
+                                  style: const TextStyle(fontFamily: 'Arial'),
                                 ),
                               ],
                             ),
@@ -366,7 +366,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                               children: [
                                 Icon(Icons.delete, color: Colors.red, size: 20),
                                 SizedBox(width: 8),
-                                Text('حذف', style: TextStyle(fontFamily: 'Cairo')),
+                                Text('حذف', style: TextStyle(fontFamily: 'Arial')),
                               ],
                             ),
                           ),
@@ -391,7 +391,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                         fontSize: 12,
                         color: admin.isActive ? Colors.green[700] : Colors.red[700],
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Cairo',
+                        fontFamily: 'Arial',
                       ),
                     ),
                   ),
@@ -401,7 +401,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[600],
-                      fontFamily: 'Cairo',
+                      fontFamily: 'Arial',
                     ),
                   ),
                 ],
@@ -413,7 +413,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey[600],
-                    fontFamily: 'Cairo',
+                    fontFamily: 'Arial',
                   ),
                 ),
               ],
@@ -437,18 +437,18 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
       builder: (context) => AlertDialog(
         title: const Text(
           'حذف المدير',
-          style: TextStyle(fontFamily: 'Cairo'),
+          style: TextStyle(fontFamily: 'Arial'),
         ),
         content: Text(
           'هل أنت متأكد من حذف المدير "${admin.name}"؟',
-          style: const TextStyle(fontFamily: 'Cairo'),
+          style: const TextStyle(fontFamily: 'Arial'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'إلغاء',
-              style: TextStyle(fontFamily: 'Cairo'),
+              style: TextStyle(fontFamily: 'Arial'),
             ),
           ),
           TextButton(
@@ -460,7 +460,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
             child: const Text(
               'حذف',
               style: TextStyle(
-                fontFamily: 'Cairo',
+                fontFamily: 'Arial',
                 color: Colors.red,
               ),
             ),

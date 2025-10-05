@@ -69,7 +69,7 @@ class BishopCard extends StatelessWidget {
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.deepPurple,
-                              fontFamily: 'Cairo',
+                              fontFamily: 'Arial',
                             ),
                           ),
                           if (bishop.diocese != null) ...[
@@ -79,7 +79,7 @@ class BishopCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[800],
-                                fontFamily: 'Cairo',
+                                fontFamily: 'Arial',
                               ),
                             ),
                           ],
@@ -102,7 +102,7 @@ class BishopCard extends StatelessWidget {
                               children: [
                                 Icon(Icons.edit, color: Colors.blue, size: 20),
                                 SizedBox(width: 8),
-                                Text('تعديل', style: TextStyle(fontFamily: 'Cairo')),
+                                Text('تعديل', style: TextStyle(fontFamily: 'Arial')),
                               ],
                             ),
                           ),
@@ -112,7 +112,7 @@ class BishopCard extends StatelessWidget {
                               children: [
                                 Icon(Icons.delete, color: Colors.red, size: 20),
                                 SizedBox(width: 8),
-                                Text('حذف', style: TextStyle(fontFamily: 'Cairo')),
+                                Text('حذف', style: TextStyle(fontFamily: 'Arial')),
                               ],
                             ),
                           ),
@@ -142,7 +142,7 @@ class BishopCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.deepPurple[700],
-                          fontFamily: 'Cairo',
+                          fontFamily: 'Arial',
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -167,7 +167,7 @@ class BishopCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[800],
-                            fontFamily: 'Cairo',
+                            fontFamily: 'Arial',
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -177,7 +177,7 @@ class BishopCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[900],
-                            fontFamily: 'Cairo',
+                            fontFamily: 'Arial',
                           ),
                         ),
                       ],

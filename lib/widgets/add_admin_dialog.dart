@@ -31,7 +31,7 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
       title: const Text(
         'إضافة مدير جديد',
         style: TextStyle(
-          fontFamily: 'Cairo',
+          fontFamily: 'Arial',
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -158,7 +158,7 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.blue[700],
-                          fontFamily: 'Cairo',
+                          fontFamily: 'Arial',
                         ),
                       ),
                     ),
@@ -175,7 +175,7 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
           child: const Text(
             'إلغاء',
             style: TextStyle(
-              fontFamily: 'Cairo',
+              fontFamily: 'Arial',
               color: Colors.grey,
             ),
           ),
@@ -199,7 +199,7 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
                     )
                   : const Text(
                       'إنشاء المدير',
-                      style: TextStyle(fontFamily: 'Cairo'),
+                      style: TextStyle(fontFamily: 'Arial'),
                     ),
             );
           },
@@ -225,7 +225,7 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
           SnackBar(
             content: const Text(
               'تم إنشاء حساب المدير بنجاح',
-              style: TextStyle(fontFamily: 'Cairo'),
+              style: TextStyle(fontFamily: 'Arial'),
             ),
             backgroundColor: Colors.green,
           ),
@@ -237,7 +237,7 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
           SnackBar(
             content: Text(
               authProvider.errorMessage ?? 'حدث خطأ في إنشاء حساب المدير',
-              style: const TextStyle(fontFamily: 'Cairo'),
+              style: const TextStyle(fontFamily: 'Arial'),
             ),
             backgroundColor: Colors.red,
           ),

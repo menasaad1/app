@@ -33,7 +33,7 @@ class AppErrorWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.red[700],
-                fontFamily: 'Cairo',
+                fontFamily: 'Arial',
               ),
               textAlign: TextAlign.center,
             ),
@@ -44,7 +44,7 @@ class AppErrorWidget extends StatelessWidget {
                 icon: const Icon(Icons.refresh),
                 label: Text(
                   retryText ?? 'إعادة المحاولة',
-                  style: const TextStyle(fontFamily: 'Cairo'),
+                  style: const TextStyle(fontFamily: 'Arial'),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,
@@ -92,7 +92,7 @@ class EmptyStateWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.grey[600],
-                fontFamily: 'Cairo',
+                fontFamily: 'Arial',
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,
@@ -104,7 +104,7 @@ class EmptyStateWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey[500],
-                  fontFamily: 'Cairo',
+                  fontFamily: 'Arial',
                 ),
                 textAlign: TextAlign.center,
               ),

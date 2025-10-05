@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.deepPurple,
-                    fontFamily: 'Cairo',
+                    fontFamily: 'Arial',
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey[800],
-                    fontFamily: 'Cairo',
+                    fontFamily: 'Arial',
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -175,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                fontFamily: 'Cairo',
+                                fontFamily: 'Arial',
                               ),
                             ),
                     );
@@ -197,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           authProvider.errorMessage!,
                           style: TextStyle(
                             color: Colors.red[700],
-                            fontFamily: 'Cairo',
+                            fontFamily: 'Arial',
                           ),
                           textAlign: TextAlign.center,
                         ),

@@ -40,7 +40,7 @@ class UserStatusWidget extends StatelessWidget {
               color: Colors.white,
               fontSize: 12,
               fontWeight: FontWeight.bold,
-              fontFamily: 'Cairo',
+              fontFamily: 'Arial',
             ),
           ),
         ],
@@ -70,7 +70,7 @@ class UserStatusWidget extends StatelessWidget {
               color: Colors.white,
               fontSize: 12,
               fontWeight: FontWeight.bold,
-              fontFamily: 'Cairo',
+              fontFamily: 'Arial',
             ),
           ),
         ],
@@ -121,7 +121,7 @@ class UserInfoWidget extends StatelessWidget {
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: authProvider.isAdmin ? Colors.deepPurple : Colors.green,
-                          fontFamily: 'Cairo',
+                          fontFamily: 'Arial',
                         ),
                       ),
                       if (authProvider.user?.email != null)
@@ -130,7 +130,7 @@ class UserInfoWidget extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[600],
-                            fontFamily: 'Cairo',
+                            fontFamily: 'Arial',
                           ),
                         ),
                     ],
@@ -166,7 +166,7 @@ class UserInfoWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.deepPurple[700],
-                          fontFamily: 'Cairo',
+                          fontFamily: 'Arial',
                         ),
                       ),
                     ),
@@ -206,7 +206,7 @@ class UserInfoWidget extends StatelessWidget {
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey,
-                          fontFamily: 'Cairo',
+                          fontFamily: 'Arial',
                         ),
                       ),
                       Text(
@@ -214,7 +214,7 @@ class UserInfoWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey[600],
-                          fontFamily: 'Cairo',
+                          fontFamily: 'Arial',
                         ),
                       ),
                     ],
@@ -225,7 +225,7 @@ class UserInfoWidget extends StatelessWidget {
                   icon: const Icon(Icons.login, size: 16),
                   label: const Text(
                     'تسجيل الدخول',
-                    style: TextStyle(fontSize: 12, fontFamily: 'Cairo'),
+                    style: TextStyle(fontSize: 12, fontFamily: 'Arial'),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
@@ -257,7 +257,7 @@ class UserInfoWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.blue[700],
-                        fontFamily: 'Cairo',
+                        fontFamily: 'Arial',
                       ),
                     ),
                   ),
@@ -276,18 +276,18 @@ class UserInfoWidget extends StatelessWidget {
       builder: (context) => AlertDialog(
         title: const Text(
           'تسجيل الخروج',
-          style: TextStyle(fontFamily: 'Cairo'),
+          style: TextStyle(fontFamily: 'Arial'),
         ),
         content: const Text(
           'هل أنت متأكد من تسجيل الخروج؟',
-          style: TextStyle(fontFamily: 'Cairo'),
+          style: TextStyle(fontFamily: 'Arial'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'إلغاء',
-              style: TextStyle(fontFamily: 'Cairo'),
+              style: TextStyle(fontFamily: 'Arial'),
             ),
           ),
           TextButton(
@@ -299,7 +299,7 @@ class UserInfoWidget extends StatelessWidget {
             child: const Text(
               'تسجيل الخروج',
               style: TextStyle(
-                fontFamily: 'Cairo',
+                fontFamily: 'Arial',
                 color: Colors.red,
               ),
             ),

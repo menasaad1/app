@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 /// Utilities for handling Arabic fonts and text rendering
 class FontUtils {
-  /// Default Arabic font family
-  static const String defaultArabicFont = 'Cairo';
+  /// Default Arabic font family - using system fonts for better compatibility
+  static const String defaultArabicFont = 'Arial';
   
   /// Get optimized text style for Arabic text
   static TextStyle getArabicTextStyle({

@@ -72,7 +72,7 @@ class PriestCard extends StatelessWidget {
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.blue[700],
-                                    fontFamily: 'Cairo',
+                                    fontFamily: 'Arial',
                                   ),
                                 ),
                                 const SizedBox(width: 4),
@@ -84,7 +84,7 @@ class PriestCard extends StatelessWidget {
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.blue,
-                                    fontFamily: 'Cairo',
+                                    fontFamily: 'Arial',
                                   ),
                                 ),
                               ),
@@ -97,7 +97,7 @@ class PriestCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[800],
-                                fontFamily: 'Cairo',
+                                fontFamily: 'Arial',
                               ),
                             ),
                           ],
@@ -120,7 +120,7 @@ class PriestCard extends StatelessWidget {
                               children: [
                                 Icon(Icons.edit, color: Colors.blue, size: 20),
                                 SizedBox(width: 8),
-                                Text('تعديل', style: TextStyle(fontFamily: 'Cairo')),
+                                Text('تعديل', style: TextStyle(fontFamily: 'Arial')),
                               ],
                             ),
                           ),
@@ -130,7 +130,7 @@ class PriestCard extends StatelessWidget {
                               children: [
                                 Icon(Icons.delete, color: Colors.red, size: 20),
                                 SizedBox(width: 8),
-                                Text('حذف', style: TextStyle(fontFamily: 'Cairo')),
+                                Text('حذف', style: TextStyle(fontFamily: 'Arial')),
                               ],
                             ),
                           ),
@@ -160,7 +160,7 @@ class PriestCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.blue[700],
-                          fontFamily: 'Cairo',
+                          fontFamily: 'Arial',
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -185,7 +185,7 @@ class PriestCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[800],
-                            fontFamily: 'Cairo',
+                            fontFamily: 'Arial',
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -195,7 +195,7 @@ class PriestCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[900],
-                            fontFamily: 'Cairo',
+                            fontFamily: 'Arial',
                           ),
                         ),
                       ],

@@ -54,7 +54,7 @@ class AccessControlWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               color: Colors.grey[600],
-              fontFamily: 'Cairo',
+              fontFamily: 'Arial',
             ),
             textAlign: TextAlign.center,
           ),
@@ -64,7 +64,7 @@ class AccessControlWidget extends StatelessWidget {
             icon: const Icon(Icons.login),
             label: const Text(
               'تسجيل الدخول',
-              style: TextStyle(fontFamily: 'Cairo'),
+              style: TextStyle(fontFamily: 'Arial'),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurple,

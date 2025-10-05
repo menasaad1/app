@@ -15,18 +15,18 @@ class DialogUtils {
       builder: (context) => AlertDialog(
         title: Text(
           title,
-          style: const TextStyle(fontFamily: 'Cairo'),
+          style: const TextStyle(fontFamily: 'Arial'),
         ),
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Cairo'),
+          style: const TextStyle(fontFamily: 'Arial'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               cancelText,
-              style: const TextStyle(fontFamily: 'Cairo'),
+              style: const TextStyle(fontFamily: 'Arial'),
             ),
           ),
           TextButton(
@@ -37,7 +37,7 @@ class DialogUtils {
             child: Text(
               confirmText,
               style: TextStyle(
-                fontFamily: 'Cairo',
+                fontFamily: 'Arial',
                 color: confirmColor,
               ),
             ),
@@ -58,18 +58,18 @@ class DialogUtils {
       builder: (context) => AlertDialog(
         title: Text(
           title,
-          style: const TextStyle(fontFamily: 'Cairo'),
+          style: const TextStyle(fontFamily: 'Arial'),
         ),
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Cairo'),
+          style: const TextStyle(fontFamily: 'Arial'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               buttonText,
-              style: const TextStyle(fontFamily: 'Cairo'),
+              style: const TextStyle(fontFamily: 'Arial'),
             ),
           ),
         ],
@@ -92,20 +92,20 @@ class DialogUtils {
             const SizedBox(width: 8),
             Text(
               title,
-              style: const TextStyle(fontFamily: 'Cairo'),
+              style: const TextStyle(fontFamily: 'Arial'),
             ),
           ],
         ),
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Cairo'),
+          style: const TextStyle(fontFamily: 'Arial'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               buttonText,
-              style: const TextStyle(fontFamily: 'Cairo'),
+              style: const TextStyle(fontFamily: 'Arial'),
             ),
           ),
         ],
@@ -128,20 +128,20 @@ class DialogUtils {
             const SizedBox(width: 8),
             Text(
               title,
-              style: const TextStyle(fontFamily: 'Cairo'),
+              style: const TextStyle(fontFamily: 'Arial'),
             ),
           ],
         ),
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Cairo'),
+          style: const TextStyle(fontFamily: 'Arial'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               buttonText,
-              style: const TextStyle(fontFamily: 'Cairo'),
+              style: const TextStyle(fontFamily: 'Arial'),
             ),
           ),
         ],

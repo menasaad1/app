@@ -35,7 +35,7 @@ class LoadingWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
-                fontFamily: 'Cairo',
+                fontFamily: 'Arial',
               ),
               textAlign: TextAlign.center,
             ),

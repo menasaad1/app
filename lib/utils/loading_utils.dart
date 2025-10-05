@@ -17,7 +17,7 @@ class LoadingUtils {
               Text(
                 message,
                 style: const TextStyle(
-                  fontFamily: 'Cairo',
+                  fontFamily: 'Arial',
                   fontSize: 16,
                 ),
                 textAlign: TextAlign.center,
@@ -46,7 +46,7 @@ class LoadingUtils {
             Text(
               message,
               style: const TextStyle(
-                fontFamily: 'Cairo',
+                fontFamily: 'Arial',
                 fontSize: 16,
                 color: Colors.grey,
               ),

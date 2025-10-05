@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen>
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontFamily: 'Cairo',
+                  fontFamily: 'Arial',
                 ),
               ),
               const SizedBox(height: 8),
@@ -102,7 +102,7 @@ class _SplashScreenState extends State<SplashScreen>
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white70,
-                  fontFamily: 'Cairo',
+                  fontFamily: 'Arial',
                 ),
               ),
               const SizedBox(height: 12),
@@ -111,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen>
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white60,
-                  fontFamily: 'Cairo',
+                  fontFamily: 'Arial',
                 ),
               ),
               const SizedBox(height: 50),
