@@ -31,27 +31,19 @@ class BishopCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          gradient: LinearGradient(
-            colors: [
-              AppColors.backgroundCard,
-              AppColors.cardBishop.withValues(alpha: 0.01),
-              AppColors.cardBishop.withValues(alpha: 0.005),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.cardBishop.withValues(alpha: 0.03),
-                blurRadius: 6.0,
-                offset: const Offset(0.0, 1.0),
-              ),
-              BoxShadow(
-                color: AppColors.cardBishop.withValues(alpha: 0.01),
-                blurRadius: 3.0,
-                offset: const Offset(0.0, 0.5),
-              ),
-            ],
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 4,
+              offset: const Offset(0, 1),
+            ),
+          ],
         ),
         child: Padding(
           padding: const EdgeInsets.all(12),
@@ -65,13 +57,13 @@ class BishopCard extends StatelessWidget {
                       width: 24,
                       height: 24,
                       decoration: BoxDecoration(
-                        color: AppColors.cardBishop,
+                        color: const Color(0xFF8B5CF6),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.cardBishop.withValues(alpha: 0.3),
-                            blurRadius: 4.0,
-                            offset: const Offset(0.0, 2.0),
+                            color: const Color(0xFF8B5CF6).withValues(alpha: 0.3),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
                           ),
                         ],
                       ),
@@ -93,17 +85,13 @@ class BishopCard extends StatelessWidget {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: AppColors.getCardGradient('bishop'),
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
+                      color: const Color(0xFF8B5CF6),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.cardBishop.withValues(alpha: 0.2),
-                          blurRadius: 6.0,
-                          offset: const Offset(0.0, 2.0),
+                          color: const Color(0xFF8B5CF6).withValues(alpha: 0.2),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
@@ -120,10 +108,10 @@ class BishopCard extends StatelessWidget {
                       children: [
                         Text(
                           bishop.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.cardBishop,
+                            color: Color(0xFF1E293B),
                             fontFamily: 'Cairo',
                           ),
                         ),
@@ -131,9 +119,9 @@ class BishopCard extends StatelessWidget {
                           const SizedBox(height: 2),
                           Text(
                             bishop.diocese!,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
-                              color: AppColors.textSecondary,
+                              color: Color(0xFF64748B),
                               fontFamily: 'Cairo',
                             ),
                           ),
@@ -180,41 +168,27 @@ class BishopCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      AppColors.cardBishop.withValues(alpha: 0.03),
-                      AppColors.cardBishop.withValues(alpha: 0.01),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  color: const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: AppColors.cardBishop.withValues(alpha: 0.05),
+                    color: const Color(0xFFE2E8F0),
                     width: 1.0,
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.cardBishop.withValues(alpha: 0.02),
-                      blurRadius: 1.0,
-                      offset: const Offset(0.0, 0.5),
-                    ),
-                  ],
                 ),
                 child: Row(
                   children: [
                     Icon(
                       Icons.calendar_today,
-                      color: AppColors.cardBishop,
+                      color: const Color(0xFF8B5CF6),
                       size: 16,
                     ),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
                         'تاريخ الرسامة: ${DateFormat('yyyy/MM/dd', 'ar').format(bishop.ordinationDate)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
-                          color: AppColors.cardBishop,
+                          color: Color(0xFF1E293B),
                           fontFamily: 'Cairo',
                           fontWeight: FontWeight.w500,
                         ),
@@ -229,18 +203,18 @@ class BishopCard extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppColors.backgroundCard,
+                    color: const Color(0xFFF8FAFC),
                     borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: AppColors.borderLight),
+                    border: Border.all(color: const Color(0xFFE2E8F0)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'ملاحظات:',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 10,
-                          color: AppColors.textSecondary,
+                          color: Color(0xFF64748B),
                           fontFamily: 'Cairo',
                           fontWeight: FontWeight.w500,
                         ),
@@ -248,9 +222,9 @@ class BishopCard extends StatelessWidget {
                       const SizedBox(height: 2),
                       Text(
                         bishop.notes!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
-                          color: AppColors.textPrimary,
+                          color: Color(0xFF1E293B),
                           fontFamily: 'Cairo',
                         ),
                       ),

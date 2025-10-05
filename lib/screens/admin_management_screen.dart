@@ -260,25 +260,17 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(
-            colors: [
-              AppColors.backgroundCard,
-              AppColors.cardAdmin.withValues(alpha: 0.01),
-              AppColors.cardAdmin.withValues(alpha: 0.005),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: AppColors.cardAdmin.withValues(alpha: 0.03),
-              blurRadius: 6.0,
-              offset: const Offset(0.0, 1.0),
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
             BoxShadow(
-              color: AppColors.cardAdmin.withValues(alpha: 0.01),
-              blurRadius: 3.0,
-              offset: const Offset(0.0, 0.5),
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 4,
+              offset: const Offset(0, 1),
             ),
           ],
         ),
@@ -324,19 +316,19 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                       children: [
                         Text(
                           admin.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.cardAdmin,
+                            color: Color(0xFF1E293B),
                             fontFamily: 'Cairo',
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           admin.email,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
-                            color: Colors.grey[600],
+                            color: Color(0xFF64748B),
                             fontFamily: 'Cairo',
                           ),
                         ),
@@ -350,14 +342,14 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                         return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
-                            color: Colors.green[100],
+                            color: const Color(0xFF10B981),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Text(
+                          child: const Text(
                             'أنت',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Colors.green[700],
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Cairo',
                             ),
