@@ -60,6 +60,36 @@ class AdminProvider with ChangeNotifier {
     }
   }
 
+  Future<bool> createAdminWithAuth(String email, String password, String name) async {
+    try {
+      _isLoading = true;
+      _errorMessage = null;
+      notifyListeners();
+
+      // First, add to admins collection
+      final adminData = {
+        'email': email,
+        'name': name,
+        'createdAt': DateTime.now().toIso8601String(),
+        'updatedAt': DateTime.now().toIso8601String(),
+        'createdBy': 'system', // We'll update this later
+        'isActive': true,
+        'password': password, // Store password temporarily for account creation
+        'needsAccountCreation': true, // Flag to indicate account needs to be created
+      };
+
+      await _firestore.collection('admins').add(adminData);
+      await fetchAdmins();
+      return true;
+    } catch (e) {
+      _errorMessage = 'حدث خطأ في إنشاء المدير: ${e.toString()}';
+      return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
   Future<bool> updateAdmin(Admin admin) async {
     try {
       _isLoading = true;

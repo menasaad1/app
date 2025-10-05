@@ -118,6 +118,15 @@ class AuthProvider with ChangeNotifier {
           .get();
 
       _isAdmin = snapshot.docs.isNotEmpty;
+      
+      // If admin exists but doesn't have Firebase Auth account, create it
+      if (_isAdmin && snapshot.docs.isNotEmpty) {
+        final adminData = snapshot.docs.first.data() as Map<String, dynamic>;
+        if (adminData['needsAccountCreation'] == true) {
+          // This admin needs a Firebase Auth account
+          // We'll handle this in the login process
+        }
+      }
     } catch (e) {
       _isAdmin = false;
     }
@@ -128,6 +137,9 @@ class AuthProvider with ChangeNotifier {
       _isLoading = true;
       _errorMessage = null;
       notifyListeners();
+
+      // Store current admin email for later sign-in
+      final currentAdminEmail = _user?.email;
 
       // Create user account
       final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
@@ -141,16 +153,64 @@ class AuthProvider with ChangeNotifier {
         'name': name,
         'createdAt': DateTime.now().toIso8601String(),
         'updatedAt': DateTime.now().toIso8601String(),
-        'createdBy': _user?.email ?? '',
+        'createdBy': currentAdminEmail ?? '',
         'isActive': true,
       });
+
+      // Sign out the newly created user
+      await _auth.signOut();
+
+      // Note: The original admin will need to sign in again manually
+      // This is a limitation of Firebase Auth - we can't programmatically sign in
+      // without the original password
 
       return true;
     } on FirebaseAuthException catch (e) {
       _errorMessage = _getErrorMessage(e.code);
       return false;
     } catch (e) {
-      _errorMessage = 'حدث خطأ في إنشاء حساب المدير';
+      _errorMessage = 'حدث خطأ في إنشاء حساب المدير: ${e.toString()}';
+      return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<bool> createFirebaseAccountForAdmin(String email, String password) async {
+    try {
+      _isLoading = true;
+      _errorMessage = null;
+      notifyListeners();
+
+      // Create user account
+      final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Update admin record to remove the needsAccountCreation flag
+      final QuerySnapshot snapshot = await _firestore
+          .collection('admins')
+          .where('email', isEqualTo: email)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        await _firestore.collection('admins').doc(snapshot.docs.first.id).update({
+          'needsAccountCreation': false,
+          'updatedAt': DateTime.now().toIso8601String(),
+        });
+      }
+
+      // Sign out the newly created user
+      await _auth.signOut();
+
+      return true;
+    } on FirebaseAuthException catch (e) {
+      _errorMessage = _getErrorMessage(e.code);
+      return false;
+    } catch (e) {
+      _errorMessage = 'حدث خطأ في إنشاء حساب Firebase: ${e.toString()}';
       return false;
     } finally {
       _isLoading = false;

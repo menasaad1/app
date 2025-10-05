@@ -144,23 +144,48 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Colors.blue[200]!),
                 ),
-                child: Row(
+                child: Column(
                   children: [
-                    Icon(
-                      Icons.info_outline,
-                      color: Colors.blue[700],
-                      size: 20,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'سيتمكن المدير الجديد من إضافة وتعديل وحذف بيانات الأساقفة',
-                        style: TextStyle(
-                          fontSize: 12,
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.info_outline,
                           color: Colors.blue[700],
-                          fontFamily: 'Cairo',
+                          size: 20,
                         ),
-                      ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'سيتمكن المدير الجديد من إضافة وتعديل وحذف بيانات الأساقفة والكهنة',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.blue[700],
+                              fontFamily: 'Cairo',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.warning_amber,
+                          color: Colors.orange[700],
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'سيحتاج المدير الجديد إلى تسجيل الدخول مرة واحدة لإنشاء حساب Firebase',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.orange[700],
+                              fontFamily: 'Cairo',
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -210,10 +235,9 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
 
   Future<void> _createAdmin() async {
     if (_formKey.currentState!.validate()) {
-      final authProvider = Provider.of<AuthProvider>(context, listen: false);
       final adminProvider = Provider.of<AdminProvider>(context, listen: false);
       
-      final success = await authProvider.createAdminAccount(
+      final success = await adminProvider.createAdminWithAuth(
         _emailController.text.trim(),
         _passwordController.text,
         _nameController.text.trim(),
@@ -224,10 +248,16 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text(
-              'تم إنشاء حساب المدير بنجاح',
+              'تم إضافة المدير بنجاح. سيتمكن من تسجيل الدخول باستخدام بياناته بعد إنشاء حساب Firebase.',
               style: TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.green,
+            duration: Duration(seconds: 5),
+            action: SnackBarAction(
+              label: 'مفهوم',
+              textColor: Colors.white,
+              onPressed: () {},
+            ),
           ),
         );
         // Refresh admins list
@@ -236,7 +266,7 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              authProvider.errorMessage ?? 'حدث خطأ في إنشاء حساب المدير',
+              adminProvider.errorMessage ?? 'حدث خطأ في إضافة المدير',
               style: const TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.red,
