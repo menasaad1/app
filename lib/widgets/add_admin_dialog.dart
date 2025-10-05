@@ -170,17 +170,17 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
                     Row(
                       children: [
                         Icon(
-                          Icons.warning_amber,
-                          color: Colors.orange[700],
+                          Icons.check_circle,
+                          color: Colors.green[700],
                           size: 20,
                         ),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'سيحتاج المدير الجديد إلى تسجيل الدخول مرة واحدة لإنشاء حساب Firebase',
+                            'سيتم إنشاء حساب Firebase تلقائياً ويمكن للمدير تسجيل الدخول فوراً',
                             style: TextStyle(
                               fontSize: 11,
-                              color: Colors.orange[700],
+                              color: Colors.green[700],
                               fontFamily: 'Cairo',
                             ),
                           ),
@@ -235,9 +235,10 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
 
   Future<void> _createAdmin() async {
     if (_formKey.currentState!.validate()) {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
       final adminProvider = Provider.of<AdminProvider>(context, listen: false);
       
-      final success = await adminProvider.createAdminWithAuth(
+      final success = await authProvider.createAdminAccount(
         _emailController.text.trim(),
         _passwordController.text,
         _nameController.text.trim(),
@@ -248,13 +249,13 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text(
-              'تم إضافة المدير بنجاح. سيتمكن من تسجيل الدخول باستخدام بياناته بعد إنشاء حساب Firebase.',
+              'تم إنشاء حساب المدير بنجاح! يمكنه الآن تسجيل الدخول باستخدام بياناته.',
               style: TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.green,
-            duration: Duration(seconds: 5),
+            duration: Duration(seconds: 4),
             action: SnackBarAction(
-              label: 'مفهوم',
+              label: 'ممتاز',
               textColor: Colors.white,
               onPressed: () {},
             ),
@@ -266,7 +267,7 @@ class _AddAdminDialogState extends State<AddAdminDialog> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              adminProvider.errorMessage ?? 'حدث خطأ في إضافة المدير',
+              authProvider.errorMessage ?? 'حدث خطأ في إنشاء حساب المدير',
               style: const TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.red,

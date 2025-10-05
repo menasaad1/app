@@ -119,12 +119,15 @@ class AuthProvider with ChangeNotifier {
 
       _isAdmin = snapshot.docs.isNotEmpty;
       
-      // If admin exists but doesn't have Firebase Auth account, create it
+      // If admin exists but doesn't have Firebase UID, update it
       if (_isAdmin && snapshot.docs.isNotEmpty) {
         final adminData = snapshot.docs.first.data() as Map<String, dynamic>;
-        if (adminData['needsAccountCreation'] == true) {
-          // This admin needs a Firebase Auth account
-          // We'll handle this in the login process
+        if (adminData['firebaseUid'] == null && _user?.uid != null) {
+          // Update admin record with Firebase UID
+          await _firestore.collection('admins').doc(snapshot.docs.first.id).update({
+            'firebaseUid': _user?.uid,
+            'updatedAt': DateTime.now().toIso8601String(),
+          });
         }
       }
     } catch (e) {
@@ -155,6 +158,7 @@ class AuthProvider with ChangeNotifier {
         'updatedAt': DateTime.now().toIso8601String(),
         'createdBy': currentAdminEmail ?? '',
         'isActive': true,
+        'firebaseUid': userCredential.user?.uid, // Store Firebase UID
       });
 
       // Sign out the newly created user
@@ -189,7 +193,7 @@ class AuthProvider with ChangeNotifier {
         password: password,
       );
 
-      // Update admin record to remove the needsAccountCreation flag
+      // Update admin record to remove the needsAccountCreation flag and add Firebase UID
       final QuerySnapshot snapshot = await _firestore
           .collection('admins')
           .where('email', isEqualTo: email)
@@ -198,6 +202,7 @@ class AuthProvider with ChangeNotifier {
       if (snapshot.docs.isNotEmpty) {
         await _firestore.collection('admins').doc(snapshot.docs.first.id).update({
           'needsAccountCreation': false,
+          'firebaseUid': userCredential.user?.uid,
           'updatedAt': DateTime.now().toIso8601String(),
         });
       }
@@ -215,6 +220,21 @@ class AuthProvider with ChangeNotifier {
     } finally {
       _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  // Method to check if admin needs Firebase account creation
+  Future<bool> checkAdminNeedsFirebaseAccount(String email) async {
+    try {
+      final QuerySnapshot snapshot = await _firestore
+          .collection('admins')
+          .where('email', isEqualTo: email)
+          .where('needsAccountCreation', isEqualTo: true)
+          .get();
+
+      return snapshot.docs.isNotEmpty;
+    } catch (e) {
+      return false;
     }
   }
 

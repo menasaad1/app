@@ -5,6 +5,7 @@ import '../providers/admin_provider.dart';
 import '../models/admin.dart';
 import '../widgets/add_admin_dialog.dart';
 import '../utils/app_colors.dart';
+import 'create_firebase_account_screen.dart';
 
 class AdminManagementScreen extends StatefulWidget {
   const AdminManagementScreen({super.key});
@@ -372,6 +373,8 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                             _showDeleteAdminDialog(admin);
                           } else if (value == 'toggle') {
                             _toggleAdminStatus(admin);
+                          } else if (value == 'create_firebase') {
+                            _createFirebaseAccount(admin);
                           }
                         },
                         itemBuilder: (context) => [
@@ -392,6 +395,24 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                               ],
                             ),
                           ),
+                          if (admin.firebaseUid == null)
+                            PopupMenuItem(
+                              value: 'create_firebase',
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.account_circle,
+                                    color: AppColors.cardAdmin,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'إنشاء حساب Firebase',
+                                    style: const TextStyle(fontFamily: 'Cairo'),
+                                  ),
+                                ],
+                              ),
+                            ),
                           const PopupMenuItem(
                             value: 'delete',
                             child: Row(
@@ -523,5 +544,21 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
       updatedAt: DateTime.now(),
     );
     Provider.of<AdminProvider>(context, listen: false).updateAdmin(updatedAdmin);
+  }
+
+  void _createFirebaseAccount(Admin admin) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CreateFirebaseAccountScreen(
+          adminEmail: admin.email,
+          adminName: admin.name,
+        ),
+      ),
+    ).then((_) {
+      // Refresh admins list after returning
+      final adminProvider = Provider.of<AdminProvider>(context, listen: false);
+      adminProvider.fetchAdmins();
+    });
   }
 }
