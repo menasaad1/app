@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_mode_provider.dart';
+import '../providers/bishops_provider.dart';
+import '../providers/priests_provider.dart';
 
 class ModeSelectorWidget extends StatelessWidget {
   const ModeSelectorWidget({super.key});
@@ -42,10 +44,16 @@ class ModeSelectorWidget extends StatelessWidget {
               const SizedBox(height: 12),
               Row(
                 children: [
-                  // Bishops Mode
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => appModeProvider.switchToBishops(),
+                   // Bishops Mode
+                   Expanded(
+                     child: GestureDetector(
+                       onTap: () async {
+                         await appModeProvider.switchToBishops();
+                         // Reload data for bishops
+                         if (context.mounted) {
+                           Provider.of<BishopsProvider>(context, listen: false).fetchBishops();
+                         }
+                       },
                       child: Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
@@ -100,10 +108,16 @@ class ModeSelectorWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  // Priests Mode
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => appModeProvider.switchToPriests(),
+                   // Priests Mode
+                   Expanded(
+                     child: GestureDetector(
+                       onTap: () async {
+                         await appModeProvider.switchToPriests();
+                         // Reload data for priests
+                         if (context.mounted) {
+                           Provider.of<PriestsProvider>(context, listen: false).fetchPriests();
+                         }
+                       },
                       child: Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(

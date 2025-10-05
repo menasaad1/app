@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/bishops_provider.dart';
@@ -23,15 +24,28 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
-      appModeProvider.loadMode().then((_) {
-        if (appModeProvider.isBishopsMode) {
-          Provider.of<BishopsProvider>(context, listen: false).fetchBishops();
-        } else {
-          Provider.of<PriestsProvider>(context, listen: false).fetchPriests();
-        }
-      });
+      _loadDataAsync();
     });
+  }
+
+  Future<void> _loadDataAsync() async {
+    final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
+    final bishopsProvider = Provider.of<BishopsProvider>(context, listen: false);
+    final priestsProvider = Provider.of<PriestsProvider>(context, listen: false);
+    
+    try {
+      // Load mode first
+      await appModeProvider.loadMode();
+      
+      // Load data based on mode
+      if (appModeProvider.isBishopsMode) {
+        bishopsProvider.fetchBishops(); // Don't await to make it faster
+      } else {
+        priestsProvider.fetchPriests(); // Don't await to make it faster
+      }
+    } catch (e) {
+      debugPrint('Error loading data: $e');
+    }
   }
 
   @override
