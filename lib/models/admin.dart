@@ -6,6 +6,7 @@ class Admin {
   final DateTime updatedAt;
   final String createdBy;
   final bool isActive;
+  final String? firebaseUid;
 
   Admin({
     required this.id,
@@ -15,6 +16,7 @@ class Admin {
     required this.updatedAt,
     required this.createdBy,
     this.isActive = true,
+    this.firebaseUid,
   });
 
   factory Admin.fromMap(Map<String, dynamic> map) {
@@ -26,6 +28,7 @@ class Admin {
       updatedAt: DateTime.parse(map['updatedAt']),
       createdBy: map['createdBy'] ?? '',
       isActive: map['isActive'] ?? true,
+      firebaseUid: map['firebaseUid'],
     );
   }
 
@@ -38,6 +41,7 @@ class Admin {
       'updatedAt': updatedAt.toIso8601String(),
       'createdBy': createdBy,
       'isActive': isActive,
+      'firebaseUid': firebaseUid,
     };
   }
 
@@ -49,6 +53,7 @@ class Admin {
     DateTime? updatedAt,
     String? createdBy,
     bool? isActive,
+    String? firebaseUid,
   }) {
     return Admin(
       id: id ?? this.id,
@@ -58,6 +63,7 @@ class Admin {
       updatedAt: updatedAt ?? this.updatedAt,
       createdBy: createdBy ?? this.createdBy,
       isActive: isActive ?? this.isActive,
+      firebaseUid: firebaseUid ?? this.firebaseUid,
     );
   }
 }
