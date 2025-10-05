@@ -66,8 +66,8 @@ class _CreateFirebaseAccountScreenState extends State<CreateFirebaseAccountScree
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.cardAdmin.withValues(alpha: 0.3),
-                    blurRadius: 15.0,
-                    offset: const Offset(0.0, 5.0),
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
                   ),
                 ],
               ),

@@ -377,7 +377,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                  boxShadow: [
                    BoxShadow(
                      color: Colors.deepPurple.withValues(alpha: 0.1),
-                     blurRadius: 10.0,
+                     blurRadius: 10,
                      offset: const Offset(0, 4),
                    ),
                  ],
@@ -549,7 +549,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                  boxShadow: [
                    BoxShadow(
                      color: Colors.blue.withValues(alpha: 0.1),
-                     blurRadius: 10.0,
+                     blurRadius: 10,
                      offset: const Offset(0, 4),
                    ),
                  ],

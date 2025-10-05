@@ -221,7 +221,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.blue.withValues(alpha: 0.3),
-                      blurRadius: 10.0,
+                      blurRadius: 10,
                       offset: const Offset(0, 5),
                     ),
                   ],

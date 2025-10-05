@@ -115,7 +115,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.deepPurple.withValues(alpha: 0.3),
-                      blurRadius: 10.0,
+                      blurRadius: 10,
                       offset: const Offset(0, 5),
                     ),
                   ],
@@ -298,8 +298,8 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                           color: admin.isActive 
                               ? AppColors.cardAdmin.withValues(alpha: 0.3)
                               : AppColors.textLight.withValues(alpha: 0.3),
-                          blurRadius: 10.0,
-                          offset: const Offset(0.0, 4.0),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
                         ),
                       ],
                     ),
@@ -438,8 +438,8 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                       boxShadow: [
                         BoxShadow(
                           color: AppColors.getStatusColor(admin.isActive).withValues(alpha: 0.2),
-                          blurRadius: 5.0,
-                          offset: const Offset(0.0, 2.0),
+                          blurRadius: 5,
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),

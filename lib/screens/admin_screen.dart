@@ -221,7 +221,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   boxShadow: [
                   BoxShadow(
                     color: Colors.deepPurple.withValues(alpha: 0.3),
-                    blurRadius: 10.0,
+                    blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
                   ],
