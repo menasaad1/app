@@ -33,7 +33,7 @@ class _AddPriestDialogState extends State<AddPriestDialog> {
         title: const Text(
         'إضافة أب كاهن جديد',
         style: TextStyle(
-          fontFamily: 'Arial',
+          fontFamily: 'Cairo',
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -117,7 +117,7 @@ class _AddPriestDialogState extends State<AddPriestDialog> {
                         'تاريخ الرسامة: ${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
                         style: const TextStyle(
                           fontSize: 16,
-                          fontFamily: 'Arial',
+                          fontFamily: 'Cairo',
                         ),
                       ),
                     ],
@@ -151,7 +151,7 @@ class _AddPriestDialogState extends State<AddPriestDialog> {
           onPressed: () => Navigator.pop(context),
           child: const Text(
             'إلغاء',
-            style: TextStyle(fontFamily: 'Arial'),
+            style: TextStyle(fontFamily: 'Cairo'),
           ),
         ),
         Consumer<PriestsProvider>(
@@ -173,7 +173,7 @@ class _AddPriestDialogState extends State<AddPriestDialog> {
                     )
                   : const Text(
                       'إضافة',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
             );
           },
@@ -220,7 +220,7 @@ class _AddPriestDialogState extends State<AddPriestDialog> {
           SnackBar(
             content: const Text(
               'تم إضافة الأب الكاهن بنجاح',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.green,
           ),
@@ -230,7 +230,7 @@ class _AddPriestDialogState extends State<AddPriestDialog> {
           SnackBar(
             content: Text(
               priestsProvider.errorMessage ?? 'حدث خطأ في إضافة الأب الكاهن',
-              style: const TextStyle(fontFamily: 'Arial'),
+              style: const TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.red,
           ),

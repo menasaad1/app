@@ -32,7 +32,7 @@ class _AdminScreenState extends State<AdminScreen> {
         title: const Text(
           'إدارة الآباء الأساقفة',
           style: TextStyle(
-            fontFamily: 'Arial',
+            fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -66,7 +66,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   children: [
                     Icon(Icons.home, color: Colors.green),
                     SizedBox(width: 8),
-                    Text('الشاشة الرئيسية', style: TextStyle(fontFamily: 'Arial')),
+                    Text('الشاشة الرئيسية', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),
@@ -76,7 +76,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   children: [
                     Icon(Icons.people, color: Colors.deepPurple),
                     SizedBox(width: 8),
-                    Text('إدارة المدراء', style: TextStyle(fontFamily: 'Arial')),
+                    Text('إدارة المدراء', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),
@@ -86,7 +86,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   children: [
                     Icon(Icons.logout, color: Colors.red),
                     SizedBox(width: 8),
-                    Text('تسجيل الخروج', style: TextStyle(fontFamily: 'Arial')),
+                    Text('تسجيل الخروج', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),
@@ -102,7 +102,7 @@ class _AdminScreenState extends State<AdminScreen> {
         label: const Text(
           'إضافة أب أسقف',
           style: TextStyle(
-            fontFamily: 'Arial',
+            fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -133,7 +133,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.red[700],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -145,7 +145,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     },
                     child: const Text(
                       'إعادة المحاولة',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
                   ),
                 ],
@@ -169,7 +169,7 @@ class _AdminScreenState extends State<AdminScreen> {
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.grey[800],
-                            fontFamily: 'Arial',
+                            fontFamily: 'Cairo',
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -179,7 +179,7 @@ class _AdminScreenState extends State<AdminScreen> {
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[700],
-                            fontFamily: 'Arial',
+                            fontFamily: 'Cairo',
                           ),
                         ),
                   const SizedBox(height: 24),
@@ -188,7 +188,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     icon: const Icon(Icons.add),
                     label: const Text(
                       'إضافة أب أسقف جديد',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.deepPurple,
@@ -242,7 +242,7 @@ class _AdminScreenState extends State<AdminScreen> {
                             'وضع الإدارة',
                             style: TextStyle(
                               color: Colors.white,
-                              fontFamily: 'Arial',
+                              fontFamily: 'Cairo',
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
@@ -251,7 +251,7 @@ class _AdminScreenState extends State<AdminScreen> {
                           'يمكنك إضافة وتعديل وحذف بيانات الآباء الأساقفة',
                           style: TextStyle(
                             color: Colors.white.withValues(alpha: 0.9),
-                            fontFamily: 'Arial',
+                            fontFamily: 'Cairo',
                             fontSize: 12,
                           ),
                         ),
@@ -284,7 +284,7 @@ class _AdminScreenState extends State<AdminScreen> {
                         'الترتيب: ${bishopsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${bishopsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
                         style: TextStyle(
                           color: Colors.deepPurple[700],
-                          fontFamily: 'Arial',
+                          fontFamily: 'Cairo',
                           fontSize: 14,
                         ),
                       ),
@@ -335,18 +335,18 @@ class _AdminScreenState extends State<AdminScreen> {
       builder: (context) => AlertDialog(
         title: const Text(
           'حذف الأسقف',
-          style: TextStyle(fontFamily: 'Arial'),
+          style: TextStyle(fontFamily: 'Cairo'),
         ),
         content: Text(
           'هل أنت متأكد من حذف الأسقف "${bishop.name}"؟',
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'إلغاء',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
           ),
           TextButton(
@@ -361,7 +361,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     SnackBar(
                       content: Text(
                         'تم حذف الأسقف "${bishop.name}" بنجاح',
-                        style: const TextStyle(fontFamily: 'Arial'),
+                        style: const TextStyle(fontFamily: 'Cairo'),
                       ),
                       backgroundColor: Colors.green,
                     ),
@@ -371,7 +371,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     SnackBar(
                       content: Text(
                         bishopsProvider.errorMessage ?? 'حدث خطأ في حذف الأسقف',
-                        style: const TextStyle(fontFamily: 'Arial'),
+                        style: const TextStyle(fontFamily: 'Cairo'),
                       ),
                       backgroundColor: Colors.red,
                     ),
@@ -382,7 +382,7 @@ class _AdminScreenState extends State<AdminScreen> {
             child: const Text(
               'حذف',
               style: TextStyle(
-                fontFamily: 'Arial',
+                fontFamily: 'Cairo',
                 color: Colors.red,
               ),
             ),
@@ -411,18 +411,18 @@ class _AdminScreenState extends State<AdminScreen> {
       builder: (context) => AlertDialog(
         title: const Text(
           'تسجيل الخروج',
-          style: TextStyle(fontFamily: 'Arial'),
+          style: TextStyle(fontFamily: 'Cairo'),
         ),
         content: const Text(
           'هل أنت متأكد من تسجيل الخروج؟',
-          style: TextStyle(fontFamily: 'Arial'),
+          style: TextStyle(fontFamily: 'Cairo'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'إلغاء',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
           ),
           TextButton(
@@ -434,7 +434,7 @@ class _AdminScreenState extends State<AdminScreen> {
             child: const Text(
               'تسجيل الخروج',
               style: TextStyle(
-                fontFamily: 'Arial',
+                fontFamily: 'Cairo',
                 color: Colors.red,
               ),
             ),

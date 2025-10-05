@@ -32,7 +32,7 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
         title: const Text(
         'إضافة أب أسقف جديد',
         style: TextStyle(
-          fontFamily: 'Arial',
+          fontFamily: 'Cairo',
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -104,14 +104,14 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey,
-                                fontFamily: 'Arial',
+                                fontFamily: 'Cairo',
                               ),
                             ),
                             Text(
                               DateFormat('yyyy/MM/dd', 'ar').format(_selectedDate),
                               style: const TextStyle(
                                 fontSize: 16,
-                                fontFamily: 'Arial',
+                                fontFamily: 'Cairo',
                               ),
                             ),
                           ],
@@ -150,7 +150,7 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
           child: const Text(
             'إلغاء',
             style: TextStyle(
-              fontFamily: 'Arial',
+              fontFamily: 'Cairo',
               color: Colors.grey,
             ),
           ),
@@ -174,7 +174,7 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
                     )
                   : const Text(
                       'إضافة',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
             );
           },
@@ -220,7 +220,7 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
           SnackBar(
             content: const Text(
               'تم إضافة الأب الأسقف بنجاح',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.green,
           ),
@@ -230,7 +230,7 @@ class _AddBishopDialogState extends State<AddBishopDialog> {
           SnackBar(
             content: Text(
               bishopsProvider.errorMessage ?? 'حدث خطأ في إضافة الأب الأسقف',
-              style: const TextStyle(fontFamily: 'Arial'),
+              style: const TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.red,
           ),

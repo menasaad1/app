@@ -46,7 +46,7 @@ class _EditBishopDialogState extends State<EditBishopDialog> {
       title: const Text(
         'تعديل بيانات الأسقف',
         style: TextStyle(
-          fontFamily: 'Arial',
+          fontFamily: 'Cairo',
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -118,14 +118,14 @@ class _EditBishopDialogState extends State<EditBishopDialog> {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey,
-                                fontFamily: 'Arial',
+                                fontFamily: 'Cairo',
                               ),
                             ),
                             Text(
                               DateFormat('yyyy/MM/dd', 'ar').format(_selectedDate),
                               style: const TextStyle(
                                 fontSize: 16,
-                                fontFamily: 'Arial',
+                                fontFamily: 'Cairo',
                               ),
                             ),
                           ],
@@ -164,7 +164,7 @@ class _EditBishopDialogState extends State<EditBishopDialog> {
           child: const Text(
             'إلغاء',
             style: TextStyle(
-              fontFamily: 'Arial',
+              fontFamily: 'Cairo',
               color: Colors.grey,
             ),
           ),
@@ -188,7 +188,7 @@ class _EditBishopDialogState extends State<EditBishopDialog> {
                     )
                   : const Text(
                       'حفظ التغييرات',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
             );
           },
@@ -232,7 +232,7 @@ class _EditBishopDialogState extends State<EditBishopDialog> {
           SnackBar(
             content: const Text(
               'تم تحديث بيانات الأسقف بنجاح',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.green,
           ),
@@ -242,7 +242,7 @@ class _EditBishopDialogState extends State<EditBishopDialog> {
           SnackBar(
             content: Text(
               bishopsProvider.errorMessage ?? 'حدث خطأ في تحديث الأسقف',
-              style: const TextStyle(fontFamily: 'Arial'),
+              style: const TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.red,
           ),

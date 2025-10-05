@@ -35,7 +35,7 @@ class ModeSelectorWidget extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontFamily: 'Arial',
+                  fontFamily: 'Cairo',
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -78,7 +78,7 @@ class ModeSelectorWidget extends StatelessWidget {
                                 color: appModeProvider.isBishopsMode
                                     ? Colors.deepPurple
                                     : Colors.white,
-                                fontFamily: 'Arial',
+                                fontFamily: 'Cairo',
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -90,7 +90,7 @@ class ModeSelectorWidget extends StatelessWidget {
                                 color: appModeProvider.isBishopsMode
                                     ? Colors.deepPurple[600]
                                     : Colors.white70,
-                                fontFamily: 'Arial',
+                                fontFamily: 'Cairo',
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -136,7 +136,7 @@ class ModeSelectorWidget extends StatelessWidget {
                                 color: appModeProvider.isPriestsMode
                                     ? Colors.blue
                                     : Colors.white,
-                                fontFamily: 'Arial',
+                                fontFamily: 'Cairo',
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -148,7 +148,7 @@ class ModeSelectorWidget extends StatelessWidget {
                                 color: appModeProvider.isPriestsMode
                                     ? Colors.blue[600]
                                     : Colors.white70,
-                                fontFamily: 'Arial',
+                                fontFamily: 'Cairo',
                               ),
                               textAlign: TextAlign.center,
                             ),

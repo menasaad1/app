@@ -28,18 +28,9 @@ class PriestsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      // Try cache first for better performance
-      QuerySnapshot snapshot;
-      try {
-        snapshot = await _firestore
-            .collection(AppConstants.priestsCollection)
-            .get(const GetOptions(source: Source.cache));
-      } catch (e) {
-        // Fallback to network if cache fails
-        snapshot = await _firestore
-            .collection(AppConstants.priestsCollection)
-            .get();
-      }
+      final QuerySnapshot snapshot = await _firestore
+          .collection(AppConstants.priestsCollection)
+          .get();
 
       _allPriests = snapshot.docs
           .map((doc) {

@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text(
           'قائمة الأساقفة',
           style: TextStyle(
-            fontFamily: 'Arial',
+            fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Icon(Icons.admin_panel_settings, color: Colors.deepPurple),
                           SizedBox(width: 8),
-                          Text('لوحة الإدارة', style: TextStyle(fontFamily: 'Arial')),
+                          Text('لوحة الإدارة', style: TextStyle(fontFamily: 'Cairo')),
                         ],
                       ),
                     ),
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Icon(Icons.logout, color: Colors.red),
                           SizedBox(width: 8),
-                          Text('تسجيل الخروج', style: TextStyle(fontFamily: 'Arial')),
+                          Text('تسجيل الخروج', style: TextStyle(fontFamily: 'Cairo')),
                         ],
                       ),
                     ),
@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Icon(Icons.login, color: Colors.deepPurple),
                           SizedBox(width: 8),
-                          Text('تسجيل الدخول', style: TextStyle(fontFamily: 'Arial')),
+                          Text('تسجيل الدخول', style: TextStyle(fontFamily: 'Cairo')),
                         ],
                       ),
                     ),
@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.red[700],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: const Text(
                       'إعادة المحاولة',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
                   ),
                 ],
@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey[600],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -177,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[500],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                   ),
                 ],
@@ -210,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         'الترتيب: ${bishopsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${bishopsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
                         style: TextStyle(
                           color: Colors.deepPurple[700],
-                          fontFamily: 'Arial',
+                          fontFamily: 'Cairo',
                           fontSize: 14,
                         ),
                       ),
@@ -255,18 +255,18 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context) => AlertDialog(
         title: const Text(
           'تسجيل الخروج',
-          style: TextStyle(fontFamily: 'Arial'),
+          style: TextStyle(fontFamily: 'Cairo'),
         ),
         content: const Text(
           'هل أنت متأكد من تسجيل الخروج؟',
-          style: TextStyle(fontFamily: 'Arial'),
+          style: TextStyle(fontFamily: 'Cairo'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'إلغاء',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
           ),
           TextButton(
@@ -278,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: const Text(
               'تسجيل الخروج',
               style: TextStyle(
-                fontFamily: 'Arial',
+                fontFamily: 'Cairo',
                 color: Colors.red,
               ),
             ),

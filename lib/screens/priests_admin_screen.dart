@@ -32,7 +32,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
         title: const Text(
           'إدارة الآباء الكهنة',
           style: TextStyle(
-            fontFamily: 'Arial',
+            fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -66,7 +66,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                   children: [
                     Icon(Icons.home, color: Colors.green),
                     SizedBox(width: 8),
-                    Text('الشاشة الرئيسية', style: TextStyle(fontFamily: 'Arial')),
+                    Text('الشاشة الرئيسية', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),
@@ -76,7 +76,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                   children: [
                     Icon(Icons.admin_panel_settings, color: Colors.blue),
                     SizedBox(width: 8),
-                    Text('إدارة المدراء', style: TextStyle(fontFamily: 'Arial')),
+                    Text('إدارة المدراء', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),
@@ -86,7 +86,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                   children: [
                     Icon(Icons.logout, color: Colors.red),
                     SizedBox(width: 8),
-                    Text('تسجيل الخروج', style: TextStyle(fontFamily: 'Arial')),
+                    Text('تسجيل الخروج', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),
@@ -102,7 +102,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
         label: const Text(
           'إضافة أب كاهن',
           style: TextStyle(
-            fontFamily: 'Arial',
+            fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -133,7 +133,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.red[700],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -145,7 +145,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                     },
                     child: const Text(
                       'إعادة المحاولة',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
                   ),
                 ],
@@ -169,7 +169,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey[800],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -179,7 +179,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[700],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -188,7 +188,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                     icon: const Icon(Icons.add),
                     label: const Text(
                       'إضافة أب كاهن جديد',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
@@ -249,7 +249,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                             'مرحباً بك في لوحة إدارة الآباء الكهنة',
                             style: TextStyle(
                               color: Colors.white,
-                              fontFamily: 'Arial',
+                              fontFamily: 'Cairo',
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
@@ -258,7 +258,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                             'يمكنك إضافة وتعديل وحذف بيانات الآباء الكهنة',
                             style: TextStyle(
                               color: Colors.white.withValues(alpha: 0.9),
-                              fontFamily: 'Arial',
+                              fontFamily: 'Cairo',
                               fontSize: 12,
                             ),
                           ),
@@ -294,7 +294,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                             'الترتيب: ${priestsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${priestsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
                             style: TextStyle(
                               color: Colors.blue[700],
-                              fontFamily: 'Arial',
+                              fontFamily: 'Cairo',
                               fontSize: 14,
                             ),
                           ),
@@ -304,7 +304,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                               priestsProvider.getFilterInfo(),
                               style: TextStyle(
                                 color: Colors.orange[800],
-                                fontFamily: 'Arial',
+                                fontFamily: 'Cairo',
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -359,18 +359,18 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
       builder: (context) => AlertDialog(
         title: const Text(
           'حذف الأب الكاهن',
-          style: TextStyle(fontFamily: 'Arial'),
+          style: TextStyle(fontFamily: 'Cairo'),
         ),
         content: Text(
           'هل أنت متأكد من حذف الأب الكاهن "${priest.name}"؟',
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'إلغاء',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
           ),
           TextButton(
@@ -385,7 +385,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                     SnackBar(
                       content: Text(
                         'تم حذف الأب الكاهن "${priest.name}" بنجاح',
-                        style: const TextStyle(fontFamily: 'Arial'),
+                        style: const TextStyle(fontFamily: 'Cairo'),
                       ),
                       backgroundColor: Colors.green,
                     ),
@@ -395,7 +395,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                     SnackBar(
                       content: Text(
                         priestsProvider.errorMessage ?? 'حدث خطأ في حذف الأب الكاهن',
-                        style: const TextStyle(fontFamily: 'Arial'),
+                        style: const TextStyle(fontFamily: 'Cairo'),
                       ),
                       backgroundColor: Colors.red,
                     ),
@@ -406,7 +406,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
             child: const Text(
               'حذف',
               style: TextStyle(
-                fontFamily: 'Arial',
+                fontFamily: 'Cairo',
                 color: Colors.red,
               ),
             ),
@@ -435,18 +435,18 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
       builder: (context) => AlertDialog(
         title: const Text(
           'تسجيل الخروج',
-          style: TextStyle(fontFamily: 'Arial'),
+          style: TextStyle(fontFamily: 'Cairo'),
         ),
         content: const Text(
           'هل أنت متأكد من تسجيل الخروج؟',
-          style: TextStyle(fontFamily: 'Arial'),
+          style: TextStyle(fontFamily: 'Cairo'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'إلغاء',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
           ),
           TextButton(
@@ -458,7 +458,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
             child: const Text(
               'تسجيل الخروج',
               style: TextStyle(
-                fontFamily: 'Arial',
+                fontFamily: 'Cairo',
                 color: Colors.red,
               ),
             ),

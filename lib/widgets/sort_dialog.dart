@@ -33,7 +33,7 @@ class _SortDialogState extends State<SortDialog> {
       title: const Text(
         'ترتيب القائمة',
         style: TextStyle(
-          fontFamily: 'Arial',
+          fontFamily: 'Cairo',
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -44,7 +44,7 @@ class _SortDialogState extends State<SortDialog> {
           const Text(
             'ترتيب حسب:',
             style: TextStyle(
-              fontFamily: 'Arial',
+              fontFamily: 'Cairo',
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -52,7 +52,7 @@ class _SortDialogState extends State<SortDialog> {
           RadioListTile<String>(
             title: const Text(
               'تاريخ الرسامة',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
             value: 'ordinationDate',
             groupValue: _selectedSortBy,
@@ -66,7 +66,7 @@ class _SortDialogState extends State<SortDialog> {
           RadioListTile<String>(
             title: const Text(
               'الاسم',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
             value: 'name',
             groupValue: _selectedSortBy,
@@ -81,7 +81,7 @@ class _SortDialogState extends State<SortDialog> {
           const Text(
             'اتجاه الترتيب:',
             style: TextStyle(
-              fontFamily: 'Arial',
+              fontFamily: 'Cairo',
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -89,7 +89,7 @@ class _SortDialogState extends State<SortDialog> {
           RadioListTile<bool>(
             title: const Text(
               'تصاعدي (من الأقدم إلى الأحدث)',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
             value: true,
             groupValue: _ascending,
@@ -103,7 +103,7 @@ class _SortDialogState extends State<SortDialog> {
           RadioListTile<bool>(
             title: const Text(
               'تنازلي (من الأحدث إلى الأقدم)',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
             value: false,
             groupValue: _ascending,
@@ -122,7 +122,7 @@ class _SortDialogState extends State<SortDialog> {
           child: const Text(
             'إلغاء',
             style: TextStyle(
-              fontFamily: 'Arial',
+              fontFamily: 'Cairo',
               color: Colors.grey,
             ),
           ),
@@ -138,7 +138,7 @@ class _SortDialogState extends State<SortDialog> {
           ),
           child: const Text(
             'تطبيق',
-            style: TextStyle(fontFamily: 'Arial'),
+            style: TextStyle(fontFamily: 'Cairo'),
           ),
         ),
       ],

@@ -6,7 +6,7 @@ class NetworkUtils {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         backgroundColor: Colors.green,
         duration: const Duration(seconds: 3),
@@ -23,7 +23,7 @@ class NetworkUtils {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         backgroundColor: Colors.red,
         duration: const Duration(seconds: 4),
@@ -40,7 +40,7 @@ class NetworkUtils {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         backgroundColor: Colors.blue,
         duration: const Duration(seconds: 3),
@@ -57,7 +57,7 @@ class NetworkUtils {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         backgroundColor: Colors.orange,
         duration: const Duration(seconds: 3),

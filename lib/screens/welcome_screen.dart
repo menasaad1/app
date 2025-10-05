@@ -10,7 +10,6 @@ import '../widgets/bishop_card.dart';
 import '../widgets/priest_card.dart';
 import '../widgets/sort_dialog.dart';
 import '../widgets/mode_selector_widget.dart';
-import '../widgets/safe_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -24,28 +23,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadDataAsync();
+      final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
+      appModeProvider.loadMode().then((_) {
+        if (appModeProvider.isBishopsMode) {
+          Provider.of<BishopsProvider>(context, listen: false).fetchBishops();
+        } else {
+          Provider.of<PriestsProvider>(context, listen: false).fetchPriests();
+        }
+      });
     });
-  }
-
-  Future<void> _loadDataAsync() async {
-    final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
-    final bishopsProvider = Provider.of<BishopsProvider>(context, listen: false);
-    final priestsProvider = Provider.of<PriestsProvider>(context, listen: false);
-    
-    try {
-      // Load mode first
-      await appModeProvider.loadMode();
-      
-      // Load data based on mode
-      if (appModeProvider.isBishopsMode) {
-        bishopsProvider.fetchBishops(); // Don't await to make it faster
-      } else {
-        priestsProvider.fetchPriests(); // Don't await to make it faster
-      }
-    } catch (e) {
-      debugPrint('Error loading data: $e');
-    }
   }
 
   @override
@@ -61,7 +47,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   return Text(
                     appModeProvider.modeTitle,
                     style: const TextStyle(
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                       fontWeight: FontWeight.bold,
                     ),
                   );
@@ -84,7 +70,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         fontSize: 12,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Arial',
+                        fontFamily: 'Cairo',
                       ),
                     ),
                   );
@@ -178,7 +164,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         fontSize: 10,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Arial',
+                        fontFamily: 'Cairo',
                       ),
                     ),
                   ),
@@ -204,7 +190,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         children: [
                           Icon(Icons.admin_panel_settings, color: Colors.deepPurple, size: 16),
                           SizedBox(width: 8),
-                          Text('إدارة', style: TextStyle(fontFamily: 'Arial', fontSize: 12)),
+                          Text('إدارة', style: TextStyle(fontFamily: 'Cairo', fontSize: 12)),
                         ],
                       ),
                     ),
@@ -214,7 +200,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         children: [
                           Icon(Icons.logout, color: Colors.red, size: 16),
                           SizedBox(width: 8),
-                          Text('خروج', style: TextStyle(fontFamily: 'Arial', fontSize: 12)),
+                          Text('خروج', style: TextStyle(fontFamily: 'Cairo', fontSize: 12)),
                         ],
                       ),
                     ),
@@ -236,7 +222,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         fontSize: 11,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Arial',
+                        fontFamily: 'Cairo',
                       ),
                     ),
                   ),
@@ -279,23 +265,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       color: Colors.white,
                     ),
                     const SizedBox(height: 12),
-                    SafeText(
+                    Text(
                       appModeProvider.modeTitle,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontFamily: 'Arial',
+                        fontFamily: 'Cairo',
                       ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 6),
-                    SafeText(
+                    Text(
                       appModeProvider.modeDescription,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.white,
-                        fontFamily: 'Arial',
+                        fontFamily: 'Cairo',
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -351,7 +337,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.red[700],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -363,7 +349,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     },
                     child: const Text(
                       'إعادة المحاولة',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
                   ),
                 ],
@@ -389,7 +375,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey[800],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -399,7 +385,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[700],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                   ),
                 ],
@@ -436,7 +422,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           'الترتيب: ${bishopsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${bishopsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
                           style: TextStyle(
                             color: Colors.deepPurple[700],
-                            fontFamily: 'Arial',
+                            fontFamily: 'Cairo',
                             fontSize: 14,
                           ),
                         ),
@@ -446,7 +432,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             bishopsProvider.getFilterInfo(),
                             style: TextStyle(
                               color: Colors.orange[800],
-                              fontFamily: 'Arial',
+                              fontFamily: 'Cairo',
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
@@ -503,7 +489,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.red[700],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -515,7 +501,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     },
                     child: const Text(
                       'إعادة المحاولة',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
                   ),
                 ],
@@ -541,7 +527,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey[800],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -551,7 +537,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[700],
-                      fontFamily: 'Arial',
+                      fontFamily: 'Cairo',
                     ),
                   ),
                 ],
@@ -588,7 +574,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           'الترتيب: ${priestsProvider.sortBy == 'ordinationDate' ? 'تاريخ الرسامة' : 'الاسم'} ${priestsProvider.ascending ? '(تصاعدي)' : '(تنازلي)'}',
                           style: TextStyle(
                             color: Colors.blue[700],
-                            fontFamily: 'Arial',
+                            fontFamily: 'Cairo',
                             fontSize: 14,
                           ),
                         ),
@@ -598,7 +584,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             priestsProvider.getFilterInfo(),
                             style: TextStyle(
                               color: Colors.orange[800],
-                              fontFamily: 'Arial',
+                              fontFamily: 'Cairo',
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
@@ -634,7 +620,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         title: const Text(
           'اختيار وضع التطبيق',
           style: TextStyle(
-            fontFamily: 'Arial',
+            fontFamily: 'Cairo',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -644,7 +630,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'إغلاق',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
           ),
         ],
@@ -701,7 +687,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           title: const Text(
             'اختيار الأساقفة الحاضرين',
             style: TextStyle(
-              fontFamily: 'Arial',
+              fontFamily: 'Cairo',
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -715,7 +701,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   controller: searchController,
                   decoration: InputDecoration(
                     hintText: 'ابحث بالاسم...',
-                    hintStyle: const TextStyle(fontFamily: 'Arial'),
+                    hintStyle: const TextStyle(fontFamily: 'Cairo'),
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -725,7 +711,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
                     ),
                   ),
-                  style: const TextStyle(fontFamily: 'Arial'),
+                  style: const TextStyle(fontFamily: 'Cairo'),
                   onChanged: (value) {
                     setState(() {
                       if (value.isEmpty) {
@@ -749,14 +735,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         title: Text(
                           bishop.name,
                           style: const TextStyle(
-                            fontFamily: 'Arial',
+                            fontFamily: 'Cairo',
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         subtitle: Text(
                           'رُسم في: ${bishop.ordinationDate.day}/${bishop.ordinationDate.month}/${bishop.ordinationDate.year}',
                           style: TextStyle(
-                            fontFamily: 'Arial',
+                            fontFamily: 'Cairo',
                             fontSize: 12,
                             color: Colors.grey[800],
                           ),
@@ -784,7 +770,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               },
               child: const Text(
                 'إلغاء',
-                style: TextStyle(fontFamily: 'Arial'),
+                style: TextStyle(fontFamily: 'Cairo'),
               ),
             ),
             ElevatedButton(
@@ -799,7 +785,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     const SnackBar(
                       content: Text(
                         'يرجى اختيار أسقف واحد على الأقل',
-                        style: TextStyle(fontFamily: 'Arial'),
+                        style: TextStyle(fontFamily: 'Cairo'),
                       ),
                       backgroundColor: Colors.orange,
                     ),
@@ -816,7 +802,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SnackBar(
                     content: Text(
                       'تم اختيار ${selectedIds.length} من الأساقفة الحاضرين',
-                      style: const TextStyle(fontFamily: 'Arial'),
+                      style: const TextStyle(fontFamily: 'Cairo'),
                     ),
                     backgroundColor: Colors.green,
                     action: SnackBarAction(
@@ -835,7 +821,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               child: const Text(
                 'تطبيق',
-                style: TextStyle(fontFamily: 'Arial'),
+                style: TextStyle(fontFamily: 'Cairo'),
               ),
             ),
           ],
@@ -863,7 +849,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           title: const Text(
             'اختيار الآباء الكهنة الحاضرين',
             style: TextStyle(
-              fontFamily: 'Arial',
+              fontFamily: 'Cairo',
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -877,7 +863,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   controller: searchController,
                   decoration: InputDecoration(
                     hintText: 'ابحث بالاسم...',
-                    hintStyle: const TextStyle(fontFamily: 'Arial'),
+                    hintStyle: const TextStyle(fontFamily: 'Cairo'),
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -887,7 +873,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       borderSide: const BorderSide(color: Colors.blue, width: 2),
                     ),
                   ),
-                  style: const TextStyle(fontFamily: 'Arial'),
+                  style: const TextStyle(fontFamily: 'Cairo'),
                   onChanged: (value) {
                     setState(() {
                       if (value.isEmpty) {
@@ -911,14 +897,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         title: Text(
                           priest.name,
                           style: const TextStyle(
-                            fontFamily: 'Arial',
+                            fontFamily: 'Cairo',
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         subtitle: Text(
                           'رُسم في: ${priest.ordinationDate.day}/${priest.ordinationDate.month}/${priest.ordinationDate.year}',
                           style: TextStyle(
-                            fontFamily: 'Arial',
+                            fontFamily: 'Cairo',
                             fontSize: 12,
                             color: Colors.grey[800],
                           ),
@@ -946,7 +932,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               },
               child: const Text(
                 'إلغاء',
-                style: TextStyle(fontFamily: 'Arial'),
+                style: TextStyle(fontFamily: 'Cairo'),
               ),
             ),
             ElevatedButton(
@@ -961,7 +947,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     const SnackBar(
                       content: Text(
                         'يرجى اختيار كاهن واحد على الأقل',
-                        style: TextStyle(fontFamily: 'Arial'),
+                        style: TextStyle(fontFamily: 'Cairo'),
                       ),
                       backgroundColor: Colors.orange,
                     ),
@@ -978,7 +964,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SnackBar(
                     content: Text(
                       'تم اختيار ${selectedIds.length} من الآباء الكهنة الحاضرين',
-                      style: const TextStyle(fontFamily: 'Arial'),
+                      style: const TextStyle(fontFamily: 'Cairo'),
                     ),
                     backgroundColor: Colors.green,
                     action: SnackBarAction(
@@ -997,7 +983,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               child: const Text(
                 'تطبيق',
-                style: TextStyle(fontFamily: 'Arial'),
+                style: TextStyle(fontFamily: 'Cairo'),
               ),
             ),
           ],

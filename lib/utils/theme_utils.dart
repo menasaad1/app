@@ -86,25 +86,25 @@ class ThemeUtils {
     fontSize: 24,
     fontWeight: FontWeight.bold,
     color: primaryColor,
-    fontFamily: 'Arial',
+    fontFamily: 'Cairo',
   );
   
   static TextStyle get subtitleTextStyle => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,
     color: textColor,
-    fontFamily: 'Arial',
+    fontFamily: 'Cairo',
   );
   
   static TextStyle get bodyTextStyle => const TextStyle(
     fontSize: 16,
     color: textColor,
-    fontFamily: 'Arial',
+    fontFamily: 'Cairo',
   );
   
   static TextStyle get captionTextStyle => const TextStyle(
     fontSize: 14,
     color: textSecondaryColor,
-    fontFamily: 'Arial',
+    fontFamily: 'Cairo',
   );
 }

@@ -54,7 +54,7 @@ class FeatureWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               color: Colors.grey[600],
-              fontFamily: 'Arial',
+              fontFamily: 'Cairo',
             ),
             textAlign: TextAlign.center,
           ),
@@ -64,7 +64,7 @@ class FeatureWidget extends StatelessWidget {
             icon: const Icon(Icons.login),
             label: const Text(
               'تسجيل الدخول',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurple,

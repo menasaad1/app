@@ -43,18 +43,18 @@ class AppUtils {
       builder: (context) => AlertDialog(
         title: Text(
           title,
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               cancelText,
-              style: const TextStyle(fontFamily: 'Arial'),
+              style: const TextStyle(fontFamily: 'Cairo'),
             ),
           ),
           TextButton(
@@ -65,7 +65,7 @@ class AppUtils {
             child: Text(
               confirmText,
               style: const TextStyle(
-                fontFamily: 'Arial',
+                fontFamily: 'Cairo',
                 color: Colors.red,
               ),
             ),
@@ -86,18 +86,18 @@ class AppUtils {
       builder: (context) => AlertDialog(
         title: Text(
           title,
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         content: Text(
           message,
-          style: const TextStyle(fontFamily: 'Arial'),
+          style: const TextStyle(fontFamily: 'Cairo'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               buttonText,
-              style: const TextStyle(fontFamily: 'Arial'),
+              style: const TextStyle(fontFamily: 'Cairo'),
             ),
           ),
         ],

@@ -48,7 +48,7 @@ class _EditPriestDialogState extends State<EditPriestDialog> {
       title: const Text(
         'تعديل بيانات الأب الكاهن',
         style: TextStyle(
-          fontFamily: 'Arial',
+          fontFamily: 'Cairo',
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -132,7 +132,7 @@ class _EditPriestDialogState extends State<EditPriestDialog> {
                         'تاريخ الرسامة: ${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
                         style: const TextStyle(
                           fontSize: 16,
-                          fontFamily: 'Arial',
+                          fontFamily: 'Cairo',
                         ),
                       ),
                     ],
@@ -166,7 +166,7 @@ class _EditPriestDialogState extends State<EditPriestDialog> {
           onPressed: () => Navigator.pop(context),
           child: const Text(
             'إلغاء',
-            style: TextStyle(fontFamily: 'Arial'),
+            style: TextStyle(fontFamily: 'Cairo'),
           ),
         ),
         Consumer<PriestsProvider>(
@@ -188,7 +188,7 @@ class _EditPriestDialogState extends State<EditPriestDialog> {
                     )
                   : const Text(
                       'حفظ التغييرات',
-                      style: TextStyle(fontFamily: 'Arial'),
+                      style: TextStyle(fontFamily: 'Cairo'),
                     ),
             );
           },
@@ -233,7 +233,7 @@ class _EditPriestDialogState extends State<EditPriestDialog> {
           SnackBar(
             content: const Text(
               'تم تحديث بيانات الأب الكاهن بنجاح',
-              style: TextStyle(fontFamily: 'Arial'),
+              style: TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.green,
           ),
@@ -243,7 +243,7 @@ class _EditPriestDialogState extends State<EditPriestDialog> {
           SnackBar(
             content: Text(
               priestsProvider.errorMessage ?? 'حدث خطأ في تحديث الأب الكاهن',
-              style: const TextStyle(fontFamily: 'Arial'),
+              style: const TextStyle(fontFamily: 'Cairo'),
             ),
             backgroundColor: Colors.red,
           ),

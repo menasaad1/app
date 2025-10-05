@@ -12,7 +12,7 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      fontFamily: 'Arial',
+      fontFamily: 'Cairo',
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryColor,
         brightness: Brightness.light,
@@ -23,7 +23,7 @@ class AppTheme {
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontFamily: 'Arial',
+          fontFamily: 'Cairo',
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
@@ -82,7 +82,7 @@ class AppTheme {
       snackBarTheme: SnackBarThemeData(
         backgroundColor: Colors.grey[800],
         contentTextStyle: const TextStyle(
-          fontFamily: 'Arial',
+          fontFamily: 'Cairo',
           color: Colors.white,
         ),
         shape: RoundedRectangleBorder(
@@ -96,7 +96,7 @@ class AppTheme {
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
-      fontFamily: 'Arial',
+      fontFamily: 'Cairo',
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryColor,
         brightness: Brightness.dark,
@@ -107,7 +107,7 @@ class AppTheme {
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontFamily: 'Arial',
+          fontFamily: 'Cairo',
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
@@ -165,7 +165,7 @@ class AppTheme {
       snackBarTheme: SnackBarThemeData(
         backgroundColor: Colors.grey[800],
         contentTextStyle: const TextStyle(
-          fontFamily: 'Arial',
+          fontFamily: 'Cairo',
           color: Colors.white,
         ),
         shape: RoundedRectangleBorder(

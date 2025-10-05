@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _checkAuthStatus() {
-    Future.delayed(const Duration(milliseconds: 1500), () async {
+    Future.delayed(const Duration(seconds: 3), () async {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
       final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
       
@@ -88,30 +88,21 @@ class _SplashScreenState extends State<SplashScreen>
               ),
               const SizedBox(height: 30),
               const Text(
-                'ترتيب الآباء الأساقفة',
+                'إدارة الأساقفة',
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontFamily: 'Arial',
+                  fontFamily: 'Cairo',
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
               const Text(
-                'نظام إدارة الآباء الأساقفة والكهنة',
+                'نظام إدارة شامل للأساقفة',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white70,
-                  fontFamily: 'Arial',
-                ),
-              ),
-              const SizedBox(height: 12),
-              const Text(
-                'جاري التحميل...',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white60,
-                  fontFamily: 'Arial',
+                  fontFamily: 'Cairo',
                 ),
               ),
               const SizedBox(height: 50),
