@@ -26,7 +26,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
         title: const Text(
           'إدارة المدراء',
@@ -115,7 +115,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.deepPurple.withValues(alpha: 0.3),
-                      blurRadius: 10,
+                      blurRadius: 10.0,
                       offset: const Offset(0, 5),
                     ),
                   ],
@@ -262,18 +262,23 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
             colors: [
-              AppColors.backgroundCard,
-              AppColors.cardAdmin.withValues(alpha: 0.08),
-              AppColors.primaryPurple.withValues(alpha: 0.05),
+              Colors.white,
+              AppColors.cardAdmin.withValues(alpha: 0.05),
+              AppColors.cardAdmin.withValues(alpha: 0.02),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.cardAdmin.withValues(alpha: 0.1),
-              blurRadius: 15,
-              offset: const Offset(0, 5),
+              color: AppColors.cardAdmin.withValues(alpha: 0.15),
+              blurRadius: 20.0,
+              offset: const Offset(0.0, 8.0),
+            ),
+            BoxShadow(
+              color: AppColors.cardAdmin.withValues(alpha: 0.05),
+              blurRadius: 8.0,
+              offset: const Offset(0.0, 2.0),
             ),
           ],
         ),
@@ -301,8 +306,8 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                           color: admin.isActive 
                               ? AppColors.cardAdmin.withValues(alpha: 0.3)
                               : AppColors.textLight.withValues(alpha: 0.3),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+                          blurRadius: 10.0,
+                          offset: const Offset(0.0, 4.0),
                         ),
                       ],
                     ),
@@ -322,13 +327,13 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.textPrimary,
+                            color: AppColors.cardAdmin,
                             fontFamily: 'Cairo',
                             shadows: [
                               Shadow(
-                                color: AppColors.cardAdmin.withValues(alpha: 0.3),
-                                blurRadius: 2,
-                                offset: const Offset(0, 1),
+                                color: Colors.white.withValues(alpha: 0.8),
+                                blurRadius: 1.0,
+                                offset: const Offset(0.0, 1.0),
                               ),
                             ],
                           ),
@@ -448,8 +453,8 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                       boxShadow: [
                         BoxShadow(
                           color: AppColors.getStatusColor(admin.isActive).withValues(alpha: 0.2),
-                          blurRadius: 5,
-                          offset: const Offset(0, 2),
+                          blurRadius: 5.0,
+                          offset: const Offset(0.0, 2.0),
                         ),
                       ],
                     ),

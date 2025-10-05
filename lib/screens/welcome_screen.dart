@@ -51,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
         title: Row(
           children: [
@@ -377,7 +377,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                  boxShadow: [
                    BoxShadow(
                      color: Colors.deepPurple.withValues(alpha: 0.1),
-                     blurRadius: 10,
+                     blurRadius: 10.0,
                      offset: const Offset(0, 4),
                    ),
                  ],
@@ -546,7 +546,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                  boxShadow: [
                    BoxShadow(
                      color: Colors.blue.withValues(alpha: 0.1),
-                     blurRadius: 10,
+                     blurRadius: 10.0,
                      offset: const Offset(0, 4),
                    ),
                  ],

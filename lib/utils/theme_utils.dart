@@ -15,7 +15,7 @@ class ThemeUtils {
     boxShadow: const [
       BoxShadow(
         color: Color(0x1A000000),
-        blurRadius: 8,
+        blurRadius: 8.0,
         offset: Offset(0, 2),
       ),
     ],
@@ -31,7 +31,7 @@ class ThemeUtils {
     boxShadow: const [
       BoxShadow(
         color: Color(0x4D9C27B0),
-        blurRadius: 10,
+        blurRadius: 10.0,
         offset: Offset(0, 5),
       ),
     ],

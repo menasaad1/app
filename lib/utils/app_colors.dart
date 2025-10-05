@@ -27,8 +27,8 @@ class AppColors {
   // Gradient Colors
   static const List<Color> purpleGradient = [
     Color(0xFF8B5CF6),
+    Color(0xFF7C3AED),
     Color(0xFF6B46C1),
-    Color(0xFF5B21B6),
   ];
 
   static const List<Color> blueGradient = [
@@ -60,9 +60,9 @@ class AppColors {
   static const Color borderDark = Color(0xFF94A3B8);
 
   // Card Colors for different types
-  static const Color cardBishop = Color(0xFF8B5CF6);
-  static const Color cardPriest = Color(0xFF3B82F6);
-  static const Color cardAdmin = Color(0xFF6B46C1);
+  static const Color cardBishop = Color(0xFF7C3AED);
+  static const Color cardPriest = Color(0xFF2563EB);
+  static const Color cardAdmin = Color(0xFF5B21B6);
 
   // Helper methods
   static Color getCardColor(String type) {

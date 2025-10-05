@@ -27,7 +27,7 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
         title: const Text(
           'إدارة الآباء الأساقفة',
@@ -221,7 +221,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   boxShadow: [
                   BoxShadow(
                     color: Colors.deepPurple.withValues(alpha: 0.3),
-                    blurRadius: 10,
+                    blurRadius: 10.0,
                     offset: const Offset(0, 5),
                   ),
                   ],

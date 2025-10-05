@@ -17,10 +17,10 @@ class ModeSelectorWidget extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.deepPurple[400]!,
-                Colors.purple[400]!,
-                Colors.blue[400]!,
-                Colors.cyan[400]!,
+                const Color(0xFF7C3AED),
+                const Color(0xFF8B5CF6),
+                const Color(0xFF3B82F6),
+                const Color(0xFF06B6D4),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -29,13 +29,13 @@ class ModeSelectorWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.deepPurple.withValues(alpha: 0.4),
-                blurRadius: 20,
-                offset: const Offset(0, 8),
+                blurRadius: 20.0,
+                offset: const Offset(0.0, 8.0),
               ),
               BoxShadow(
                 color: Colors.blue.withValues(alpha: 0.2),
-                blurRadius: 15,
-                offset: const Offset(0, 4),
+                blurRadius: 15.0,
+                offset: const Offset(0.0, 4.0),
               ),
             ],
           ),
@@ -51,8 +51,8 @@ class ModeSelectorWidget extends StatelessWidget {
                   shadows: [
                     Shadow(
                       color: Colors.black26,
-                      blurRadius: 3,
-                      offset: Offset(0, 2),
+                      blurRadius: 3.0,
+                      offset: Offset(0.0, 2.0),
                     ),
                   ],
                 ),
@@ -89,8 +89,8 @@ class ModeSelectorWidget extends StatelessWidget {
                                color: appModeProvider.isBishopsMode
                                    ? Colors.deepPurple.withValues(alpha: 0.3)
                                    : Colors.transparent,
-                               blurRadius: 15,
-                               offset: const Offset(0, 5),
+                               blurRadius: 15.0,
+                               offset: const Offset(0.0, 5.0),
                              ),
                            ],
                          ),
@@ -116,8 +116,8 @@ class ModeSelectorWidget extends StatelessWidget {
                                 shadows: appModeProvider.isBishopsMode ? [
                                   Shadow(
                                     color: Colors.deepPurple.withValues(alpha: 0.3),
-                                    blurRadius: 2,
-                                    offset: const Offset(0, 1),
+                                    blurRadius: 2.0,
+                                    offset: const Offset(0.0, 1.0),
                                   ),
                                 ] : null,
                               ),
@@ -169,8 +169,8 @@ class ModeSelectorWidget extends StatelessWidget {
                                color: appModeProvider.isPriestsMode
                                    ? Colors.blue.withValues(alpha: 0.3)
                                    : Colors.transparent,
-                               blurRadius: 15,
-                               offset: const Offset(0, 5),
+                               blurRadius: 15.0,
+                               offset: const Offset(0.0, 5.0),
                              ),
                            ],
                          ),
@@ -196,8 +196,8 @@ class ModeSelectorWidget extends StatelessWidget {
                                 shadows: appModeProvider.isPriestsMode ? [
                                   Shadow(
                                     color: Colors.blue.withValues(alpha: 0.3),
-                                    blurRadius: 2,
-                                    offset: const Offset(0, 1),
+                                    blurRadius: 2.0,
+                                    offset: const Offset(0.0, 1.0),
                                   ),
                                 ] : null,
                               ),

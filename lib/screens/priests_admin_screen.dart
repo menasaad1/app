@@ -27,7 +27,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
         title: const Text(
           'إدارة الآباء الكهنة',
@@ -221,7 +221,7 @@ class _PriestsAdminScreenState extends State<PriestsAdminScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.blue.withValues(alpha: 0.3),
-                      blurRadius: 10,
+                      blurRadius: 10.0,
                       offset: const Offset(0, 5),
                     ),
                   ],

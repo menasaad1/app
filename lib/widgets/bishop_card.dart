@@ -31,20 +31,25 @@ class BishopCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
             colors: [
-              AppColors.backgroundCard,
-              AppColors.cardBishop.withValues(alpha: 0.08),
-              AppColors.primaryPurple.withValues(alpha: 0.05),
+              Colors.white,
+              AppColors.cardBishop.withValues(alpha: 0.05),
+              AppColors.cardBishop.withValues(alpha: 0.02),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.cardBishop.withValues(alpha: 0.1),
-              blurRadius: 15,
-              offset: const Offset(0, 5),
-            ),
-          ],
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.cardBishop.withValues(alpha: 0.15),
+                blurRadius: 20.0,
+                offset: const Offset(0.0, 8.0),
+              ),
+              BoxShadow(
+                color: AppColors.cardBishop.withValues(alpha: 0.05),
+                blurRadius: 8.0,
+                offset: const Offset(0.0, 2.0),
+              ),
+            ],
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -66,8 +71,8 @@ class BishopCard extends StatelessWidget {
                       boxShadow: [
                         BoxShadow(
                           color: AppColors.cardBishop.withValues(alpha: 0.3),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+                          blurRadius: 10.0,
+                          offset: const Offset(0.0, 4.0),
                         ),
                       ],
                     ),
@@ -87,13 +92,13 @@ class BishopCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.textPrimary,
+                            color: AppColors.cardBishop,
                             fontFamily: 'Cairo',
                             shadows: [
                               Shadow(
-                                color: AppColors.cardBishop.withValues(alpha: 0.3),
-                                blurRadius: 2,
-                                offset: const Offset(0, 1),
+                                color: Colors.white.withValues(alpha: 0.8),
+                                blurRadius: 1.0,
+                                offset: const Offset(0.0, 1.0),
                               ),
                             ],
                           ),
@@ -154,21 +159,21 @@ class BishopCard extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       AppColors.cardBishop.withValues(alpha: 0.1),
-                      AppColors.primaryPurple.withValues(alpha: 0.05),
+                      AppColors.cardBishop.withValues(alpha: 0.05),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: AppColors.cardBishop.withValues(alpha: 0.3),
-                    width: 1.5,
+                    color: AppColors.cardBishop.withValues(alpha: 0.2),
+                    width: 1.0,
                   ),
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.cardBishop.withValues(alpha: 0.1),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
+                      blurRadius: 6.0,
+                      offset: const Offset(0.0, 2.0),
                     ),
                   ],
                 ),

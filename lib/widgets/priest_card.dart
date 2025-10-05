@@ -31,20 +31,25 @@ class PriestCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
             colors: [
-              AppColors.backgroundCard,
-              AppColors.cardPriest.withValues(alpha: 0.08),
-              AppColors.primaryBlue.withValues(alpha: 0.05),
+              Colors.white,
+              AppColors.cardPriest.withValues(alpha: 0.05),
+              AppColors.cardPriest.withValues(alpha: 0.02),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.cardPriest.withValues(alpha: 0.1),
-              blurRadius: 15,
-              offset: const Offset(0, 5),
-            ),
-          ],
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.cardPriest.withValues(alpha: 0.15),
+                blurRadius: 20.0,
+                offset: const Offset(0.0, 8.0),
+              ),
+              BoxShadow(
+                color: AppColors.cardPriest.withValues(alpha: 0.05),
+                blurRadius: 8.0,
+                offset: const Offset(0.0, 2.0),
+              ),
+            ],
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -66,8 +71,8 @@ class PriestCard extends StatelessWidget {
                       boxShadow: [
                         BoxShadow(
                           color: AppColors.cardPriest.withValues(alpha: 0.3),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+                          blurRadius: 10.0,
+                          offset: const Offset(0.0, 4.0),
                         ),
                       ],
                     ),
@@ -102,13 +107,13 @@ class PriestCard extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary,
+                                color: AppColors.cardPriest,
                                 fontFamily: 'Cairo',
                                 shadows: [
                                   Shadow(
-                                    color: AppColors.cardPriest.withValues(alpha: 0.3),
-                                    blurRadius: 2,
-                                    offset: const Offset(0, 1),
+                                    color: Colors.white.withValues(alpha: 0.8),
+                                    blurRadius: 1.0,
+                                    offset: const Offset(0.0, 1.0),
                                   ),
                                 ],
                                 ),
@@ -172,21 +177,21 @@ class PriestCard extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       AppColors.cardPriest.withValues(alpha: 0.1),
-                      AppColors.primaryBlue.withValues(alpha: 0.05),
+                      AppColors.cardPriest.withValues(alpha: 0.05),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: AppColors.cardPriest.withValues(alpha: 0.3),
-                    width: 1.5,
+                    color: AppColors.cardPriest.withValues(alpha: 0.2),
+                    width: 1.0,
                   ),
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.cardPriest.withValues(alpha: 0.1),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
+                      blurRadius: 6.0,
+                      offset: const Offset(0.0, 2.0),
                     ),
                   ],
                 ),
