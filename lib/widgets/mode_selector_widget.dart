@@ -17,25 +17,25 @@ class ModeSelectorWidget extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                const Color(0xFFA78BFA),
-                const Color(0xFF8B5CF6),
-                const Color(0xFF60A5FA),
-                const Color(0xFF22D3EE),
+                const Color(0xFFC4B5FD),
+                const Color(0xFF9F7AEA),
+                const Color(0xFF93C5FD),
+                const Color(0xFF67E8F9),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF8B5CF6).withValues(alpha: 0.2),
-                blurRadius: 15.0,
-                offset: const Offset(0.0, 6.0),
+                color: const Color(0xFF9F7AEA).withValues(alpha: 0.1),
+                blurRadius: 8.0,
+                offset: const Offset(0.0, 3.0),
               ),
               BoxShadow(
-                color: const Color(0xFF3B82F6).withValues(alpha: 0.1),
-                blurRadius: 10.0,
-                offset: const Offset(0.0, 3.0),
+                color: const Color(0xFF60A5FA).withValues(alpha: 0.05),
+                blurRadius: 4.0,
+                offset: const Offset(0.0, 1.0),
               ),
             ],
           ),
@@ -77,20 +77,20 @@ class ModeSelectorWidget extends StatelessWidget {
                            color: appModeProvider.isBishopsMode
                                ? Colors.white
                                : Colors.white.withValues(alpha: 0.2),
-                           borderRadius: BorderRadius.circular(16),
+                           borderRadius: BorderRadius.circular(12),
                            border: Border.all(
                              color: appModeProvider.isBishopsMode
                                  ? Colors.deepPurple
                                  : Colors.white.withValues(alpha: 0.5),
-                             width: 2.5,
+                             width: 2.0,
                            ),
                            boxShadow: [
                              BoxShadow(
                                color: appModeProvider.isBishopsMode
-                                   ? Colors.deepPurple.withValues(alpha: 0.3)
+                                   ? Colors.deepPurple.withValues(alpha: 0.2)
                                    : Colors.transparent,
-                               blurRadius: 15.0,
-                               offset: const Offset(0.0, 5.0),
+                               blurRadius: 8.0,
+                               offset: const Offset(0.0, 3.0),
                              ),
                            ],
                          ),
@@ -115,15 +115,15 @@ class ModeSelectorWidget extends StatelessWidget {
                                 fontFamily: 'Cairo',
                                 shadows: appModeProvider.isBishopsMode ? [
                                   Shadow(
-                                    color: Colors.deepPurple.withValues(alpha: 0.3),
-                                    blurRadius: 2.0,
+                                    color: Colors.deepPurple.withValues(alpha: 0.2),
+                                    blurRadius: 1.0,
                                     offset: const Offset(0.0, 1.0),
                                   ),
                                 ] : null,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: 6),
+                            const SizedBox(height: 4),
                             Text(
                               'إدارة وترتيب الأساقفة',
                               style: TextStyle(
@@ -157,20 +157,20 @@ class ModeSelectorWidget extends StatelessWidget {
                            color: appModeProvider.isPriestsMode
                                ? Colors.white
                                : Colors.white.withValues(alpha: 0.2),
-                           borderRadius: BorderRadius.circular(16),
+                           borderRadius: BorderRadius.circular(12),
                            border: Border.all(
                              color: appModeProvider.isPriestsMode
                                  ? Colors.blue
                                  : Colors.white.withValues(alpha: 0.5),
-                             width: 2.5,
+                             width: 2.0,
                            ),
                            boxShadow: [
                              BoxShadow(
                                color: appModeProvider.isPriestsMode
-                                   ? Colors.blue.withValues(alpha: 0.3)
+                                   ? Colors.blue.withValues(alpha: 0.2)
                                    : Colors.transparent,
-                               blurRadius: 15.0,
-                               offset: const Offset(0.0, 5.0),
+                               blurRadius: 8.0,
+                               offset: const Offset(0.0, 3.0),
                              ),
                            ],
                          ),
@@ -195,15 +195,15 @@ class ModeSelectorWidget extends StatelessWidget {
                                 fontFamily: 'Cairo',
                                 shadows: appModeProvider.isPriestsMode ? [
                                   Shadow(
-                                    color: Colors.blue.withValues(alpha: 0.3),
-                                    blurRadius: 2.0,
+                                    color: Colors.blue.withValues(alpha: 0.2),
+                                    blurRadius: 1.0,
                                     offset: const Offset(0.0, 1.0),
                                   ),
                                 ] : null,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: 6),
+                            const SizedBox(height: 4),
                             Text(
                               'إدارة وترتيب الكهنة',
                               style: TextStyle(

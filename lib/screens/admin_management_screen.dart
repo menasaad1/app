@@ -26,7 +26,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F5F9),
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
         title: const Text(
           'إدارة المدراء',
@@ -262,23 +262,23 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
             colors: [
-              Colors.white,
-              AppColors.cardAdmin.withValues(alpha: 0.03),
+              AppColors.backgroundCard,
               AppColors.cardAdmin.withValues(alpha: 0.01),
+              AppColors.cardAdmin.withValues(alpha: 0.005),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.cardAdmin.withValues(alpha: 0.08),
-              blurRadius: 12.0,
-              offset: const Offset(0.0, 4.0),
-            ),
-            BoxShadow(
               color: AppColors.cardAdmin.withValues(alpha: 0.03),
               blurRadius: 6.0,
               offset: const Offset(0.0, 1.0),
+            ),
+            BoxShadow(
+              color: AppColors.cardAdmin.withValues(alpha: 0.01),
+              blurRadius: 3.0,
+              offset: const Offset(0.0, 0.5),
             ),
           ],
         ),

@@ -51,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F5F9),
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
         title: Row(
           children: [
@@ -425,13 +425,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: bishopsProvider.bishops.length,
-                itemBuilder: (context, index) {
-                  final bishop = bishopsProvider.bishops[index];
-                  return BishopCard(
-                    bishop: bishop,
-                    index: index,
-                  );
-                },
+                  itemBuilder: (context, index) {
+                    final bishop = bishopsProvider.bishops[index];
+                    return BishopCard(
+                      bishop: bishop,
+                      index: index,
+                    );
+                  },
               ),
             ),
           ],
@@ -597,13 +597,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: priestsProvider.priests.length,
-                itemBuilder: (context, index) {
-                  final priest = priestsProvider.priests[index];
-                  return PriestCard(
-                    priest: priest,
-                    index: index,
-                  );
-                },
+                  itemBuilder: (context, index) {
+                    final priest = priestsProvider.priests[index];
+                    return PriestCard(
+                      priest: priest,
+                      index: index,
+                    );
+                  },
               ),
             ),
           ],

@@ -22,34 +22,34 @@ class BishopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      elevation: 6,
+      margin: const EdgeInsets.only(bottom: 8),
+      elevation: 4,
       shadowColor: AppColors.cardBishop.withValues(alpha: 0.2),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
-              Colors.white,
-              AppColors.cardBishop.withValues(alpha: 0.03),
+              AppColors.backgroundCard,
               AppColors.cardBishop.withValues(alpha: 0.01),
+              AppColors.cardBishop.withValues(alpha: 0.005),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
             boxShadow: [
               BoxShadow(
-                color: AppColors.cardBishop.withValues(alpha: 0.08),
-                blurRadius: 12.0,
-                offset: const Offset(0.0, 4.0),
-              ),
-              BoxShadow(
                 color: AppColors.cardBishop.withValues(alpha: 0.03),
                 blurRadius: 6.0,
                 offset: const Offset(0.0, 1.0),
+              ),
+              BoxShadow(
+                color: AppColors.cardBishop.withValues(alpha: 0.01),
+                blurRadius: 3.0,
+                offset: const Offset(0.0, 0.5),
               ),
             ],
         ),
@@ -62,11 +62,11 @@ class BishopCard extends StatelessWidget {
                 children: [
                   if (index != null) ...[
                     Container(
-                      width: 30,
-                      height: 30,
+                      width: 24,
+                      height: 24,
                       decoration: BoxDecoration(
                         color: AppColors.cardBishop,
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
                             color: AppColors.cardBishop.withValues(alpha: 0.3),
@@ -80,40 +80,40 @@ class BishopCard extends StatelessWidget {
                           '${index! + 1}',
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Cairo',
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 8),
                   ],
                   Container(
-                    width: 50,
-                    height: 50,
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: AppColors.getCardGradient('bishop'),
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.cardBishop.withValues(alpha: 0.3),
-                          blurRadius: 10.0,
-                          offset: const Offset(0.0, 4.0),
+                          color: AppColors.cardBishop.withValues(alpha: 0.2),
+                          blurRadius: 6.0,
+                          offset: const Offset(0.0, 2.0),
                         ),
                       ],
                     ),
                     child: const Icon(
                       Icons.church,
                       color: Colors.white,
-                      size: 24,
+                      size: 20,
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,19 +121,19 @@ class BishopCard extends StatelessWidget {
                         Text(
                           bishop.name,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: AppColors.cardBishop,
                             fontFamily: 'Cairo',
                           ),
                         ),
                         if (bishop.diocese != null) ...[
-                          const SizedBox(height: 4),
+                          const SizedBox(height: 2),
                           Text(
                             bishop.diocese!,
                             style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[800],
+                              fontSize: 12,
+                              color: AppColors.textSecondary,
                               fontFamily: 'Cairo',
                             ),
                           ),
@@ -176,28 +176,28 @@ class BishopCard extends StatelessWidget {
                   ],
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.cardBishop.withValues(alpha: 0.05),
-                      AppColors.cardBishop.withValues(alpha: 0.02),
+                      AppColors.cardBishop.withValues(alpha: 0.03),
+                      AppColors.cardBishop.withValues(alpha: 0.01),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: AppColors.cardBishop.withValues(alpha: 0.1),
+                    color: AppColors.cardBishop.withValues(alpha: 0.05),
                     width: 1.0,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.cardBishop.withValues(alpha: 0.05),
-                      blurRadius: 4.0,
-                      offset: const Offset(0.0, 1.0),
+                      color: AppColors.cardBishop.withValues(alpha: 0.02),
+                      blurRadius: 1.0,
+                      offset: const Offset(0.0, 0.5),
                     ),
                   ],
                 ),
@@ -206,30 +206,32 @@ class BishopCard extends StatelessWidget {
                     Icon(
                       Icons.calendar_today,
                       color: AppColors.cardBishop,
-                      size: 20,
+                      size: 16,
                     ),
-                    const SizedBox(width: 8),
-                    Text(
-                      'تاريخ الرسامة: ${DateFormat('yyyy/MM/dd', 'ar').format(bishop.ordinationDate)}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.cardBishop,
-                        fontFamily: 'Cairo',
-                        fontWeight: FontWeight.w500,
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        'تاريخ الرسامة: ${DateFormat('yyyy/MM/dd', 'ar').format(bishop.ordinationDate)}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.cardBishop,
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
               if (bishop.notes != null && bishop.notes!.isNotEmpty) ...[
-                const SizedBox(height: 12),
+                const SizedBox(height: 6),
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.grey[300]!),
+                    color: AppColors.backgroundCard,
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: AppColors.borderLight),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,18 +239,18 @@ class BishopCard extends StatelessWidget {
                       Text(
                         'ملاحظات:',
                         style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[800],
+                          fontSize: 10,
+                          color: AppColors.textSecondary,
                           fontFamily: 'Cairo',
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 2),
                       Text(
                         bishop.notes!,
                         style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[900],
+                          fontSize: 12,
+                          color: AppColors.textPrimary,
                           fontFamily: 'Cairo',
                         ),
                       ),
