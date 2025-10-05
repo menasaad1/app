@@ -12,20 +12,30 @@ class ModeSelectorWidget extends StatelessWidget {
     return Consumer<AppModeProvider>(
       builder: (context, appModeProvider, child) {
         return Container(
-          margin: const EdgeInsets.all(12),
-          padding: const EdgeInsets.all(12),
+          margin: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.deepPurple[400]!, Colors.blue[400]!],
+              colors: [
+                Colors.deepPurple[400]!,
+                Colors.purple[400]!,
+                Colors.blue[400]!,
+                Colors.cyan[400]!,
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(25),
             boxShadow: [
               BoxShadow(
-                color: Colors.deepPurple.withValues(alpha: 0.3),
-                blurRadius: 10,
-                offset: const Offset(0, 5),
+                color: Colors.deepPurple.withValues(alpha: 0.4),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+              BoxShadow(
+                color: Colors.blue.withValues(alpha: 0.2),
+                blurRadius: 15,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -34,14 +44,21 @@ class ModeSelectorWidget extends StatelessWidget {
               const Text(
                 'اختر وضع التطبيق',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   fontFamily: 'Cairo',
+                  shadows: [
+                    Shadow(
+                      color: Colors.black26,
+                      blurRadius: 3,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
               Row(
                 children: [
                    // Bishops Mode
@@ -54,47 +71,63 @@ class ModeSelectorWidget extends StatelessWidget {
                            Provider.of<BishopsProvider>(context, listen: false).fetchBishops();
                          }
                        },
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: appModeProvider.isBishopsMode
-                              ? Colors.white
-                              : Colors.white.withValues(alpha: 0.2),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: appModeProvider.isBishopsMode
-                                ? Colors.deepPurple
-                                : Colors.white.withValues(alpha: 0.5),
-                            width: 2,
-                          ),
-                        ),
+                       child: Container(
+                         padding: const EdgeInsets.all(16),
+                         decoration: BoxDecoration(
+                           color: appModeProvider.isBishopsMode
+                               ? Colors.white
+                               : Colors.white.withValues(alpha: 0.2),
+                           borderRadius: BorderRadius.circular(20),
+                           border: Border.all(
+                             color: appModeProvider.isBishopsMode
+                                 ? Colors.deepPurple
+                                 : Colors.white.withValues(alpha: 0.5),
+                             width: 2.5,
+                           ),
+                           boxShadow: [
+                             BoxShadow(
+                               color: appModeProvider.isBishopsMode
+                                   ? Colors.deepPurple.withValues(alpha: 0.3)
+                                   : Colors.transparent,
+                               blurRadius: 15,
+                               offset: const Offset(0, 5),
+                             ),
+                           ],
+                         ),
                         child: Column(
                           children: [
                             Icon(
                               Icons.church,
-                              size: 32,
+                              size: 36,
                               color: appModeProvider.isBishopsMode
                                   ? Colors.deepPurple
                                   : Colors.white,
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 10),
                             Text(
                               'الآباء الأساقفة',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: appModeProvider.isBishopsMode
                                     ? Colors.deepPurple
                                     : Colors.white,
                                 fontFamily: 'Cairo',
+                                shadows: appModeProvider.isBishopsMode ? [
+                                  Shadow(
+                                    color: Colors.deepPurple.withValues(alpha: 0.3),
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ] : null,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: 6),
                             Text(
                               'إدارة وترتيب الأساقفة',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 13,
                                 color: appModeProvider.isBishopsMode
                                     ? Colors.deepPurple[600]
                                     : Colors.white70,
@@ -118,47 +151,63 @@ class ModeSelectorWidget extends StatelessWidget {
                            Provider.of<PriestsProvider>(context, listen: false).fetchPriests();
                          }
                        },
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: appModeProvider.isPriestsMode
-                              ? Colors.white
-                              : Colors.white.withValues(alpha: 0.2),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: appModeProvider.isPriestsMode
-                                ? Colors.blue
-                                : Colors.white.withValues(alpha: 0.5),
-                            width: 2,
-                          ),
-                        ),
+                       child: Container(
+                         padding: const EdgeInsets.all(16),
+                         decoration: BoxDecoration(
+                           color: appModeProvider.isPriestsMode
+                               ? Colors.white
+                               : Colors.white.withValues(alpha: 0.2),
+                           borderRadius: BorderRadius.circular(20),
+                           border: Border.all(
+                             color: appModeProvider.isPriestsMode
+                                 ? Colors.blue
+                                 : Colors.white.withValues(alpha: 0.5),
+                             width: 2.5,
+                           ),
+                           boxShadow: [
+                             BoxShadow(
+                               color: appModeProvider.isPriestsMode
+                                   ? Colors.blue.withValues(alpha: 0.3)
+                                   : Colors.transparent,
+                               blurRadius: 15,
+                               offset: const Offset(0, 5),
+                             ),
+                           ],
+                         ),
                         child: Column(
                           children: [
                             Icon(
                               Icons.person,
-                              size: 32,
+                              size: 36,
                               color: appModeProvider.isPriestsMode
                                   ? Colors.blue
                                   : Colors.white,
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 10),
                             Text(
                               'الآباء الكهنة',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: appModeProvider.isPriestsMode
                                     ? Colors.blue
                                     : Colors.white,
                                 fontFamily: 'Cairo',
+                                shadows: appModeProvider.isPriestsMode ? [
+                                  Shadow(
+                                    color: Colors.blue.withValues(alpha: 0.3),
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ] : null,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: 6),
                             Text(
                               'إدارة وترتيب الكهنة',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 13,
                                 color: appModeProvider.isPriestsMode
                                     ? Colors.blue[600]
                                     : Colors.white70,

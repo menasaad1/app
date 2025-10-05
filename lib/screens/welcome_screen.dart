@@ -51,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Row(
           children: [
@@ -247,79 +247,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           const SizedBox(width: 8),
         ],
       ),
-      body: Column(
-        children: [
-          // Welcome Banner
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            margin: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.deepPurple[400]!, Colors.deepPurple[600]!],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.deepPurple.withValues(alpha: 0.3),
-                  blurRadius: 10,
-                  offset: const Offset(0, 5),
-                ),
-              ],
-            ),
-            child: Consumer<AppModeProvider>(
-              builder: (context, appModeProvider, child) {
-                return Column(
-                  children: [
-                    Icon(
-                      appModeProvider.modeIcon,
-                      size: 36,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      appModeProvider.modeTitle,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: 'Cairo',
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      appModeProvider.modeDescription,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                        fontFamily: 'Cairo',
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-          // Mode Selector
-          const ModeSelectorWidget(),
-          // Data List
-          Expanded(
-            child: Consumer<AppModeProvider>(
-              builder: (context, appModeProvider, child) {
-                if (appModeProvider.isBishopsMode) {
-                  return _buildBishopsList();
-                } else {
-                  return _buildPriestsList();
-                }
-              },
-            ),
-          ),
-        ],
-      ),
+       body: Column(
+         children: [
+           // Mode Selector
+           const ModeSelectorWidget(),
+           // Data List
+           Expanded(
+             child: Consumer<AppModeProvider>(
+               builder: (context, appModeProvider, child) {
+                 if (appModeProvider.isBishopsMode) {
+                   return _buildBishopsList();
+                 } else {
+                   return _buildPriestsList();
+                 }
+               },
+             ),
+           ),
+         ],
+       ),
     );
   }
 
@@ -410,16 +355,33 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
         return Column(
           children: [
-            // Sort Info
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.deepPurple[50],
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.deepPurple[200]!),
-              ),
+             // Sort Info
+             Container(
+               width: double.infinity,
+               padding: const EdgeInsets.all(20),
+               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+               decoration: BoxDecoration(
+                 gradient: LinearGradient(
+                   colors: [
+                     Colors.deepPurple[50]!,
+                     Colors.purple[50]!,
+                   ],
+                   begin: Alignment.topLeft,
+                   end: Alignment.bottomRight,
+                 ),
+                 borderRadius: BorderRadius.circular(20),
+                 border: Border.all(
+                   color: Colors.deepPurple[200]!,
+                   width: 1.5,
+                 ),
+                 boxShadow: [
+                   BoxShadow(
+                     color: Colors.deepPurple.withValues(alpha: 0.1),
+                     blurRadius: 10,
+                     offset: const Offset(0, 4),
+                   ),
+                 ],
+               ),
               child: Row(
                 children: [
                   Icon(
@@ -562,16 +524,33 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
         return Column(
           children: [
-            // Sort Info
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.blue[200]!),
-              ),
+             // Sort Info
+             Container(
+               width: double.infinity,
+               padding: const EdgeInsets.all(20),
+               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+               decoration: BoxDecoration(
+                 gradient: LinearGradient(
+                   colors: [
+                     Colors.blue[50]!,
+                     Colors.cyan[50]!,
+                   ],
+                   begin: Alignment.topLeft,
+                   end: Alignment.bottomRight,
+                 ),
+                 borderRadius: BorderRadius.circular(20),
+                 border: Border.all(
+                   color: Colors.blue[200]!,
+                   width: 1.5,
+                 ),
+                 boxShadow: [
+                   BoxShadow(
+                     color: Colors.blue.withValues(alpha: 0.1),
+                     blurRadius: 10,
+                     offset: const Offset(0, 4),
+                   ),
+                 ],
+               ),
               child: Row(
                 children: [
                   Icon(
