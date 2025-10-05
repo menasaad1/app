@@ -8,6 +8,7 @@ class PriestCard extends StatelessWidget {
   final bool isAdmin;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
+  final int? index;
 
   const PriestCard({
     super.key,
@@ -15,59 +16,89 @@ class PriestCard extends StatelessWidget {
     this.isAdmin = false,
     this.onEdit,
     this.onDelete,
+    this.index,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      elevation: 8,
-      shadowColor: AppColors.cardPriest.withValues(alpha: 0.3),
+      margin: const EdgeInsets.only(bottom: 12),
+      elevation: 6,
+      shadowColor: AppColors.cardPriest.withValues(alpha: 0.2),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
             colors: [
               Colors.white,
-              AppColors.cardPriest.withValues(alpha: 0.05),
-              AppColors.cardPriest.withValues(alpha: 0.02),
+              AppColors.cardPriest.withValues(alpha: 0.03),
+              AppColors.cardPriest.withValues(alpha: 0.01),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
             boxShadow: [
               BoxShadow(
-                color: AppColors.cardPriest.withValues(alpha: 0.15),
-                blurRadius: 20.0,
-                offset: const Offset(0.0, 8.0),
+                color: AppColors.cardPriest.withValues(alpha: 0.08),
+                blurRadius: 12.0,
+                offset: const Offset(0.0, 4.0),
               ),
               BoxShadow(
-                color: AppColors.cardPriest.withValues(alpha: 0.05),
-                blurRadius: 8.0,
-                offset: const Offset(0.0, 2.0),
+                color: AppColors.cardPriest.withValues(alpha: 0.03),
+                blurRadius: 6.0,
+                offset: const Offset(0.0, 1.0),
               ),
             ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
+                  if (index != null) ...[
+                    Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: AppColors.cardPriest,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.cardPriest.withValues(alpha: 0.3),
+                            blurRadius: 4.0,
+                            offset: const Offset(0.0, 2.0),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${index! + 1}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Cairo',
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                  ],
                   Container(
-                    width: 60,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: AppColors.getCardGradient('priest'),
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(25),
                       boxShadow: [
                         BoxShadow(
                           color: AppColors.cardPriest.withValues(alpha: 0.3),
@@ -79,7 +110,7 @@ class PriestCard extends StatelessWidget {
                     child: const Icon(
                       Icons.person,
                       color: Colors.white,
-                      size: 28,
+                      size: 24,
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -105,17 +136,10 @@ class PriestCard extends StatelessWidget {
                               child: Text(
                                 priest.name,
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 color: AppColors.cardPriest,
                                 fontFamily: 'Cairo',
-                                shadows: [
-                                  Shadow(
-                                    color: Colors.white.withValues(alpha: 0.8),
-                                    blurRadius: 1.0,
-                                    offset: const Offset(0.0, 1.0),
-                                  ),
-                                ],
                                 ),
                               ),
                             ),
@@ -176,22 +200,22 @@ class PriestCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.cardPriest.withValues(alpha: 0.1),
                       AppColors.cardPriest.withValues(alpha: 0.05),
+                      AppColors.cardPriest.withValues(alpha: 0.02),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: AppColors.cardPriest.withValues(alpha: 0.2),
+                    color: AppColors.cardPriest.withValues(alpha: 0.1),
                     width: 1.0,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.cardPriest.withValues(alpha: 0.1),
-                      blurRadius: 6.0,
-                      offset: const Offset(0.0, 2.0),
+                      color: AppColors.cardPriest.withValues(alpha: 0.05),
+                      blurRadius: 4.0,
+                      offset: const Offset(0.0, 1.0),
                     ),
                   ],
                 ),

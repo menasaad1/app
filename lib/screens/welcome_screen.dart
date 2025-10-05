@@ -51,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: const Color(0xFFF1F5F9),
       appBar: AppBar(
         title: Row(
           children: [
@@ -427,7 +427,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 itemCount: bishopsProvider.bishops.length,
                 itemBuilder: (context, index) {
                   final bishop = bishopsProvider.bishops[index];
-                  return BishopCard(bishop: bishop);
+                  return BishopCard(
+                    bishop: bishop,
+                    index: index,
+                  );
                 },
               ),
             ),
@@ -596,7 +599,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 itemCount: priestsProvider.priests.length,
                 itemBuilder: (context, index) {
                   final priest = priestsProvider.priests[index];
-                  return PriestCard(priest: priest);
+                  return PriestCard(
+                    priest: priest,
+                    index: index,
+                  );
                 },
               ),
             ),

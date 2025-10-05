@@ -12,30 +12,30 @@ class ModeSelectorWidget extends StatelessWidget {
     return Consumer<AppModeProvider>(
       builder: (context, appModeProvider, child) {
         return Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                const Color(0xFF7C3AED),
+                const Color(0xFFA78BFA),
                 const Color(0xFF8B5CF6),
-                const Color(0xFF3B82F6),
-                const Color(0xFF06B6D4),
+                const Color(0xFF60A5FA),
+                const Color(0xFF22D3EE),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.deepPurple.withValues(alpha: 0.4),
-                blurRadius: 20.0,
-                offset: const Offset(0.0, 8.0),
+                color: const Color(0xFF8B5CF6).withValues(alpha: 0.2),
+                blurRadius: 15.0,
+                offset: const Offset(0.0, 6.0),
               ),
               BoxShadow(
-                color: Colors.blue.withValues(alpha: 0.2),
-                blurRadius: 15.0,
-                offset: const Offset(0.0, 4.0),
+                color: const Color(0xFF3B82F6).withValues(alpha: 0.1),
+                blurRadius: 10.0,
+                offset: const Offset(0.0, 3.0),
               ),
             ],
           ),
@@ -44,21 +44,21 @@ class ModeSelectorWidget extends StatelessWidget {
               const Text(
                 'اختر وضع التطبيق',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   fontFamily: 'Cairo',
                   shadows: [
                     Shadow(
                       color: Colors.black26,
-                      blurRadius: 3.0,
-                      offset: Offset(0.0, 2.0),
+                      blurRadius: 2.0,
+                      offset: Offset(0.0, 1.0),
                     ),
                   ],
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               Row(
                 children: [
                    // Bishops Mode
@@ -72,12 +72,12 @@ class ModeSelectorWidget extends StatelessWidget {
                          }
                        },
                        child: Container(
-                         padding: const EdgeInsets.all(16),
+                         padding: const EdgeInsets.all(12),
                          decoration: BoxDecoration(
                            color: appModeProvider.isBishopsMode
                                ? Colors.white
                                : Colors.white.withValues(alpha: 0.2),
-                           borderRadius: BorderRadius.circular(20),
+                           borderRadius: BorderRadius.circular(16),
                            border: Border.all(
                              color: appModeProvider.isBishopsMode
                                  ? Colors.deepPurple
@@ -98,16 +98,16 @@ class ModeSelectorWidget extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.church,
-                              size: 36,
+                              size: 28,
                               color: appModeProvider.isBishopsMode
                                   ? Colors.deepPurple
                                   : Colors.white,
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 8),
                             Text(
                               'الآباء الأساقفة',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: appModeProvider.isBishopsMode
                                     ? Colors.deepPurple
@@ -127,7 +127,7 @@ class ModeSelectorWidget extends StatelessWidget {
                             Text(
                               'إدارة وترتيب الأساقفة',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 12,
                                 color: appModeProvider.isBishopsMode
                                     ? Colors.deepPurple[600]
                                     : Colors.white70,
@@ -152,12 +152,12 @@ class ModeSelectorWidget extends StatelessWidget {
                          }
                        },
                        child: Container(
-                         padding: const EdgeInsets.all(16),
+                         padding: const EdgeInsets.all(12),
                          decoration: BoxDecoration(
                            color: appModeProvider.isPriestsMode
                                ? Colors.white
                                : Colors.white.withValues(alpha: 0.2),
-                           borderRadius: BorderRadius.circular(20),
+                           borderRadius: BorderRadius.circular(16),
                            border: Border.all(
                              color: appModeProvider.isPriestsMode
                                  ? Colors.blue
@@ -178,16 +178,16 @@ class ModeSelectorWidget extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.person,
-                              size: 36,
+                              size: 28,
                               color: appModeProvider.isPriestsMode
                                   ? Colors.blue
                                   : Colors.white,
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 8),
                             Text(
                               'الآباء الكهنة',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: appModeProvider.isPriestsMode
                                     ? Colors.blue
@@ -207,7 +207,7 @@ class ModeSelectorWidget extends StatelessWidget {
                             Text(
                               'إدارة وترتيب الكهنة',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 12,
                                 color: appModeProvider.isPriestsMode
                                     ? Colors.blue[600]
                                     : Colors.white70,

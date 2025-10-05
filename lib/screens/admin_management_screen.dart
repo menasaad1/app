@@ -26,7 +26,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: const Color(0xFFF1F5F9),
       appBar: AppBar(
         title: const Text(
           'إدارة المدراء',
@@ -263,22 +263,22 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
           gradient: LinearGradient(
             colors: [
               Colors.white,
-              AppColors.cardAdmin.withValues(alpha: 0.05),
-              AppColors.cardAdmin.withValues(alpha: 0.02),
+              AppColors.cardAdmin.withValues(alpha: 0.03),
+              AppColors.cardAdmin.withValues(alpha: 0.01),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.cardAdmin.withValues(alpha: 0.15),
-              blurRadius: 20.0,
-              offset: const Offset(0.0, 8.0),
+              color: AppColors.cardAdmin.withValues(alpha: 0.08),
+              blurRadius: 12.0,
+              offset: const Offset(0.0, 4.0),
             ),
             BoxShadow(
-              color: AppColors.cardAdmin.withValues(alpha: 0.05),
-              blurRadius: 8.0,
-              offset: const Offset(0.0, 2.0),
+              color: AppColors.cardAdmin.withValues(alpha: 0.03),
+              blurRadius: 6.0,
+              offset: const Offset(0.0, 1.0),
             ),
           ],
         ),
@@ -329,13 +329,6 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                             fontWeight: FontWeight.bold,
                             color: AppColors.cardAdmin,
                             fontFamily: 'Cairo',
-                            shadows: [
-                              Shadow(
-                                color: Colors.white.withValues(alpha: 0.8),
-                                blurRadius: 1.0,
-                                offset: const Offset(0.0, 1.0),
-                              ),
-                            ],
                           ),
                         ),
                         const SizedBox(height: 4),
