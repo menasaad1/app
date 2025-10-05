@@ -31,3 +31,12 @@ flutter:
   assets:
     - assets/images/
 
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: fonts/Cairo-Regular.ttf
+        - asset: fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: fonts/Cairo-Light.ttf
+          weight: 300
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/web_utils.dart';
+import '../utils/font_utils.dart';
 
 /// A safe wrapper widget that prevents Flutter Web rendering issues
 class SafeWidget extends StatelessWidget {
@@ -105,16 +106,19 @@ class SafeText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final safeStyle = style != null
-        ? style!.copyWith(
-            fontSize: style!.fontSize?.safeFontSize ?? 14.0,
-          )
-        : const TextStyle(fontSize: 14.0);
+    // Use Arabic-optimized style if no style provided
+    final baseStyle = style ?? FontUtils.getArabicBodyStyle();
+    
+    final safeStyle = baseStyle.copyWith(
+      fontSize: (baseStyle.fontSize ?? 14.0).safeFontSize,
+      fontFamily: baseStyle.fontFamily ?? FontUtils.defaultArabicFont,
+    );
 
     return Text(
       text,
       style: safeStyle,
-      textAlign: textAlign,
+      textAlign: textAlign ?? (FontUtils.containsArabic(text) ? TextAlign.right : TextAlign.left),
+      textDirection: FontUtils.getTextDirection(text),
       maxLines: maxLines,
       overflow: overflow ?? TextOverflow.ellipsis,
     );

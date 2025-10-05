@@ -28,9 +28,18 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      final QuerySnapshot snapshot = await _firestore
-          .collection(AppConstants.bishopsCollection)
-          .get();
+      // Try cache first for better performance
+      QuerySnapshot snapshot;
+      try {
+        snapshot = await _firestore
+            .collection(AppConstants.bishopsCollection)
+            .get(const GetOptions(source: Source.cache));
+      } catch (e) {
+        // Fallback to network if cache fails
+        snapshot = await _firestore
+            .collection(AppConstants.bishopsCollection)
+            .get();
+      }
 
       _allBishops = snapshot.docs
           .map((doc) {

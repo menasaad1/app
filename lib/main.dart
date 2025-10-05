@@ -65,9 +65,15 @@ class BishopsApp extends StatelessWidget {
           Locale('en', 'US'),
         ],
         locale: const Locale('ar', 'SA'),
-        theme: AppTheme.lightTheme,
+        theme: AppTheme.lightTheme.copyWith(
+          textTheme: AppTheme.lightTheme.textTheme.apply(
+            fontFamily: 'Cairo',
+            bodyColor: Colors.black87,
+            displayColor: Colors.black87,
+          ),
+        ),
         darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.light,
         home: const SplashScreen(),
         routes: {
           '/login': (context) => const LoginScreen(),
