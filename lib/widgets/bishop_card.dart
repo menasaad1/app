@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/bishop.dart';
+import '../utils/app_colors.dart';
 
 class BishopCard extends StatelessWidget {
   final Bishop bishop;
@@ -21,7 +22,7 @@ class BishopCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 8,
-      shadowColor: Colors.deepPurple.withValues(alpha: 0.3),
+      shadowColor: AppColors.cardBishop.withValues(alpha: 0.3),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -30,16 +31,16 @@ class BishopCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
             colors: [
-              Colors.white,
-              Colors.deepPurple.withValues(alpha: 0.08),
-              Colors.purple.withValues(alpha: 0.05),
+              AppColors.backgroundCard,
+              AppColors.cardBishop.withValues(alpha: 0.08),
+              AppColors.primaryPurple.withValues(alpha: 0.05),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.deepPurple.withValues(alpha: 0.1),
+              color: AppColors.cardBishop.withValues(alpha: 0.1),
               blurRadius: 15,
               offset: const Offset(0, 5),
             ),
@@ -57,14 +58,14 @@ class BishopCard extends StatelessWidget {
                     height: 60,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Colors.deepPurple[400]!, Colors.deepPurple[600]!],
+                        colors: AppColors.getCardGradient('bishop'),
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.deepPurple.withValues(alpha: 0.3),
+                          color: AppColors.cardBishop.withValues(alpha: 0.3),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -86,11 +87,11 @@ class BishopCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple[800],
+                            color: AppColors.textPrimary,
                             fontFamily: 'Cairo',
                             shadows: [
                               Shadow(
-                                color: Colors.deepPurple.withValues(alpha: 0.3),
+                                color: AppColors.cardBishop.withValues(alpha: 0.3),
                                 blurRadius: 2,
                                 offset: const Offset(0, 1),
                               ),
@@ -152,20 +153,20 @@ class BishopCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.deepPurple[50]!,
-                      Colors.purple[50]!,
+                      AppColors.cardBishop.withValues(alpha: 0.1),
+                      AppColors.primaryPurple.withValues(alpha: 0.05),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: Colors.deepPurple[200]!,
+                    color: AppColors.cardBishop.withValues(alpha: 0.3),
                     width: 1.5,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.deepPurple.withValues(alpha: 0.1),
+                      color: AppColors.cardBishop.withValues(alpha: 0.1),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -175,7 +176,7 @@ class BishopCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.calendar_today,
-                      color: Colors.deepPurple[700],
+                      color: AppColors.cardBishop,
                       size: 20,
                     ),
                     const SizedBox(width: 8),
@@ -183,7 +184,7 @@ class BishopCard extends StatelessWidget {
                       'تاريخ الرسامة: ${DateFormat('yyyy/MM/dd', 'ar').format(bishop.ordinationDate)}',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.deepPurple[700],
+                        color: AppColors.cardBishop,
                         fontFamily: 'Cairo',
                         fontWeight: FontWeight.w500,
                       ),

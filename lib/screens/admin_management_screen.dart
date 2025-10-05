@@ -4,6 +4,7 @@ import '../providers/auth_provider.dart';
 import '../providers/admin_provider.dart';
 import '../models/admin.dart';
 import '../widgets/add_admin_dialog.dart';
+import '../utils/app_colors.dart';
 
 class AdminManagementScreen extends StatefulWidget {
   const AdminManagementScreen({super.key});
@@ -24,7 +25,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: AppColors.backgroundLight,
       appBar: AppBar(
         title: const Text(
           'إدارة المدراء',
@@ -33,13 +34,13 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: AppColors.cardAdmin,
         foregroundColor: Colors.white,
         elevation: 0,
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showAddAdminDialog(),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: AppColors.cardAdmin,
         foregroundColor: Colors.white,
         icon: const Icon(Icons.person_add),
         label: const Text(
@@ -220,7 +221,7 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                                 style: TextStyle(fontFamily: 'Cairo'),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.deepPurple,
+                                backgroundColor: AppColors.cardAdmin,
                                 foregroundColor: Colors.white,
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 24,
@@ -249,22 +250,31 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
 
   Widget _buildAdminCard(Admin admin) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      elevation: 2,
+      margin: const EdgeInsets.only(bottom: 16),
+      elevation: 8,
+      shadowColor: AppColors.cardAdmin.withValues(alpha: 0.3),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
             colors: [
-              Colors.white,
-              Colors.deepPurple.withValues(alpha: 0.05),
+              AppColors.backgroundCard,
+              AppColors.cardAdmin.withValues(alpha: 0.08),
+              AppColors.primaryPurple.withValues(alpha: 0.05),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.cardAdmin.withValues(alpha: 0.1),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+          ],
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -274,16 +284,31 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
               Row(
                 children: [
                   Container(
-                    width: 50,
-                    height: 50,
+                    width: 60,
+                    height: 60,
                     decoration: BoxDecoration(
-                      color: admin.isActive ? Colors.deepPurple : Colors.grey,
-                      borderRadius: BorderRadius.circular(25),
+                      gradient: LinearGradient(
+                        colors: admin.isActive 
+                            ? AppColors.getCardGradient('admin')
+                            : [AppColors.textLight, AppColors.textSecondary],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: admin.isActive 
+                              ? AppColors.cardAdmin.withValues(alpha: 0.3)
+                              : AppColors.textLight.withValues(alpha: 0.3),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
                     child: Icon(
                       admin.isActive ? Icons.admin_panel_settings : Icons.person_off,
                       color: Colors.white,
-                      size: 24,
+                      size: 28,
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -293,11 +318,18 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
                       children: [
                         Text(
                           admin.name,
-                          style: const TextStyle(
-                            fontSize: 18,
+                          style: TextStyle(
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple,
+                            color: AppColors.textPrimary,
                             fontFamily: 'Cairo',
+                            shadows: [
+                              Shadow(
+                                color: AppColors.cardAdmin.withValues(alpha: 0.3),
+                                blurRadius: 2,
+                                offset: const Offset(0, 1),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -380,16 +412,31 @@ class _AdminManagementScreenState extends State<AdminManagementScreen> {
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: admin.isActive ? Colors.green[100] : Colors.red[100],
-                      borderRadius: BorderRadius.circular(12),
+                      gradient: LinearGradient(
+                        colors: AppColors.getStatusGradient(admin.isActive),
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(
+                        color: AppColors.getStatusColor(admin.isActive).withValues(alpha: 0.3),
+                        width: 1,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.getStatusColor(admin.isActive).withValues(alpha: 0.2),
+                          blurRadius: 5,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
                     child: Text(
                       admin.isActive ? 'نشط' : 'غير نشط',
                       style: TextStyle(
-                        fontSize: 12,
-                        color: admin.isActive ? Colors.green[700] : Colors.red[700],
+                        fontSize: 13,
+                        color: AppColors.getStatusColor(admin.isActive),
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Cairo',
                       ),

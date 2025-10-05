@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/priest.dart';
+import '../utils/app_colors.dart';
 
 class PriestCard extends StatelessWidget {
   final Priest priest;
@@ -21,7 +22,7 @@ class PriestCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 8,
-      shadowColor: Colors.blue.withValues(alpha: 0.3),
+      shadowColor: AppColors.cardPriest.withValues(alpha: 0.3),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -30,16 +31,16 @@ class PriestCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
             colors: [
-              Colors.white,
-              Colors.blue.withValues(alpha: 0.08),
-              Colors.cyan.withValues(alpha: 0.05),
+              AppColors.backgroundCard,
+              AppColors.cardPriest.withValues(alpha: 0.08),
+              AppColors.primaryBlue.withValues(alpha: 0.05),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.blue.withValues(alpha: 0.1),
+              color: AppColors.cardPriest.withValues(alpha: 0.1),
               blurRadius: 15,
               offset: const Offset(0, 5),
             ),
@@ -57,14 +58,14 @@ class PriestCard extends StatelessWidget {
                     height: 60,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Colors.blue[400]!, Colors.blue[600]!],
+                        colors: AppColors.getCardGradient('priest'),
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.blue.withValues(alpha: 0.3),
+                          color: AppColors.cardPriest.withValues(alpha: 0.3),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -98,11 +99,18 @@ class PriestCard extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 priest.name,
-                                style: const TextStyle(
-                                  fontSize: 18,
+                                style: TextStyle(
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
-                                  fontFamily: 'Cairo',
+                                color: AppColors.textPrimary,
+                                fontFamily: 'Cairo',
+                                shadows: [
+                                  Shadow(
+                                    color: AppColors.cardPriest.withValues(alpha: 0.3),
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
                                 ),
                               ),
                             ),
@@ -159,17 +167,34 @@ class PriestCard extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.blue[50],
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.blue[200]!),
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.cardPriest.withValues(alpha: 0.1),
+                      AppColors.primaryBlue.withValues(alpha: 0.05),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: AppColors.cardPriest.withValues(alpha: 0.3),
+                    width: 1.5,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.cardPriest.withValues(alpha: 0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
                 child: Row(
                   children: [
                     Icon(
                       Icons.calendar_today,
-                      color: Colors.blue[700],
+                      color: AppColors.cardPriest,
                       size: 20,
                     ),
                     const SizedBox(width: 8),
@@ -177,7 +202,7 @@ class PriestCard extends StatelessWidget {
                       'تاريخ الرسامة: ${DateFormat('yyyy/MM/dd', 'ar').format(priest.ordinationDate)}',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.blue[700],
+                        color: AppColors.cardPriest,
                         fontFamily: 'Cairo',
                         fontWeight: FontWeight.w500,
                       ),
