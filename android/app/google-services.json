@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1021548695581",
+    "project_id": "bishops-e48c8",
+    "storage_bucket": "bishops-e48c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021548695581:android:576e399bef15dd38d7f6f4",
+        "android_client_info": {
+          "package_name": "com.example.bishops_management_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzuYMg3O0x9bAJvNQZZ8W6BfzzBxYHgJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
