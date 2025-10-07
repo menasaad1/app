@@ -4,6 +4,7 @@ import '../models/priest.dart';
 import '../utils/constants.dart';
 import '../services/sync_service.dart';
 import '../services/offline_service.dart';
+import '../services/realtime_service.dart';
 
 class PriestsProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -139,6 +140,29 @@ class PriestsProvider with ChangeNotifier {
       _ascending = !_ascending;
     }
     fetchPriests();
+    _startRealtimeListener();
+  }
+
+  void _startRealtimeListener() {
+    RealtimeService.startRealtimeUpdates(
+      onPriestsUpdate: (priests) {
+        _allPriests = priests;
+        
+        // Apply current filter if exists
+        if (_isFiltered && _filteredIds.isNotEmpty) {
+          _priests = _allPriests.where((priest) => _filteredIds.contains(priest.id)).toList();
+        } else {
+          _priests = List.from(_allPriests);
+        }
+        
+        _sortPriests();
+        notifyListeners();
+      },
+      onError: (error) {
+        _errorMessage = error;
+        notifyListeners();
+      },
+    );
   }
 
   void clearError() {
@@ -227,5 +251,16 @@ class PriestsProvider with ChangeNotifier {
     } catch (e) {
       return 0;
     }
+  }
+
+  // إيقاف التحديثات المباشرة
+  void stopRealtimeUpdates() {
+    RealtimeService.stopRealtimeUpdates();
+  }
+
+  @override
+  void dispose() {
+    stopRealtimeUpdates();
+    super.dispose();
   }
 }

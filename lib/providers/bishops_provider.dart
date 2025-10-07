@@ -4,6 +4,7 @@ import '../models/bishop.dart';
 import '../utils/constants.dart';
 import '../services/sync_service.dart';
 import '../services/offline_service.dart';
+import '../services/realtime_service.dart';
 
 class BishopsProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -139,6 +140,29 @@ class BishopsProvider with ChangeNotifier {
       _ascending = !_ascending;
     }
     fetchBishops();
+    _startRealtimeListener();
+  }
+
+  void _startRealtimeListener() {
+    RealtimeService.startRealtimeUpdates(
+      onBishopsUpdate: (bishops) {
+        _allBishops = bishops;
+        
+        // Apply current filter if exists
+        if (_isFiltered && _filteredIds.isNotEmpty) {
+          _bishops = _allBishops.where((bishop) => _filteredIds.contains(bishop.id)).toList();
+        } else {
+          _bishops = List.from(_allBishops);
+        }
+        
+        _sortBishops();
+        notifyListeners();
+      },
+      onError: (error) {
+        _errorMessage = error;
+        notifyListeners();
+      },
+    );
   }
 
   void clearError() {
@@ -227,6 +251,17 @@ class BishopsProvider with ChangeNotifier {
     } catch (e) {
       return 0;
     }
+  }
+
+  // إيقاف التحديثات المباشرة
+  void stopRealtimeUpdates() {
+    RealtimeService.stopRealtimeUpdates();
+  }
+
+  @override
+  void dispose() {
+    stopRealtimeUpdates();
+    super.dispose();
   }
 }
 

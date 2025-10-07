@@ -59,6 +59,8 @@ class _AdminScreenState extends State<AdminScreen> {
                 Navigator.pushNamed(context, '/data-management');
               } else if (value == 'sync-management') {
                 Navigator.pushNamed(context, '/sync-management');
+              } else if (value == 'realtime-management') {
+                Navigator.pushNamed(context, '/realtime-management');
               } else if (value == 'logout') {
                 _showLogoutDialog();
               }
@@ -101,6 +103,16 @@ class _AdminScreenState extends State<AdminScreen> {
                     Icon(Icons.sync, color: Colors.orange),
                     SizedBox(width: 8),
                     Text('إدارة المزامنة', style: TextStyle(fontFamily: 'Cairo')),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'realtime-management',
+                child: Row(
+                  children: [
+                    Icon(Icons.update, color: Colors.blue),
+                    SizedBox(width: 8),
+                    Text('التحديثات المباشرة', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),
