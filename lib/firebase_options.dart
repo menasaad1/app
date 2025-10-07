@@ -54,28 +54,28 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQ',
-    appId: '1:123456789012:android:abcdef1234567890abcdef',
-    messagingSenderId: '123456789012',
-    projectId: 'bishops-management-app',
-    storageBucket: 'bishops-management-app.appspot.com',
+    apiKey: 'AIzaSyACuw1WT3Njrbpz1BCRiMy91CaTqmTypKg',
+    appId: '1:1021548695581:android:31668ee852c06bb1d7f6f4',
+    messagingSenderId: '1021548695581',
+    projectId: 'bishops-e48c8',
+    storageBucket: 'bishops-e48c8.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQ',
-    appId: '1:123456789012:ios:abcdef1234567890abcdef',
-    messagingSenderId: '123456789012',
-    projectId: 'bishops-management-app',
-    storageBucket: 'bishops-management-app.appspot.com',
-    iosBundleId: 'com.example.bishopsManagementApp',
+    apiKey: 'AIzaSyACuw1WT3Njrbpz1BCRiMy91CaTqmTypKg',
+    appId: '1:1021548695581:ios:31668ee852c06bb1d7f6f4',
+    messagingSenderId: '1021548695581',
+    projectId: 'bishops-e48c8',
+    storageBucket: 'bishops-e48c8.firebasestorage.app',
+    iosBundleId: 'com.example.bishops_management_app',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQxQ',
-    appId: '1:123456789012:ios:abcdef1234567890abcdef',
-    messagingSenderId: '123456789012',
-    projectId: 'bishops-management-app',
-    storageBucket: 'bishops-management-app.appspot.com',
-    iosBundleId: 'com.example.bishopsManagementApp',
+    apiKey: 'AIzaSyACuw1WT3Njrbpz1BCRiMy91CaTqmTypKg',
+    appId: '1:1021548695581:ios:31668ee852c06bb1d7f6f4',
+    messagingSenderId: '1021548695581',
+    projectId: 'bishops-e48c8',
+    storageBucket: 'bishops-e48c8.firebasestorage.app',
+    iosBundleId: 'com.example.bishops_management_app',
   );
 }

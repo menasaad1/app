@@ -7,20 +7,30 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1021548695581:android:576e399bef15dd38d7f6f4",
+        "mobilesdk_app_id": "1:1021548695581:android:31668ee852c06bb1d7f6f4",
         "android_client_info": {
           "package_name": "com.example.bishops_management_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1021548695581-abcdefghijklmnopqrstuvwxyz123456.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAzuYMg3O0x9bAJvNQZZ8W6BfzzBxYHgJo"
+          "current_key": "AIzaSyACuw1WT3Njrbpz1BCRiMy91CaTqmTypKg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021548695581-abcdefghijklmnopqrstuvwxyz123456.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

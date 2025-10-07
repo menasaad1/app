@@ -37,20 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   void _checkAuthStatus() {
     Future.delayed(const Duration(seconds: 3), () async {
-      final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      final appModeProvider = Provider.of<AppModeProvider>(context, listen: false);
-      
-      // Load the app mode first
-      await appModeProvider.loadMode();
-      
-      if (authProvider.isAuthenticated && authProvider.isAdmin) {
-        // Navigate to appropriate admin screen based on mode
-        if (appModeProvider.isBishopsMode) {
-          Navigator.pushReplacementNamed(context, '/admin');
-        } else {
-          Navigator.pushReplacementNamed(context, '/priests-admin');
-        }
-      } else {
+      if (mounted) {
         Navigator.pushReplacementNamed(context, '/home');
       }
     });
