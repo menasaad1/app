@@ -17,12 +17,13 @@ class FirebaseDataLoader {
       for (int i = 0; i < bishops.length; i++) {
         final bishop = bishops[i];
         await _firestore.collection('bishops').add({
+          'id': bishop.id,
           'name': bishop.name,
           'diocese': bishop.diocese,
           'ordinationDate': Timestamp.fromDate(bishop.ordinationDate),
           'notes': bishop.notes,
-          'createdAt': FieldValue.serverTimestamp(),
-          'updatedAt': FieldValue.serverTimestamp(),
+          'createdAt': Timestamp.fromDate(bishop.createdAt),
+          'updatedAt': Timestamp.fromDate(bishop.updatedAt),
         });
         
         print('تم إضافة الأسقف ${i + 1}/${bishops.length}: ${bishop.name}');
@@ -56,12 +57,13 @@ class FirebaseDataLoader {
   static Future<void> addSingleBishop(Bishop bishop) async {
     try {
       await _firestore.collection('bishops').add({
+        'id': bishop.id,
         'name': bishop.name,
         'diocese': bishop.diocese,
         'ordinationDate': Timestamp.fromDate(bishop.ordinationDate),
         'notes': bishop.notes,
-        'createdAt': FieldValue.serverTimestamp(),
-        'updatedAt': FieldValue.serverTimestamp(),
+        'createdAt': Timestamp.fromDate(bishop.createdAt),
+        'updatedAt': Timestamp.fromDate(bishop.updatedAt),
       });
       print('تم إضافة الأسقف: ${bishop.name}');
     } catch (e) {
