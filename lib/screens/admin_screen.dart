@@ -55,6 +55,8 @@ class _AdminScreenState extends State<AdminScreen> {
                 Navigator.pushReplacementNamed(context, '/home');
               } else if (value == 'admin-management') {
                 Navigator.pushNamed(context, '/admin-management');
+              } else if (value == 'data-management') {
+                Navigator.pushNamed(context, '/data-management');
               } else if (value == 'logout') {
                 _showLogoutDialog();
               }
@@ -77,6 +79,16 @@ class _AdminScreenState extends State<AdminScreen> {
                     Icon(Icons.people, color: Colors.deepPurple),
                     SizedBox(width: 8),
                     Text('إدارة المدراء', style: TextStyle(fontFamily: 'Cairo')),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'data-management',
+                child: Row(
+                  children: [
+                    Icon(Icons.data_usage, color: Colors.green),
+                    SizedBox(width: 8),
+                    Text('إدارة البيانات', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),

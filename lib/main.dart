@@ -15,6 +15,7 @@ import 'screens/welcome_screen.dart';
 import 'screens/admin_screen.dart';
 import 'screens/priests_admin_screen.dart';
 import 'screens/admin_management_screen.dart';
+import 'screens/data_management_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,6 +59,7 @@ class BishopsApp extends StatelessWidget {
           '/admin': (context) => const AdminScreen(),
           '/priests-admin': (context) => const PriestsAdminScreen(),
           '/admin-management': (context) => const AdminManagementScreen(),
+          '/data-management': (context) => const DataManagementScreen(),
         },
       ),
     );
