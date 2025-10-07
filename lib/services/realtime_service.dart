@@ -3,6 +3,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import '../models/bishop.dart';
 import '../models/priest.dart';
 import '../services/offline_service.dart';
+import '../services/local_data_manager.dart';
 import '../utils/constants.dart';
 
 class RealtimeService {
@@ -37,6 +38,9 @@ class RealtimeService {
 
               // حفظ البيانات محلياً
               await OfflineService.saveBishopsLocally(bishops);
+              
+              // حفظ البيانات في الملف المحلي أيضاً
+              await LocalDataManager.saveLocalBishopsData(bishops);
               
               // إشعار التطبيق بالتحديث
               if (onBishopsUpdated != null) {
@@ -82,6 +86,9 @@ class RealtimeService {
 
               // حفظ البيانات محلياً
               await OfflineService.savePriestsLocally(priests);
+              
+              // حفظ البيانات في الملف المحلي أيضاً
+              await LocalDataManager.saveLocalPriestsData(priests);
               
               // إشعار التطبيق بالتحديث
               if (onPriestsUpdated != null) {

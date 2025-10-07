@@ -20,6 +20,7 @@ import 'screens/sync_management_screen.dart';
 import 'screens/bishop_selection_screen.dart';
 import 'screens/priest_selection_screen.dart';
 import 'screens/realtime_management_screen.dart';
+import 'screens/local_data_management_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,6 +69,7 @@ class BishopsApp extends StatelessWidget {
           '/bishop-selection': (context) => const BishopSelectionScreen(),
           '/priest-selection': (context) => const PriestSelectionScreen(),
           '/realtime-management': (context) => const RealtimeManagementScreen(),
+          '/local-data-management': (context) => const LocalDataManagementScreen(),
         },
       ),
     );

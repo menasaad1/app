@@ -3,6 +3,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import '../models/bishop.dart';
 import '../models/priest.dart';
 import '../services/offline_service.dart';
+import '../services/local_data_manager.dart';
 import '../utils/constants.dart';
 
 class SyncService {
@@ -142,6 +143,9 @@ class SyncService {
         localBishops.add(bishop);
         await OfflineService.saveBishopsLocally(localBishops);
         
+        // تحديث الملف المحلي أيضاً
+        await LocalDataManager.addBishopToLocalData(bishop);
+        
         return true;
       } else {
         // حفظ التغيير للاتصال لاحقاً
@@ -153,6 +157,9 @@ class SyncService {
         final localBishops = await OfflineService.loadBishopsLocally();
         localBishops.add(bishop);
         await OfflineService.saveBishopsLocally(localBishops);
+        
+        // تحديث الملف المحلي أيضاً
+        await LocalDataManager.addBishopToLocalData(bishop);
         
         return true;
       }
@@ -182,6 +189,9 @@ class SyncService {
           await OfflineService.saveBishopsLocally(localBishops);
         }
         
+        // تحديث الملف المحلي أيضاً
+        await LocalDataManager.updateBishopInLocalData(bishop);
+        
         return true;
       } else {
         // حفظ التغيير للاتصال لاحقاً
@@ -195,6 +205,9 @@ class SyncService {
           localBishops[index] = bishop;
           await OfflineService.saveBishopsLocally(localBishops);
         }
+        
+        // تحديث الملف المحلي أيضاً
+        await LocalDataManager.updateBishopInLocalData(bishop);
         
         return true;
       }
@@ -219,6 +232,9 @@ class SyncService {
         localBishops.removeWhere((b) => b.id == bishopId);
         await OfflineService.saveBishopsLocally(localBishops);
         
+        // تحديث الملف المحلي أيضاً
+        await LocalDataManager.deleteBishopFromLocalData(bishopId);
+        
         return true;
       } else {
         // حفظ التغيير للاتصال لاحقاً
@@ -228,6 +244,9 @@ class SyncService {
         final localBishops = await OfflineService.loadBishopsLocally();
         localBishops.removeWhere((b) => b.id == bishopId);
         await OfflineService.saveBishopsLocally(localBishops);
+        
+        // تحديث الملف المحلي أيضاً
+        await LocalDataManager.deleteBishopFromLocalData(bishopId);
         
         return true;
       }

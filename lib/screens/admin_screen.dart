@@ -61,6 +61,8 @@ class _AdminScreenState extends State<AdminScreen> {
                 Navigator.pushNamed(context, '/sync-management');
               } else if (value == 'realtime-management') {
                 Navigator.pushNamed(context, '/realtime-management');
+              } else if (value == 'local-data-management') {
+                Navigator.pushNamed(context, '/local-data-management');
               } else if (value == 'logout') {
                 _showLogoutDialog();
               }
@@ -113,6 +115,16 @@ class _AdminScreenState extends State<AdminScreen> {
                     Icon(Icons.update, color: Colors.blue),
                     SizedBox(width: 8),
                     Text('التحديثات المباشرة', style: TextStyle(fontFamily: 'Cairo')),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'local-data-management',
+                child: Row(
+                  children: [
+                    Icon(Icons.storage, color: Colors.green),
+                    SizedBox(width: 8),
+                    Text('البيانات المحلية', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),
