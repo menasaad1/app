@@ -304,7 +304,6 @@ class SyncService {
         }
         
         // تحديث البيانات المحلية
-        final localBishops = await OfflineService.loadBishopsLocally();
         localBishops.removeWhere((b) => b.id == bishopId);
         await OfflineService.saveBishopsLocally(localBishops);
         
