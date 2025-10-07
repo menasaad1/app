@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../models/bishop.dart';
+import '../models/priest.dart';
 import '../services/offline_service.dart';
 import '../utils/constants.dart';
 
@@ -105,6 +106,25 @@ class SyncService {
     } catch (e) {
       print('خطأ في تحميل البيانات: $e');
       return await OfflineService.loadBishopsLocally();
+    }
+  }
+
+  /// تحميل الكهنة (أونلاين أو أوفلاين)
+  static Future<List<Priest>> loadPriests() async {
+    try {
+      if (await isOnline()) {
+        // محاولة المزامنة مع Firebase
+        final syncSuccess = await syncPriestsWithFirebase();
+        if (syncSuccess) {
+          return await OfflineService.loadPriestsLocally();
+        }
+      }
+      
+      // تحميل البيانات المحلية
+      return await OfflineService.loadPriestsLocally();
+    } catch (e) {
+      print('خطأ في تحميل الكهنة: $e');
+      return await OfflineService.loadPriestsLocally();
     }
   }
 
@@ -213,6 +233,151 @@ class SyncService {
       }
     } catch (e) {
       print('خطأ في حذف الأسقف: $e');
+      return false;
+    }
+  }
+
+  /// مزامنة الكهنة مع Firebase
+  static Future<bool> syncPriestsWithFirebase() async {
+    try {
+      if (!await isOnline()) {
+        print('لا يوجد اتصال بالإنترنت');
+        return false;
+      }
+
+      // تحميل الكهنة من Firebase
+      final QuerySnapshot snapshot = await _firestore
+          .collection(AppConstants.priestsCollection)
+          .get();
+
+      final List<Priest> firebasePriests = snapshot.docs
+          .map((doc) {
+            final data = doc.data() as Map<String, dynamic>;
+            return Priest.fromMap({
+              'id': doc.id,
+              ...data,
+            });
+          })
+          .toList();
+
+      // حفظ البيانات محلياً
+      await OfflineService.savePriestsLocally(firebasePriests);
+
+      // تطبيق التغييرات المعلقة
+      await _applyPendingChanges();
+
+      return true;
+    } catch (e) {
+      print('خطأ في مزامنة الكهنة: $e');
+      return false;
+    }
+  }
+
+  /// إضافة كاهن (أونلاين أو أوفلاين)
+  static Future<bool> addPriest(Priest priest) async {
+    try {
+      if (await isOnline()) {
+        // إضافة مباشرة إلى Firebase
+        final priestMap = priest.toMap();
+        priestMap.remove('id');
+        await _firestore.collection(AppConstants.priestsCollection).add(priestMap);
+        
+        // تحديث البيانات المحلية
+        final localPriests = await OfflineService.loadPriestsLocally();
+        localPriests.add(priest);
+        await OfflineService.savePriestsLocally(localPriests);
+        
+        return true;
+      } else {
+        // حفظ التغيير للاتصال لاحقاً
+        final priestMap = priest.toMap();
+        priestMap.remove('id');
+        await OfflineService.savePendingChange('add', priestMap);
+        
+        // إضافة إلى البيانات المحلية
+        final localPriests = await OfflineService.loadPriestsLocally();
+        localPriests.add(priest);
+        await OfflineService.savePriestsLocally(localPriests);
+        
+        return true;
+      }
+    } catch (e) {
+      print('خطأ في إضافة الكاهن: $e');
+      return false;
+    }
+  }
+
+  /// تحديث كاهن (أونلاين أو أوفلاين)
+  static Future<bool> updatePriest(Priest priest) async {
+    try {
+      if (await isOnline()) {
+        // تحديث مباشر في Firebase
+        final priestMap = priest.toMap();
+        priestMap.remove('id');
+        await _firestore
+            .collection(AppConstants.priestsCollection)
+            .doc(priest.id)
+            .update(priestMap);
+        
+        // تحديث البيانات المحلية
+        final localPriests = await OfflineService.loadPriestsLocally();
+        final index = localPriests.indexWhere((p) => p.id == priest.id);
+        if (index != -1) {
+          localPriests[index] = priest;
+          await OfflineService.savePriestsLocally(localPriests);
+        }
+        
+        return true;
+      } else {
+        // حفظ التغيير للاتصال لاحقاً
+        final priestMap = priest.toMap();
+        await OfflineService.savePendingChange('update', priestMap);
+        
+        // تحديث البيانات المحلية
+        final localPriests = await OfflineService.loadPriestsLocally();
+        final index = localPriests.indexWhere((p) => p.id == priest.id);
+        if (index != -1) {
+          localPriests[index] = priest;
+          await OfflineService.savePriestsLocally(localPriests);
+        }
+        
+        return true;
+      }
+    } catch (e) {
+      print('خطأ في تحديث الكاهن: $e');
+      return false;
+    }
+  }
+
+  /// حذف كاهن (أونلاين أو أوفلاين)
+  static Future<bool> deletePriest(String priestId) async {
+    try {
+      if (await isOnline()) {
+        // حذف مباشر من Firebase
+        await _firestore
+            .collection(AppConstants.priestsCollection)
+            .doc(priestId)
+            .delete();
+        
+        // تحديث البيانات المحلية
+        final localPriests = await OfflineService.loadPriestsLocally();
+        localPriests.removeWhere((p) => p.id == priestId);
+        await OfflineService.savePriestsLocally(localPriests);
+        
+        return true;
+      } else {
+        // حفظ التغيير للاتصال لاحقاً
+        await OfflineService.savePendingChange('delete', {'id': priestId});
+        
+        // تحديث البيانات المحلية
+        final localPriests = await OfflineService.loadPriestsLocally();
+        localPriests.removeWhere((p) => p.id == priestId);
+        await OfflineService.savePriestsLocally(localPriests);
+        
+        return true;
+      }
+    } catch (e) {
+      print('خطأ في حذف الكاهن: $e');
       return false;
     }
   }

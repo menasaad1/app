@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/bishop.dart';
+import '../models/priest.dart';
 
 class OfflineService {
   static const String _bishopsKey = 'bishops_data';
+  static const String _priestsKey = 'priests_data';
   static const String _lastSyncKey = 'last_sync_time';
   static const String _pendingChangesKey = 'pending_changes';
 
@@ -110,11 +112,41 @@ class OfflineService {
     }
   }
 
+  /// حفظ الكهنة محلياً
+  static Future<void> savePriestsLocally(List<Priest> priests) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final priestsJson = priests.map((priest) => priest.toMap()).toList();
+      await prefs.setString(_priestsKey, jsonEncode(priestsJson));
+      await prefs.setString(_lastSyncKey, DateTime.now().toIso8601String());
+    } catch (e) {
+      print('خطأ في حفظ الكهنة محلياً: $e');
+    }
+  }
+
+  /// تحميل الكهنة من التخزين المحلي
+  static Future<List<Priest>> loadPriestsLocally() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final priestsJson = prefs.getString(_priestsKey);
+      
+      if (priestsJson != null) {
+        final List<dynamic> priestsList = jsonDecode(priestsJson);
+        return priestsList.map((json) => Priest.fromMap(json)).toList();
+      }
+      return [];
+    } catch (e) {
+      print('خطأ في تحميل الكهنة المحلية: $e');
+      return [];
+    }
+  }
+
   /// مسح جميع البيانات المحلية
   static Future<void> clearAllLocalData() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove(_bishopsKey);
+      await prefs.remove(_priestsKey);
       await prefs.remove(_lastSyncKey);
       await prefs.remove(_pendingChangesKey);
     } catch (e) {

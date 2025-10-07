@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/priest.dart';
 import '../utils/constants.dart';
+import '../services/sync_service.dart';
+import '../services/offline_service.dart';
 
 class PriestsProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -28,19 +30,8 @@ class PriestsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      final QuerySnapshot snapshot = await _firestore
-          .collection(AppConstants.priestsCollection)
-          .get();
-
-      _allPriests = snapshot.docs
-          .map((doc) {
-            final data = doc.data() as Map<String, dynamic>;
-            return Priest.fromMap({
-              'id': doc.id,
-              ...data,
-            });
-          })
-          .toList();
+      // استخدام خدمة المزامنة الجديدة
+      _allPriests = await SyncService.loadPriests();
       
       // Apply current filter if exists
       if (_isFiltered && _filteredIds.isNotEmpty) {
@@ -66,12 +57,16 @@ class PriestsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      final priestMap = priest.toMap();
-      priestMap.remove('id'); // Remove id from map before adding
+      // استخدام خدمة المزامنة الجديدة
+      final success = await SyncService.addPriest(priest);
       
-      await _firestore.collection(AppConstants.priestsCollection).add(priestMap);
-      await fetchPriests();
-      return true;
+      if (success) {
+        await fetchPriests();
+        return true;
+      } else {
+        _errorMessage = 'حدث خطأ في إضافة الكاهن';
+        return false;
+      }
     } catch (e) {
       _errorMessage = 'حدث خطأ في إضافة الأب الكاهن: ${e.toString()}';
       return false;
@@ -87,15 +82,16 @@ class PriestsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      final priestMap = priest.toMap();
-      priestMap.remove('id'); // Remove id from map before updating
+      // استخدام خدمة المزامنة الجديدة
+      final success = await SyncService.updatePriest(priest);
       
-      await _firestore
-          .collection(AppConstants.priestsCollection)
-          .doc(priest.id)
-          .update(priestMap);
-      await fetchPriests();
-      return true;
+      if (success) {
+        await fetchPriests();
+        return true;
+      } else {
+        _errorMessage = 'حدث خطأ في تحديث الكاهن';
+        return false;
+      }
     } catch (e) {
       _errorMessage = 'حدث خطأ في تحديث الأب الكاهن: ${e.toString()}';
       return false;
@@ -111,15 +107,21 @@ class PriestsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      await _firestore.collection(AppConstants.priestsCollection).doc(priestId).delete();
+      // استخدام خدمة المزامنة الجديدة
+      final success = await SyncService.deletePriest(priestId);
       
-      // Remove from filtered list if it exists
-      if (_isFiltered) {
-        _filteredIds.remove(priestId);
+      if (success) {
+        // Remove from filtered list if it exists
+        if (_isFiltered) {
+          _filteredIds.remove(priestId);
+        }
+        
+        await fetchPriests();
+        return true;
+      } else {
+        _errorMessage = 'حدث خطأ في حذف الكاهن';
+        return false;
       }
-      
-      await fetchPriests();
-      return true;
     } catch (e) {
       _errorMessage = 'حدث خطأ في حذف الأب الكاهن: ${e.toString()}';
       return false;
@@ -180,5 +182,50 @@ class PriestsProvider with ChangeNotifier {
       return 'عرض ${_priests.length} من ${_allPriests.length} كاهن';
     }
     return 'عرض جميع الآباء الكهنة (${_allPriests.length})';
+  }
+
+  // مزامنة التغييرات المعلقة
+  Future<bool> syncPendingChanges() async {
+    try {
+      _isLoading = true;
+      _errorMessage = null;
+      notifyListeners();
+
+      final success = await SyncService.syncPendingChanges();
+      
+      if (success) {
+        await fetchPriests();
+        return true;
+      } else {
+        _errorMessage = 'فشل في مزامنة التغييرات';
+        return false;
+      }
+    } catch (e) {
+      _errorMessage = 'حدث خطأ في المزامنة: ${e.toString()}';
+      return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // التحقق من وجود تغييرات معلقة
+  Future<bool> hasPendingChanges() async {
+    try {
+      final pendingChanges = await OfflineService.getPendingChanges();
+      return pendingChanges.isNotEmpty;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // الحصول على عدد التغييرات المعلقة
+  Future<int> getPendingChangesCount() async {
+    try {
+      final pendingChanges = await OfflineService.getPendingChanges();
+      return pendingChanges.length;
+    } catch (e) {
+      return 0;
+    }
   }
 }

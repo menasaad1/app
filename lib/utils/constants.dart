@@ -4,6 +4,9 @@ class AppConstants {
   static const String priestsCollection = 'priests';
   static const String adminsCollection = 'admins';
   
+  // Admin Configuration
+  static const String adminEmail = 'admin@bishops.com';
+  
   // SharedPreferences Keys
   static const String userEmailKey = 'user_email';
   static const String isAdminKey = 'is_admin';
