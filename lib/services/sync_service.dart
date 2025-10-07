@@ -46,6 +46,9 @@ class SyncService {
 
       // حفظ البيانات محلياً
       await OfflineService.saveBishopsLocally(firebaseBishops);
+      
+      // حفظ البيانات في الملف المحلي أيضاً
+      await LocalDataManager.saveLocalBishopsData(firebaseBishops);
 
       // تطبيق التغييرات المعلقة
       await _applyPendingChanges();
@@ -169,10 +172,18 @@ class SyncService {
   static Future<bool> addBishop(Bishop bishop) async {
     try {
       if (await isOnline()) {
-        // إضافة مباشرة إلى Firebase
-        final bishopMap = bishop.toMap();
-        bishopMap.remove('id');
-        await _firestore.collection(AppConstants.bishopsCollection).add(bishopMap);
+        // التحقق من وجود الأسقف أولاً
+        final querySnapshot = await _firestore
+            .collection(AppConstants.bishopsCollection)
+            .where('name', isEqualTo: bishop.name)
+            .get();
+        
+        if (querySnapshot.docs.isEmpty) {
+          // إضافة مباشرة إلى Firebase
+          final bishopMap = bishop.toMap();
+          bishopMap.remove('id');
+          await _firestore.collection(AppConstants.bishopsCollection).add(bishopMap);
+        }
         
         // تحديث البيانات المحلية
         final localBishops = await OfflineService.loadBishopsLocally();
@@ -209,13 +220,23 @@ class SyncService {
   static Future<bool> updateBishop(Bishop bishop) async {
     try {
       if (await isOnline()) {
-        // تحديث مباشر في Firebase
-        final bishopMap = bishop.toMap();
-        bishopMap.remove('id');
-        await _firestore
+        // البحث عن المستند في Firebase باستخدام الاسم
+        final querySnapshot = await _firestore
             .collection(AppConstants.bishopsCollection)
-            .doc(bishop.id)
-            .update(bishopMap);
+            .where('name', isEqualTo: bishop.name)
+            .get();
+        
+        if (querySnapshot.docs.isNotEmpty) {
+          // تحديث مباشر في Firebase
+          final bishopMap = bishop.toMap();
+          bishopMap.remove('id');
+          await querySnapshot.docs.first.reference.update(bishopMap);
+        } else {
+          // إذا لم يوجد المستند، أضفه جديداً
+          final bishopMap = bishop.toMap();
+          bishopMap.remove('id');
+          await _firestore.collection(AppConstants.bishopsCollection).add(bishopMap);
+        }
         
         // تحديث البيانات المحلية
         final localBishops = await OfflineService.loadBishopsLocally();
@@ -257,11 +278,30 @@ class SyncService {
   static Future<bool> deleteBishop(String bishopId) async {
     try {
       if (await isOnline()) {
-        // حذف مباشر من Firebase
-        await _firestore
-            .collection(AppConstants.bishopsCollection)
-            .doc(bishopId)
-            .delete();
+        // البحث عن الأسقف في البيانات المحلية أولاً للحصول على الاسم
+        final localBishops = await OfflineService.loadBishopsLocally();
+        final bishop = localBishops.firstWhere((b) => b.id == bishopId, orElse: () => Bishop(
+          id: '',
+          name: '',
+          diocese: '',
+          ordinationDate: DateTime.now(),
+          notes: '',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ));
+        
+        if (bishop.name.isNotEmpty) {
+          // البحث عن المستند في Firebase باستخدام الاسم
+          final querySnapshot = await _firestore
+              .collection(AppConstants.bishopsCollection)
+              .where('name', isEqualTo: bishop.name)
+              .get();
+          
+          if (querySnapshot.docs.isNotEmpty) {
+            // حذف مباشر من Firebase
+            await querySnapshot.docs.first.reference.delete();
+          }
+        }
         
         // تحديث البيانات المحلية
         final localBishops = await OfflineService.loadBishopsLocally();

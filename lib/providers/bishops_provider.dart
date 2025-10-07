@@ -5,6 +5,7 @@ import '../utils/constants.dart';
 import '../services/sync_service.dart';
 import '../services/offline_service.dart';
 import '../services/realtime_service.dart';
+import '../utils/debug_helper.dart';
 
 class BishopsProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -31,8 +32,17 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
+      // طباعة معلومات التصحيح
+      await DebugHelper.debugBishopsData();
+
       // استخدام خدمة المزامنة الجديدة
       _allBishops = await SyncService.loadBishops();
+      
+      // إذا لم توجد بيانات، جرب إعادة تعيين البيانات الافتراضية
+      if (_allBishops.isEmpty) {
+        await DebugHelper.resetToDefaultData();
+        _allBishops = await SyncService.loadBishops();
+      }
       
       // Apply current filter if exists
       if (_isFiltered && _filteredIds.isNotEmpty) {
@@ -46,6 +56,7 @@ class BishopsProvider with ChangeNotifier {
 
     } catch (e) {
       _errorMessage = 'حدث خطأ في تحميل البيانات';
+      print('خطأ في fetchBishops: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
