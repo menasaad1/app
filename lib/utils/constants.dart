@@ -2,30 +2,30 @@ class AppConstants {
   // Firebase Collections
   static const String bishopsCollection = 'bishops';
   static const String priestsCollection = 'priests';
-  static const String usersCollection = 'users';
+  static const String adminsCollection = 'admins';
   
-  // Admin Configuration
-  static const String adminEmail = 'admin@bishops.com';
+  // SharedPreferences Keys
+  static const String userEmailKey = 'user_email';
+  static const String isAdminKey = 'is_admin';
+  static const String appModeKey = 'app_mode'; // 'bishops' or 'priests'
   
-  // App Configuration
-  static const String appName = 'إدارة الأساقفة';
-  static const String appVersion = '1.0.0';
+  // App Modes
+  static const String bishopsMode = 'bishops';
+  static const String priestsMode = 'priests';
   
-  // Date Formats
-  static const String dateFormat = 'yyyy/MM/dd';
-  static const String dateTimeFormat = 'yyyy/MM/dd HH:mm';
+  // Sort Options
+  static const String sortByName = 'name';
+  static const String sortByOrdinationDate = 'ordinationDate';
   
-  // Validation
-  static const int minPasswordLength = 6;
-  static const int maxNameLength = 100;
-  static const int maxNotesLength = 500;
+  // Error Messages
+  static const String networkError = 'خطأ في الاتصال بالإنترنت';
+  static const String dataLoadError = 'خطأ في تحميل البيانات';
+  static const String dataSaveError = 'خطأ في حفظ البيانات';
+  static const String dataDeleteError = 'خطأ في حذف البيانات';
   
-  // UI Constants
-  static const double defaultPadding = 16.0;
-  static const double cardElevation = 2.0;
-  static const double borderRadius = 12.0;
-  
-  // Animation Durations
-  static const Duration splashDuration = Duration(seconds: 3);
-  static const Duration animationDuration = Duration(milliseconds: 300);
+  // Success Messages
+  static const String dataLoadSuccess = 'تم تحميل البيانات بنجاح';
+  static const String dataSaveSuccess = 'تم حفظ البيانات بنجاح';
+  static const String dataDeleteSuccess = 'تم حذف البيانات بنجاح';
+  static const String syncSuccess = 'تم مزامنة البيانات بنجاح';
 }

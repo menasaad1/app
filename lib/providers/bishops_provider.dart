@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/bishop.dart';
 import '../utils/constants.dart';
+import '../services/sync_service.dart';
+import '../services/offline_service.dart';
 
 class BishopsProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -28,19 +30,8 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      final QuerySnapshot snapshot = await _firestore
-          .collection(AppConstants.bishopsCollection)
-          .get();
-
-      _allBishops = snapshot.docs
-          .map((doc) {
-            final data = doc.data() as Map<String, dynamic>;
-            return Bishop.fromMap({
-              'id': doc.id,
-              ...data,
-            });
-          })
-          .toList();
+      // استخدام خدمة المزامنة الجديدة
+      _allBishops = await SyncService.loadBishops();
       
       // Apply current filter if exists
       if (_isFiltered && _filteredIds.isNotEmpty) {
@@ -66,12 +57,16 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      final bishopMap = bishop.toMap();
-      bishopMap.remove('id'); // Remove id from map before adding
+      // استخدام خدمة المزامنة الجديدة
+      final success = await SyncService.addBishop(bishop);
       
-      await _firestore.collection(AppConstants.bishopsCollection).add(bishopMap);
-      await fetchBishops();
-      return true;
+      if (success) {
+        await fetchBishops();
+        return true;
+      } else {
+        _errorMessage = 'حدث خطأ في إضافة الأسقف';
+        return false;
+      }
     } catch (e) {
       _errorMessage = 'حدث خطأ في إضافة الأسقف: ${e.toString()}';
       return false;
@@ -87,15 +82,16 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      final bishopMap = bishop.toMap();
-      bishopMap.remove('id'); // Remove id from map before updating
+      // استخدام خدمة المزامنة الجديدة
+      final success = await SyncService.updateBishop(bishop);
       
-      await _firestore
-          .collection(AppConstants.bishopsCollection)
-          .doc(bishop.id)
-          .update(bishopMap);
-      await fetchBishops();
-      return true;
+      if (success) {
+        await fetchBishops();
+        return true;
+      } else {
+        _errorMessage = 'حدث خطأ في تحديث الأسقف';
+        return false;
+      }
     } catch (e) {
       _errorMessage = 'حدث خطأ في تحديث الأسقف: ${e.toString()}';
       return false;
@@ -111,15 +107,21 @@ class BishopsProvider with ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
 
-      await _firestore.collection(AppConstants.bishopsCollection).doc(bishopId).delete();
+      // استخدام خدمة المزامنة الجديدة
+      final success = await SyncService.deleteBishop(bishopId);
       
-      // Remove from filtered list if it exists
-      if (_isFiltered) {
-        _filteredIds.remove(bishopId);
+      if (success) {
+        // Remove from filtered list if it exists
+        if (_isFiltered) {
+          _filteredIds.remove(bishopId);
+        }
+        
+        await fetchBishops();
+        return true;
+      } else {
+        _errorMessage = 'حدث خطأ في حذف الأسقف';
+        return false;
       }
-      
-      await fetchBishops();
-      return true;
     } catch (e) {
       _errorMessage = 'حدث خطأ في حذف الأسقف: ${e.toString()}';
       return false;
@@ -180,6 +182,51 @@ class BishopsProvider with ChangeNotifier {
       return 'عرض ${_bishops.length} من ${_allBishops.length} أسقف';
     }
     return 'عرض جميع الأساقفة (${_allBishops.length})';
+  }
+
+  // مزامنة التغييرات المعلقة
+  Future<bool> syncPendingChanges() async {
+    try {
+      _isLoading = true;
+      _errorMessage = null;
+      notifyListeners();
+
+      final success = await SyncService.syncPendingChanges();
+      
+      if (success) {
+        await fetchBishops();
+        return true;
+      } else {
+        _errorMessage = 'فشل في مزامنة التغييرات';
+        return false;
+      }
+    } catch (e) {
+      _errorMessage = 'حدث خطأ في المزامنة: ${e.toString()}';
+      return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // التحقق من وجود تغييرات معلقة
+  Future<bool> hasPendingChanges() async {
+    try {
+      final pendingChanges = await OfflineService.getPendingChanges();
+      return pendingChanges.isNotEmpty;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // الحصول على عدد التغييرات المعلقة
+  Future<int> getPendingChangesCount() async {
+    try {
+      final pendingChanges = await OfflineService.getPendingChanges();
+      return pendingChanges.length;
+    } catch (e) {
+      return 0;
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../data/bishops_data.dart';
 import '../models/bishop.dart';
+import '../services/offline_service.dart';
 
 class FirebaseDataLoader {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -28,6 +29,9 @@ class FirebaseDataLoader {
         
         print('تم إضافة الأسقف ${i + 1}/${bishops.length}: ${bishop.name}');
       }
+      
+      // حفظ البيانات محلياً أيضاً
+      await OfflineService.saveBishopsLocally(bishops);
       
       print('تم إضافة جميع الأساقفة بنجاح!');
     } catch (e) {

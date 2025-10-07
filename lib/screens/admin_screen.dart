@@ -57,6 +57,8 @@ class _AdminScreenState extends State<AdminScreen> {
                 Navigator.pushNamed(context, '/admin-management');
               } else if (value == 'data-management') {
                 Navigator.pushNamed(context, '/data-management');
+              } else if (value == 'sync-management') {
+                Navigator.pushNamed(context, '/sync-management');
               } else if (value == 'logout') {
                 _showLogoutDialog();
               }
@@ -89,6 +91,16 @@ class _AdminScreenState extends State<AdminScreen> {
                     Icon(Icons.data_usage, color: Colors.green),
                     SizedBox(width: 8),
                     Text('إدارة البيانات', style: TextStyle(fontFamily: 'Cairo')),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'sync-management',
+                child: Row(
+                  children: [
+                    Icon(Icons.sync, color: Colors.orange),
+                    SizedBox(width: 8),
+                    Text('إدارة المزامنة', style: TextStyle(fontFamily: 'Cairo')),
                   ],
                 ),
               ),
