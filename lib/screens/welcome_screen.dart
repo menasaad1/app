@@ -142,7 +142,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   builder: (context, bishopsProvider, child) {
                     return IconButton(
                       icon: const Icon(Icons.group),
-                      onPressed: bishopsProvider.bishops.isEmpty ? null : () => _showAttendanceDialog(),
+                      onPressed: bishopsProvider.bishops.isEmpty ? null : () => Navigator.pushNamed(context, '/bishop-selection'),
                       tooltip: 'اختيار الحاضرين',
                     );
                   },
@@ -152,7 +152,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   builder: (context, priestsProvider, child) {
                     return IconButton(
                       icon: const Icon(Icons.group),
-                      onPressed: priestsProvider.priests.isEmpty ? null : () => _showPriestsAttendanceDialog(),
+                      onPressed: priestsProvider.priests.isEmpty ? null : () => Navigator.pushNamed(context, '/priest-selection'),
                       tooltip: 'اختيار الحاضرين',
                     );
                   },

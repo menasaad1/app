@@ -17,6 +17,8 @@ import 'screens/priests_admin_screen.dart';
 import 'screens/admin_management_screen.dart';
 import 'screens/data_management_screen.dart';
 import 'screens/sync_management_screen.dart';
+import 'screens/bishop_selection_screen.dart';
+import 'screens/priest_selection_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +64,8 @@ class BishopsApp extends StatelessWidget {
           '/admin-management': (context) => const AdminManagementScreen(),
           '/data-management': (context) => const DataManagementScreen(),
           '/sync-management': (context) => const SyncManagementScreen(),
+          '/bishop-selection': (context) => const BishopSelectionScreen(),
+          '/priest-selection': (context) => const PriestSelectionScreen(),
         },
       ),
     );

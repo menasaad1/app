@@ -167,6 +167,15 @@ class PriestsProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // Filter priests by selected IDs (for attendance)
+  void filterPriestsByIds(List<String> selectedIds) {
+    _filteredIds = selectedIds;
+    _isFiltered = true;
+    _priests = _allPriests.where((priest) => selectedIds.contains(priest.id)).toList();
+    _sortPriests();
+    notifyListeners();
+  }
+
   // Clear filter and show all priests
   void clearFilter() {
     _isFiltered = false;
