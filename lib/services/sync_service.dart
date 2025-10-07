@@ -4,6 +4,7 @@ import '../models/bishop.dart';
 import '../models/priest.dart';
 import '../services/offline_service.dart';
 import '../services/local_data_manager.dart';
+import '../data/bishops_data.dart';
 import '../utils/constants.dart';
 
 class SyncService {
@@ -103,10 +104,32 @@ class SyncService {
       }
       
       // تحميل البيانات المحلية
-      return await OfflineService.loadBishopsLocally();
+      final localBishops = await OfflineService.loadBishopsLocally();
+      if (localBishops.isNotEmpty) {
+        return localBishops;
+      }
+      
+      // إذا لم توجد بيانات محلية، جرب تحميل البيانات من الملف المحلي
+      final localDataBishops = await LocalDataManager.loadLocalBishopsData();
+      if (localDataBishops.isNotEmpty) {
+        // حفظ البيانات في OfflineService أيضاً
+        await OfflineService.saveBishopsLocally(localDataBishops);
+        return localDataBishops;
+      }
+      
+      // إذا لم توجد بيانات محلية، استخدم البيانات الافتراضية
+      final defaultBishops = BishopsData.getInitialBishops();
+      if (defaultBishops.isNotEmpty) {
+        // حفظ البيانات الافتراضية محلياً
+        await OfflineService.saveBishopsLocally(defaultBishops);
+        await LocalDataManager.saveLocalBishopsData(defaultBishops);
+        return defaultBishops;
+      }
+      
+      return [];
     } catch (e) {
       print('خطأ في تحميل البيانات: $e');
-      return await OfflineService.loadBishopsLocally();
+      return [];
     }
   }
 
@@ -122,10 +145,23 @@ class SyncService {
       }
       
       // تحميل البيانات المحلية
-      return await OfflineService.loadPriestsLocally();
+      final localPriests = await OfflineService.loadPriestsLocally();
+      if (localPriests.isNotEmpty) {
+        return localPriests;
+      }
+      
+      // إذا لم توجد بيانات محلية، جرب تحميل البيانات من الملف المحلي
+      final localDataPriests = await LocalDataManager.loadLocalPriestsData();
+      if (localDataPriests.isNotEmpty) {
+        // حفظ البيانات في OfflineService أيضاً
+        await OfflineService.savePriestsLocally(localDataPriests);
+        return localDataPriests;
+      }
+      
+      return [];
     } catch (e) {
       print('خطأ في تحميل الكهنة: $e');
-      return await OfflineService.loadPriestsLocally();
+      return [];
     }
   }
 
